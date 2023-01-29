@@ -15,7 +15,7 @@ module.exports = {
         main: "#3EB489",
         background: "#FFFFFF",
         txt: "#333333",
-        "light-background": "#F5F5F5",
+        lightBG: "#F5F5F5",
         light: "#E6F9E6",
       },
       fontFamily: {
