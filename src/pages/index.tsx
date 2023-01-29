@@ -1,7 +1,8 @@
 import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "@next/font/google";
-import Link from "next/link";
+import HomePage from "@/components/home";
+import Hero from "@/components/hero";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,16 +16,14 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="container h-full mx-auto">
-        <h1 className="text-main mt-10 mb-6 text-[1.2rem] px-4">Welcome to Greenfie</h1>
-        <section className="bg-light-background p-6 h-96">
-          <h2 className="font-bold p-4 py-5">Our dreams</h2>
-          <p className="text-txt">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi
-            accusantium veniam voluptates eligendi quas, ab provident voluptatum
-            libero a consequuntur.
-          </p>
+        <section className="md:min-h-[120px]">
+        <h1 className="text-main my-8 text-[1.2rem] px-4">Welcome to Greenfie</h1>
         </section>
-        
+        <div className="flex flex-wrap justify-center md:justify-between lg:justify-between items-center gap-4">
+          <Hero />
+          <HomePage />
+        </div>
+
       </main>
     </>
   );
