@@ -31,7 +31,7 @@ const appPages: AppPage[] = [
   },
   {
     image: "/images/tomatos.jpg",
-    name: "About Us",
+    name: "About",
     page: "/about"
   },
   {
@@ -41,7 +41,7 @@ const appPages: AppPage[] = [
   },
   {
     image: "/images/tomatos.jpg",
-    name: "About Us",
+    name: "About",
     page: "/about"
   },
   {
@@ -55,7 +55,7 @@ const appPages: AppPage[] = [
 
 const Home = () => {
   return (
-    <div className="w-fit grid grid-cols-3 gap-2">
+    <div className="w-full md:w-1/3 lg:w-1/3 xl:w-1/3 grid grid-cols-3 gap-2 place-items-center">
       {
         appPages.map((page, index) => {
           return (

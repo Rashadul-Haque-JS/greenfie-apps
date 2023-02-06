@@ -1,4 +1,5 @@
 const { join } = require("path");
+
 module.exports = {
   content: [
     join(
@@ -7,8 +8,15 @@ module.exports = {
     ),
   ],
   theme: {
-    screen: {},
     extend: {
+      screens: {
+        'xs': {'max': '575.98px'},
+        'sm': {'min': '576px', 'max': '767.98px'},
+        'md': {'min': '768px', 'max': '991.98px'},
+        'lg': {'min': '992px', 'max': '1199.98px'},
+        'xl': {'min': '1200px'},
+      },
+      
       colors: {
         prime: "#00ff00",
         brownee: "#8B5E3C",
@@ -25,5 +33,6 @@ module.exports = {
       },
     },
   },
+  variants: {},
   plugins: [],
-};
+}

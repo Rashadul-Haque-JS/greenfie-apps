@@ -15,16 +15,17 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="container h-full mx-auto">
-        <section className="md:min-h-[120px]">
+      <main className="container h-full mx-auto ">
+        {/* <section className="md:min-h-[120px]">
         <h1 className="text-main my-8 text-[1.2rem] px-4">Welcome to Greenfie</h1>
-        </section>
-        <div className="flex flex-wrap justify-center md:justify-between lg:justify-between items-center gap-4">
+        </section> */}
+        <div className="flex flex-wrap justify-center mx-6 p-4 items-start gap-10 md:gap-20 first-letter: lg:gap-36 xl:gap-52 md:py-10 shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px] mt-12">
           <Hero />
           <HomePage />
         </div>
 
       </main>
+      
     </>
   );
 }
