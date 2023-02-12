@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 8080",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -14,7 +14,14 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.3.0",
+    "@fortawesome/free-solid-svg-icons": "^6.3.0",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "@next/font": "13.1.5",
+    "@types/mongoose": "^5.11.97",
+    "antd": "^5.2.0",
+    "font-awesome": "^4.7.0",
+    "mongoose": "^6.9.1",
     "next": "13.1.5",
     "react": "18.2.0",
     "react-dom": "18.2.0"
@@ -33,6 +40,6 @@
     "postcss-preset-env": "^7.8.3",
     "sass": "^1.57.1",
     "tailwindcss": "^3.2.4",
-    "typescript": "^4.9.4"
+    "typescript": "^4.9.5"
   }
 }
