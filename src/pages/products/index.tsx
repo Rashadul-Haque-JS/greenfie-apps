@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Layout from '@/components/Layout';
 import Product from '@/components/Product';
-import productSchema  from '../../../server/models/products';
 import connection from 'server/db';
 
 export interface IProduct {

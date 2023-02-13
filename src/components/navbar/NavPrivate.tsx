@@ -8,17 +8,23 @@ function Navbar() {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row justify-between  p-4 bg-gray-900">
-      <div className="flex items-start lg:hidden xl:hidden">
+    <div className="flex flex-col lg:flex-row justify-between bg-main xs:px-3 sm:px-3 px-8 py-2">
+      <div className="flex justify-between items-center lg:hidden xl:hidden">
         <button
-          className="text-white p-2 rounded-full hover:bg-gray-700"
+          className="text-white p-0 rounded-full hover:bg-gray-700 text-4xl"
           onClick={toggle}
         >
           &#9776;
         </button>
+        <div className='text-2xl text-white font-bold'>
+          Greenfie
+        </div>
+        <div className='text-3xl text-white font-bold rounded-full bg-white w-5 h-5'>
+          
+        </div>
       </div>
       <div className="flex items-center hidden lg:flex xl:flex">
-        <img src="logo.png" alt="Logo" />
+      <img className='w-[36px] h-auto' src='/images/greenfie.png' alt="Greenfie logo" />
       </div>
       <div
         className={`navbar__drawer ${
