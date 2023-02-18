@@ -27,6 +27,19 @@
     }
   }
 
+  // Styles for scrollbar '
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+body::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+body {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
   .navbar__drawer {
     transition: transform 0.3s ease-in-out;
     transform: translateX(-100%);
@@ -35,4 +48,6 @@
   .navbar__drawer--open {
     transform: translateX(0%);
   }
+  
+
   

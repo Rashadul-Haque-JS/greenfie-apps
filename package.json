@@ -14,9 +14,6 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6.3.0",
-    "@fortawesome/free-solid-svg-icons": "^6.3.0",
-    "@fortawesome/react-fontawesome": "^0.2.0",
     "@next/font": "13.1.5",
     "@types/mongoose": "^5.11.97",
     "antd": "^5.2.0",
@@ -24,7 +21,8 @@
     "mongoose": "^6.9.1",
     "next": "13.1.5",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-select": "^5.7.0"
   },
   "devDependencies": {
     "@types/node": "^18.11.18",
