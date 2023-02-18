@@ -28,15 +28,16 @@ function Navbar() {
         <img className='w-[36px] h-auto' src='/images/greenfie.png' alt="Greenfie logo" />
       </div>
 
-      <div id="drawer-navigation" className="fixed sm:top-0 sm:left-0 xs:top-0 xs:left-0 md:top-0 md:left-0 w-80 lg:top-[56px] lg:left-[240px] xl:top-[51px] xl:left-[240px] z-40 h-screen px-4 lg:pr-0 xl:pr-0 overflow-y-auto transition-transform -translate-x-full bg-main dark:bg-gray-800" tabIndex={-1} aria-labelledby="drawer-navigation-label  ">
+      <div id="drawer-navigation" className="fixed sm:top-0 sm:left-0 xs:top-0 xs:left-0 md:top-0 md:left-0 w-80 lg:top-[56px] lg:left-[240px] xl:top-[51px] xl:left-[240px] z-40 h-screen px-4 lg:pr-0 xl:pr-0 overflow-y-auto transition-transform -translate-x-full bg-main dark:bg-gray-800" tabIndex={-1} aria-labelledby="drawer-navigation-label">
        <hr className='hidden lg:block xl:block'/>
-        <h5 id="drawer-navigation-label" className="text-base font-semibold text-white text-center p-4">Greenfie</h5>
+        <h5 id="drawer-navigation-label" className="text-2xl font-semibold text-white py-4 lg:hidden xl:hidden">Greenfie</h5>
         <button type="button" data-drawer-hide="drawer-navigation" aria-controls="drawer-navigation" className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white lg:hidden xl:hidden" >
-          {/* <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd"></path></svg> */}
-          <span className="text-white">Close</span>
+        <div className="bg-white rounded-full w-12 h-12 flex justify-center items-center">
+        <svg className="w-5 h-5" fill="#000" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
+          </div>
           <span className="sr-only">Close menu</span>
         </button>
-        <div className='text-xl text-white text-center hidden lg:block xl:block font-semibold'>
+        <div className='text-xl text-white text-center hidden lg:block xl:block font-semibold pt-4'>
           Greenfie
         </div>
         <div className="py-4 overflow-y-auto lg:flex lg:justify-end xl:flex xl:justify-end ">
