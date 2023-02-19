@@ -1,8 +1,9 @@
 import React from 'react'
 import { useRouter } from 'next/router';
 import Head from 'next/head'
-import Navbar from './navbar/navbar';
-import NavbarPrivate from './navbar/NavPrivate'
+import Navbar from '../navbar/navbar';
+import NavbarPrivate from '../navbar/NavPrivate'
+
 const Layout = ({ children }:any) => {
   const {pathname}= useRouter();
   console.log(pathname);
