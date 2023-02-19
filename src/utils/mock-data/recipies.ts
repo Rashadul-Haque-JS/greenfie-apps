@@ -4,6 +4,7 @@ const recipes = [
       title: "Tomato Salad",
       description: "A simple and fresh Italian classic salad made with juicy tomatoes, creamy mozzarella, and fresh basil.",
       image: "https://picsum.photos/id/250/400/300",
+      video:"https://sample-videos.com/video123/mp4/240/big_buck_bunny_240p_1mb.mp4",
       ingredients: [
         "4 medium tomatoes, sliced",
         "1 ball mozzarella, sliced",
@@ -12,7 +13,7 @@ const recipes = [
         "2 tbsp balsamic vinegar",
         "Salt and pepper to taste"
       ],
-      instructions: [
+      directions: [
         "In a large serving plate, arrange the tomato and mozzarella slices.",
         "Sprinkle the chopped basil on top.",
         "In a small bowl, whisk together the olive oil, balsamic vinegar, salt, and pepper.",
@@ -24,6 +25,7 @@ const recipes = [
       title: "Spaghetti Meatballs",
       description: "A classic Italian dish made with tender spaghetti and juicy meatballs, served in a rich tomato sauce.",
       image: "https://picsum.photos/id/260/400/300",
+      video:"https://sample-videos.com/video123/mp4/240/big_buck_bunny_240p_1mb.mp4",
       ingredients: [
         "1 lb spaghetti",
         "1 lb ground beef",
@@ -43,7 +45,7 @@ const recipes = [
         "1/4 tsp red pepper flakes",
         "Salt and pepper to taste"
       ],
-      instructions: [
+      directions: [
         "In a large bowl, combine the ground beef, breadcrumbs, Parmesan cheese, parsley, egg, garlic powder, salt, and pepper. Mix well and shape into 16 meatballs.",
         "In a large pot, bring salted water to a boil and cook the spaghetti according to package instructions.",
         "In a large skillet, heat the olive oil over medium-high heat. Add the meatballs and cook until browned on all sides. Remove from the skillet and set aside.",
@@ -57,6 +59,7 @@ const recipes = [
       title: "Chicken Fajitas",
       description: "A delicious Tex-Mex dish made with tender chicken strips, bell peppers, and onions, served with warm tortillas.",
       image: "https://picsum.photos/id/270/400/300",
+      video:"https://sample-videos.com/video123/mp4/240/big_buck_bunny_240p_1mb.mp4",
       ingredients: [
         "1 lb boneless, skinless chicken breasts, sliced",
         "2 bell peppers, sliced",
@@ -71,13 +74,21 @@ const recipes = [
         "1/4 tsp black pepper",
         "Enjoy your delicious and healthy homemade chickn Fajitas!"
       ],
-        
+      directions: [
+        "In a large bowl, combine the ground beef, breadcrumbs, Parmesan cheese, parsley, egg, garlic powder, salt, and pepper. Mix well and shape into 16 meatballs.",
+        "In a large pot, bring salted water to a boil and cook the spaghetti according to package instructions.",
+        "In a large skillet, heat the olive oil over medium-high heat. Add the meatballs and cook until browned on all sides. Remove from the skillet and set aside.",
+        "In the same skillet, add the onion and garlic and cook until softened. Add the crushed tomatoes, oregano, basil, red pepper flakes, salt, and pepper. Stir well and bring to a simmer.",
+        "Add the meatballs to the tomato sauce and let simmer for 10 minutes, until cooked through.",
+        "Serve the meatballs and sauce over the cooked spaghetti."
+      ]
       },
       {
         id: 4,
 title: "Garlic Shrimp Scampi",
 description: "A delicious Italian-American dish made with succulent shrimp, cooked in garlic butter and white wine, served over pasta.",
 image: "https://picsum.photos/id/280/400/300",
+video:"https://sample-videos.com/video123/mp4/240/big_buck_bunny_240p_1mb.mp4",
 ingredients: [
 "1 lb large shrimp, peeled and deveined",
 "3 tbsp butter",
@@ -104,6 +115,7 @@ directions: [
   title: "Beef-Broccoli Stir-Fry",
   description: "A classic Chinese-American dish made with tender beef and broccoli, cooked in a savory sauce and served over rice.",
   image: "https://picsum.photos/id/426/400/300",
+  video:"https://sample-videos.com/video123/mp4/240/big_buck_bunny_240p_1mb.mp4",
   ingredients: [
     "1 lb flank steak, sliced",
     "3 cups broccoli florets",

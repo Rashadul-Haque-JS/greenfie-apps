@@ -1,15 +1,27 @@
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
 function Navbar() {
-
+  
   const [isActive, setIsActive] = useState(false);
+  const router = useRouter()
+  const activePaths = ['/products', '/recipes'];
 
   function handleClick() {
     setIsActive(!isActive);
   }
 
+  useEffect(() => {
+    if (activePaths.includes(router.pathname)) {
+      setIsActive(true);
+    } else {
+      setIsActive(false);
+    }
+  }, [router.pathname]);
+
   return (
-    <div className="flex flex-col lg:flex-row xl:flex-row justify-between lg:justify-start xl:justify-start bg-main xs:px-3 sm:px-3 px-8 py-2 fixed top-0 left-0 w-full z-40">
+    <div className="flex flex-col lg:flex-row xl:flex-row justify-between lg:justify-start xl:justify-start bg-main xs:px-3 sm:px-3 px-8 py-2 fixed top-0 left-0 w-full z-40 ">
       <div className="flex justify-between items-center lg:hidden xl:hidden">
         <button
           className="text-white p-0 rounded-full text-4xl"
@@ -40,14 +52,14 @@ function Navbar() {
         <div className='text-xl text-white text-center hidden lg:block xl:block font-semibold pt-4'>
           Greenfie
         </div>
-        <div className="py-4 overflow-y-auto lg:flex lg:justify-end xl:flex xl:justify-end ">
+        <div className="py-4 overflow-hidden lg:flex lg:justify-end xl:flex xl:justify-end ">
           <ul className="space-y-2 w-full lg:ml-16 xl:ml-16 ">
             <hr />
             <li>
-              <a href="#" className="flex items-center p-2 text-base font-normal text-txt rounded-lg hover:text-background">
+              <Link href="#" className="flex items-center p-2 text-base font-normal text-txt rounded-lg hover:text-background">
                 <svg className="w-6 h-6 text-txt transition duration-75 group-hover:text-background dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path></svg>
                 <span className="ml-3">Dashboard</span>
-              </a>
+              </Link>
             </li>
             <hr />
             <li>
@@ -56,15 +68,16 @@ function Navbar() {
                 <span className="flex-1 ml-3 text-left whitespace-nowrap">Products</span>
                 <span className='text-4xl' style={{ transform: isActive ? 'rotate(45deg)' : 'rotate(0)' }}>+</span>
               </button>
-              <ul id="dropdown-example" className="hidden py-2 space-y-2 bg-lightGreen">
+             
+              <ul id="dropdown-example"  className="hidden py-2 space-y-2  bg-lightGreen">
                 <li>
-                  <a href="#" className="flex items-center w-full p-2 text-base font-normal text-txt transition duration-75 rounded-lg pl-11 group ">Product</a>
+                  <Link href="/products" className="flex items-center w-full p-2 text-base font-normal text-txt transition duration-75 rounded-lg pl-11 group ">Lists</Link>
                 </li>
                 <li>
-                  <a href="#" className="flex items-center w-full p-2 text-base font-normal text-txt transition duration-75 rounded-lg pl-11 group ">Billing</a>
+                  <Link href="#" className="flex items-center w-full p-2 text-base font-normal text-txt transition duration-75 rounded-lg pl-11 group ">Billing</Link>
                 </li>
                 <li>
-                  <a href="#" className="flex items-center w-full p-2 text-base font-normal text-txt transition duration-75 rounded-lg pl-11 group ">Invoice</a>
+                  <Link href="#" className="flex items-center w-full p-2 text-base font-normal text-txt transition duration-75 rounded-lg pl-11 group ">Invoice</Link>
                 </li>
               </ul>
             </li>
@@ -72,18 +85,18 @@ function Navbar() {
             <li>
               <button type="button" className="flex items-center w-full p-2 text-base font-normal text-txt hover:text-background transition duration-75 rounded-lg group " aria-controls="dropdown-example" data-collapse-toggle="dropdown-example-2" onClick={handleClick}>
                 <svg className="flex-shrink-0 w-6 h-6 text-txt transition duration-75 group-hover:text-background dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clipRule="evenodd"></path></svg>
-                <span className="flex-1 ml-3 text-left whitespace-nowrap">Products-2</span>
+                <span className="flex-1 ml-3 text-left whitespace-nowrap">Recipes</span>
                 <span className='text-4xl' style={{ transform: isActive ? 'rotate(45deg)' : 'rotate(0)' }}>+</span>
               </button>
               <ul id="dropdown-example-2" className="hidden py-2 space-y-2  bg-lightGreen">
                 <li>
-                  <a href="#" className="flex items-center w-full p-2 text-base font-normal text-txt transition duration-75 rounded-lg pl-11 group ">Product</a>
+                  <Link href="/recipes" className="flex items-center w-full p-2 text-base font-normal text-txt transition duration-75 rounded-lg pl-11 group ">Lists</Link>
                 </li>
                 <li>
-                  <a href="#" className="flex items-center w-full p-2 text-base font-normal text-txt transition duration-75 rounded-lg pl-11 group ">Billing</a>
+                  <Link href="#" className="flex items-center w-full p-2 text-base font-normal text-txt transition duration-75 rounded-lg pl-11 group ">Billing</Link>
                 </li>
                 <li>
-                  <a href="#" className="flex items-center w-full p-2 text-base font-normal text-txt transition duration-75 rounded-lg pl-11 group ">Invoice</a>
+                  <Link href="#" className="flex items-center w-full p-2 text-base font-normal text-txt transition duration-75 rounded-lg pl-11 group ">Invoice</Link>
                 </li>
               </ul>
             </li>
@@ -96,13 +109,13 @@ function Navbar() {
               </button>
               <ul id="dropdown-example-3" className="hidden py-2 space-y-2  bg-lightGreen">
                 <li>
-                  <a href="#" className="flex items-center w-full p-2 text-base font-normal text-txt transition duration-75 rounded-lg pl-11 group ">Product</a>
+                  <Link href="#" className="flex items-center w-full p-2 text-base font-normal text-txt transition duration-75 rounded-lg pl-11 group ">Product</Link>
                 </li>
                 <li>
-                  <a href="#" className="flex items-center w-full p-2 text-base font-normal text-txt transition duration-75 rounded-lg pl-11 group ">Billing</a>
+                  <Link href="#" className="flex items-center w-full p-2 text-base font-normal text-txt transition duration-75 rounded-lg pl-11 group ">Billing</Link>
                 </li>
                 <li>
-                  <a href="#" className="flex items-center w-full p-2 text-base font-normal text-txt transition duration-75 rounded-lg pl-11 group ">Invoice</a>
+                  <Link href="#" className="flex items-center w-full p-2 text-base font-normal text-txt transition duration-75 rounded-lg pl-11 group ">Invoice</Link>
                 </li>
               </ul>
             </li>
