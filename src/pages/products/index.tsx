@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Layout from '@/components/Layout';
-import Product from '@/components/Product';
+import Product from '@/components/cards/Product';
 import connection from 'server/db';
+import SwiftSearch from '@/components/search/SearchIndex';
 
 export interface IProduct {
   name: string;
@@ -28,6 +29,7 @@ const Products = () => {
     <>
       <div className="md:container md:mx-auto lg:container xl:mx-auto">
         <h1 className="text-2xl font-bold text-center">Our Products</h1>
+        <SwiftSearch indexName='products'/>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-2 place-content-center">
           {products.map(product => (
             <Product key={product.price} {...product} />

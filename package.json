@@ -14,6 +14,7 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
+    "@meilisearch/instant-meilisearch": "^0.11.0",
     "@next/font": "13.1.5",
     "@types/mongoose": "^5.11.97",
     "antd": "^5.2.0",
@@ -22,12 +23,15 @@
     "next": "13.1.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-instantsearch-core": "^6.39.0",
+    "react-instantsearch-dom": "^6.39.0",
     "react-select": "^5.7.0"
   },
   "devDependencies": {
     "@types/node": "^18.11.18",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
+    "@types/react-instantsearch-dom": "^6.12.3",
     "autoprefixer": "^10.4.13",
     "cypress": "^12.3.0",
     "eslint": "^8.32.0",

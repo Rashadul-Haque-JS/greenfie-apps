@@ -22,9 +22,10 @@ module.exports = {
         brownee: "#8B5E3C",
         main: "#3EB489",
         background: "#FFFFFF",
-        txt: "#333333",
+        txt: "#000000",
         lightBG: "#F5F5F5",
         light: "#E6F9E6",
+        lightGreen:"#34D399"
       },
       fontFamily: {
         sans: ["Open Sans", "sans-serif"],
