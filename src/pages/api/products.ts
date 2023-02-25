@@ -1,11 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import connectToDB from '@/server/connection';
-import { createProduct, getProducts,getProduct, updateProduct, deleteProduct } from '@/server/models/products';
+import { createProduct, getProducts, getProduct, updateProduct, deleteProduct } from '@/server/models/products';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { method, body, query } = req;
 
-   await connectToDB();
+  await connectToDB();
 
   switch (method) {
     case 'POST':
@@ -17,11 +17,24 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
       break;
     case 'GET':
-      try {
-        const results = await getProducts();
-        res.status(200).json(results);
-      } catch (error) {
-        res.status(500).json({ message: 'Error getting Products' });
+      if (query.id) {
+        try {
+          const result = await getProduct(query.id as string);
+          if (result) {
+            res.status(200).json(result);
+          } else {
+            res.status(404).json({ message: 'Product not found' });
+          }
+        } catch (error) {
+          res.status(500).json({ message: 'Error getting Product' });
+        }
+      } else {
+        try {
+          const results = await getProducts();
+          res.status(200).json(results);
+        } catch (error) {
+          res.status(500).json({ message: 'Error getting Products' });
+        }
       }
       break;
     case 'PUT':
@@ -48,19 +61,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         }
       } catch (error) {
         res.status(500).json({ message: 'Error deleting Product' });
-      }
-      break;
-    case 'GET':
-      try {
-        const { id } = query;
-        const result = await getProduct(id as string);
-        if (result) {
-          res.status(200).json(result);
-        } else {
-          res.status(404).json({ message: 'Product not found' });
-        }
-      } catch (error) {
-        res.status(500).json({ message: 'Error getting Product' });
       }
       break;
     default:
