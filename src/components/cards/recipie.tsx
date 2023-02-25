@@ -1,8 +1,8 @@
-import { Recipe } from '../../utils/types';
+import { IRecipe } from '../../utils/types';
 import Link from 'next/link';
 
 interface RecipeCardProps {
-  recipe: Recipe;
+  recipe: IRecipe;
 }
 
 const RecipeCard = ({ recipe }: RecipeCardProps) => {
@@ -14,7 +14,7 @@ const RecipeCard = ({ recipe }: RecipeCardProps) => {
         <p className="text-gray-700 text-base">{recipe.description}</p>
       </div>
       <div className="px-6 py-4">
-        <Link href={`/recipes/${recipe.id}`}>
+        <Link href={`/recipes/${recipe._id}`}>
           <button className="bg-txt hover:bg-main text-white font-bold py-2 px-4 rounded">
             Show Details
           </button>
