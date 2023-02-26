@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useMediaQuery } from '@material-ui/core';
-
+import Image from 'next/image';
 const Navbar = () => {
   const isMobileScreen = useMediaQuery('(max-width: 960px)');
   const [isActive, setIsActive] = useState(false);
@@ -39,7 +39,7 @@ const Navbar = () => {
       </div>
       <div className="items-center hidden lg:flex xl:flex">
         <Link href="/">
-          <img className='w-[36px] h-auto' src='/images/greenfie.png' alt="Greenfie logo"  />
+          <Image className='w-[36px] h-auto' src='/images/greenfie.png' alt="Greenfie logo" width={500} height={500} />
         </Link>
       </div>
 

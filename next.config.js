@@ -1,8 +1,7 @@
-const path = require('node:path');
+const path = require('path');
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
-
 
 module.exports = withBundleAnalyzer({
   webpack(config) {
@@ -13,6 +12,8 @@ module.exports = withBundleAnalyzer({
 
     return config;
   },
+
+  images: {
+    domains: ['picsum.photos'],
+  },
 });
-
-
