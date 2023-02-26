@@ -1,5 +1,5 @@
 
-import RecipeCard from '@/components/cards/recipie';
+import RecipeCard from '@/components/cards/Recipie';
 import ListsPage from '@/components/layouts/LayoutInner';
 import {IRecipe, GenericProps } from '../../utils/types';
 import { GetServerSideProps } from 'next';

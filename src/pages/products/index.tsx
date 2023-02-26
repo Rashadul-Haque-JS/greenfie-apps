@@ -1,4 +1,4 @@
-import Product from '@/components/cards/Product';
+import ProductCard from '@/components/cards/Product';
 import ListsPage from '@/components/layouts/LayoutInner';
 import {IProducts, GenericProps } from '@/utils/types';
 import { GetServerSideProps } from 'next';
@@ -12,7 +12,7 @@ const Products = ({ products }:GenericProps) => {
   return (
     <ListsPage>
       {products.map((product:IProducts) => (
-            <Product key={product._id} {...product} />
+            <ProductCard key={product._id} product={product} />
           ))}
     </ListsPage>
   );

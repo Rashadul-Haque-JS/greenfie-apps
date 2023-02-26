@@ -1,15 +1,10 @@
 import React, { useState } from 'react';
 import { Button } from 'antd';
 import Image from 'next/image';
+import Link from 'next/link';
+import { GenericProps } from '@/utils/types';
 
-interface ProductProps {
-  name: string;
-  description: string;
-  image: string;
-  price: number;
-}
-
-const ProductCard: React.FC<ProductProps> = ({ name, description, image, price }) => {
+const ProductCard = ({ product }:GenericProps) => {
   const [isLoved, setIsLoved] = useState(false);
   const [isInCart, setIsInCart] = useState(false);
 
@@ -23,16 +18,18 @@ const ProductCard: React.FC<ProductProps> = ({ name, description, image, price }
 
   return (
     <div className="max-w-sm rounded overflow-hidden shadow-lg m-10">
-      <Image className="w-full" src={image} alt={name}  width={500} height={500}/>
+     <Link href={`/products/${product._id}`}>
+     <Image className="w-full" src={product.image} alt={product.name}  width={500} height={500}/>
+     </Link>
       <div className="px-6 py-4">
-        <div className="font-bold text-xl mb-2">{name}</div>
+        <div className="font-bold text-xl mb-2">{product.name}</div>
         <p className="text-gray-700 text-base">
-          {description}
+          {product.description}
         </p>
       </div>
       <div className="px-4 py-4">
         <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
-          ${price}
+          ${product.price}
         </span>
         <Button onClick={toggleLove} className="px-2 mx-1 hover:bg-main">
           {isLoved ? 'Loved ❤️' : 'Love It'}

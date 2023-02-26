@@ -18,14 +18,14 @@ module.exports = {
       },
       
       colors: {
-        prime: "#00ff00",
         brownee: "#8B5E3C",
-        main: "#3EB489",
-        background: "#FFFFFF",
-        txt: "#000000",
-        lightBG: "#F5F5F5",
+        main: "#3EB489", //used
+        background: "#FFFFFF",//used
+        txt: "#000000", //used
+        lightBG: "#F5F5F5",//used in single product page
         light: "#E6F9E6",
-        lightGreen:"#34D399"
+        lightGreen:"#34D399",
+        offWhite:"#f7fafc"
       },
       fontFamily: {
         sans: ["Open Sans", "sans-serif"],

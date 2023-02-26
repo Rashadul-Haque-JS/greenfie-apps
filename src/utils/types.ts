@@ -6,6 +6,7 @@ export interface IRecipe {
   video: string;
   ingredients: string[];
   directions: string[];
+
 }
 
 export interface IProducts{
@@ -14,6 +15,7 @@ export interface IProducts{
   description: string;
   price:number;
   image: string;
+  unit?: string;
 }
 export interface IApps{
   _id?: string;
