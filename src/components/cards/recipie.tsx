@@ -1,14 +1,10 @@
-import { IRecipe } from '../../utils/types';
+import { GenericProps } from '../../utils/types';
 import Link from 'next/link';
 
-interface RecipeCardProps {
-  recipe: IRecipe;
-}
-
-const RecipeCard = ({ recipe }: RecipeCardProps) => {
+const RecipeCard = ({ recipe }: GenericProps) => {
   return (
     <div className="max-w-sm rounded overflow-hidden shadow-lg m-10 h-[480px]">
-      <img className="w-full" src={recipe.image} alt={recipe.title} />
+      <img className="w-full" src={recipe.image} alt={recipe.title} loading="lazy"/>
       <div className="px-6 py-4">
         <div className="font-bold text-xl mb-2">{recipe.title}</div>
         <p className="text-gray-700 text-base">{recipe.description}</p>

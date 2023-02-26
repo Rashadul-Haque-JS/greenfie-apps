@@ -26,29 +26,29 @@ const ProductsSchema = new mongoose.Schema({
    
 // Define CRUD operations
 export async function createProduct(data:IProducts) {
-  const Product = new Products(data);
-  await Product.save();
-  return Product.toObject();
+  const product = new Products(data);
+  await product.save();
+  return product.toObject();
 }
 
 export async function getProducts() {
-  const Productss = await Products.find();
-  return Productss.map((Products) => Products.toObject());
+  const productss = await Products.find();
+  return productss.map((products) => products.toObject());
 }
 
 export async function getProduct(id:string) {
-  const Product = await Products.findById(id);
-  return Product ? Product.toObject() : null;
+  const product = await Products.findById(id);
+  return product ? product.toObject() : null;
 }
 
 export async function updateProduct(id:string, data:IProducts) {
-  const Product = await Products.findByIdAndUpdate(id, data, { new: true });
-  return Product ? Product.toObject() : null;
+  const product = await Products.findByIdAndUpdate(id, data, { new: true });
+  return product ? product.toObject() : null;
 }
 
 export async function deleteProduct(id:string) {
-  const Product = await Products.findByIdAndDelete(id);
-  return Product ? Product.toObject() : null;
+  const product = await Products.findByIdAndDelete(id);
+  return product ? product.toObject() : null;
 }
 
 export default Products

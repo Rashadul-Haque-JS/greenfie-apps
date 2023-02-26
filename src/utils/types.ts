@@ -15,6 +15,13 @@ export interface IProducts{
   price:number;
   image: string;
 }
+export interface IApps{
+  _id?: string;
+  name: string;
+  image: string;
+  page:string;
+ 
+}
 
 export interface GenericProps{
   [key:string]:any

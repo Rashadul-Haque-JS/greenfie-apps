@@ -22,7 +22,7 @@ const ProductCard: React.FC<ProductProps> = ({ name, description, image, price }
 
   return (
     <div className="max-w-sm rounded overflow-hidden shadow-lg m-10">
-      <img className="w-full" src={image} alt={name} />
+      <img className="w-full" src={image} alt={name} loading="lazy" />
       <div className="px-6 py-4">
         <div className="font-bold text-xl mb-2">{name}</div>
         <p className="text-gray-700 text-base">

@@ -11,10 +11,11 @@
     "cy:run": "cypress run",
     "cy:open": "cypress open",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "analyze": "ANALYZE=true next build"
   },
-  
   "dependencies": {
+    "@material-ui/core": "^4.12.4",
     "@meilisearch/instant-meilisearch": "^0.11.0",
     "@next/font": "13.1.5",
     "@types/express": "^4.17.17",
@@ -33,6 +34,7 @@
     "react-select": "^5.7.0"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^13.2.1",
     "@types/dotenv": "^8.2.0",
     "@types/node": "^18.11.18",
     "@types/react": "^18.0.27",
