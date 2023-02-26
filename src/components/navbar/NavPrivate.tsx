@@ -39,7 +39,7 @@ const Navbar = () => {
       </div>
       <div className="items-center hidden lg:flex xl:flex">
         <Link href="/">
-          <img className='w-[36px] h-auto' src='/images/greenfie.png' alt="Greenfie logo" loading="lazy" />
+          <img className='w-[36px] h-auto' src='/images/greenfie.png' alt="Greenfie logo"  />
         </Link>
       </div>
 

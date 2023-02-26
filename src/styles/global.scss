@@ -28,7 +28,7 @@
 body {
   font-family: "Montserrat", sans-serif;
   background-color: #ffffff;
-
+  
   h1 {
     font-family: "Raleway", sans-serif;
   }
@@ -50,3 +50,9 @@ body {
 .navbar__drawer--open {
   transform: translateX(0%);
 }
+
+/* Background opacity after drawer open is set to normal*/
+.bg-opacity-50 {
+  --tw-bg-opacity: 0.0
+}
+

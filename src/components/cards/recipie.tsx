@@ -4,7 +4,7 @@ import Link from 'next/link';
 const RecipeCard = ({ recipe }: GenericProps) => {
   return (
     <div className="max-w-sm rounded overflow-hidden shadow-lg m-10 h-[480px]">
-      <img className="w-full" src={recipe.image} alt={recipe.title} loading="lazy"/>
+      <img className="w-full" src={recipe.image} alt={recipe.title} />
       <div className="px-6 py-4">
         <div className="font-bold text-xl mb-2">{recipe.title}</div>
         <p className="text-gray-700 text-base">{recipe.description}</p>
