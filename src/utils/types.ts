@@ -31,7 +31,13 @@ export interface GenericProps{
 
 export type TButton = {
   children: React.ReactNode;
-  variant: 'primary' | 'secondary';
-  marginTop:number;
+  style?:string;
+  mode: 'primary' | 'others';
   onClick?:(event: React.MouseEvent<HTMLElement>) =>void
+};
+export type TLink = {
+  children: React.ReactNode;
+  style?:string;
+  mode: 'primary' | 'others';
+  url?:string;
 };
