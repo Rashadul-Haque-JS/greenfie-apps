@@ -17,24 +17,24 @@ const ProductCard = ({ product }:GenericProps) => {
   };
 
   return (
-    <div className="max-w-sm rounded overflow-hidden shadow-lg m-10">
+    <div className='max-w-sm rounded overflow-hidden shadow-lg m-10'>
      <Link href={`/products/${product._id}`}>
-     <Image className="w-full" src={product.image} alt={product.name}  width={500} height={500}/>
+     <Image className='w-full' src={product.image} alt={product.name}  width={500} height={500}/>
      </Link>
-      <div className="px-6 py-4">
-        <div className="font-bold text-xl mb-2">{product.name}</div>
-        <p className="text-gray-700 text-base">
+      <div className='px-6 py-4'>
+        <div className='font-bold text-xl mb-2'>{product.name}</div>
+        <p className='text-gray-700 text-base'>
           {product.description}
         </p>
       </div>
-      <div className="px-4 py-4">
-        <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+      <div className='px-4 py-4'>
+        <span className='inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2'>
           ${product.price}
         </span>
-        <Button onClick={toggleLove} className="px-2 mx-1 hover:bg-main">
+        <Button onClick={toggleLove} className='px-2 mx-1 hover:bg-main'>
           {isLoved ? 'Loved ❤️' : 'Love It'}
         </Button>
-        <Button onClick={addToCart} className="px-2 mx-1 hover:bg-main">
+        <Button onClick={addToCart} className='px-2 mx-1 hover:bg-main'>
           {isInCart ? 'In Cart 🛒' : 'Add to Cart'}
         </Button>
       </div>

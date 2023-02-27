@@ -1,9 +1,9 @@
-import React from "react";
-import axios from "axios";
-import { GetServerSideProps } from "next";
-import AppSymbol from "@/components/appsSymbol";
-import Hero from "@/components/hero";
-import { GenericProps, IApps } from "@/utils/types";
+import React from 'react';
+import axios from 'axios';
+import { GetServerSideProps } from 'next';
+import AppSymbol from '@/components/appsSymbol';
+import Hero from '@/components/hero';
+import { GenericProps, IApps } from '@/utils/types';
 
 
 const Home = ({ apps }: GenericProps) => {
@@ -14,13 +14,13 @@ const Home = ({ apps }: GenericProps) => {
 
   return (
 
-    <div className="container h-full mx-auto ">
-      {/* <section className="md:min-h-[120px]">
-        <h1 className="text-main my-8 text-[1.2rem] px-4">Welcome to Greenfie</h1>
+    <div className='container h-full mx-auto '>
+      {/* <section className='md:min-h-[120px]'>
+        <h1 className='text-main my-8 text-[1.2rem] px-4'>Welcome to Greenfie</h1>
         </section> */}
-      <div className="flex flex-wrap justify-center mx-6 p-4 items-start gap-10 md:gap-20 first-letter: lg:gap-36 xl:gap-52 md:py-10 shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px] mt-12">
+      <div className='flex flex-wrap justify-center mx-6 p-4 items-start gap-10 md:gap-20 first-letter: lg:gap-36 xl:gap-52 md:py-10 shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px] mt-12'>
         <Hero />
-        <div className="w-full md:w-1/3 lg:w-1/3 xl:w-1/3 grid grid-cols-3 gap-2 place-items-center">
+        <div className='w-full md:w-1/3 lg:w-1/3 xl:w-1/3 grid grid-cols-3 gap-2 place-items-center'>
           {
             apps.map((page: IApps, index: number) => {
               return (
@@ -45,7 +45,7 @@ const Home = ({ apps }: GenericProps) => {
 
 export const getServerSideProps: GetServerSideProps = async () => {
   try {
-    const res = await axios.get("http://127.0.0.1:9000/api/fav-apps");
+    const res = await axios.get('http://127.0.0.1:9000/api/fav-apps');
     const apps = res.data;
     return { props: { apps } };
   } catch (error: any) {

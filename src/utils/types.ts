@@ -28,3 +28,10 @@ export interface IApps{
 export interface GenericProps{
   [key:string]:any
 }
+
+export type TButton = {
+  children: React.ReactNode;
+  variant: 'primary' | 'secondary';
+  marginTop:number;
+  onClick?:(event: React.MouseEvent<HTMLElement>) =>void
+};
