@@ -18,7 +18,7 @@ module.exports = {
       },
       
       colors: {
-        brownee: "#8B5E3C",
+        brownee: "#c70e05",
         main: "#3EB489", //used
         background: "#FFFFFF",//used
         txt: "#000000", //used

@@ -10,10 +10,11 @@ const RecipeCard = ({ recipe }: GenericProps) => {
         <p className='text-gray-700 text-base'>{recipe.description}</p>
       </div>
       <div className='px-6 py-4'>
-        <Link href={`/recipes/${recipe._id}`}>
-          <button className='bg-txt hover:bg-main text-white font-bold py-2 px-4 rounded'>
-            Show Details
-          </button>
+        <Link href={`/recipes/${recipe._id}`} className='flex items-center bg-txt hover:bg-main text-white font-bold py-2 px-4 w-3/4 rounded'>
+
+          <span className='mx-2'>Watch Now</span>
+          <i className="material-icons">play_circle_outline</i>
+
         </Link>
       </div>
     </div>
