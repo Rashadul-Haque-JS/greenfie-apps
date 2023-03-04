@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 
-const Login = ({ setIsLoginModalOpen , setIsSignupModalOpen,setIsResetModalOpen}: any) => {
+const Login = ({ setIsLoginModalOpen, setIsSignupModalOpen, setIsResetModalOpen }: any) => {
     const [credentials, setCredentials] = useState({ email: "", password: "" });
 
     const handleChange = (event: any) => {
@@ -31,41 +31,50 @@ const Login = ({ setIsLoginModalOpen , setIsSignupModalOpen,setIsResetModalOpen}
             <div className="bg-background p-8  w-[356px] sm:mt-10 xs:mt-10">
                 <div className="flex justify-between items-center">
                     <span className="text-lg font-bold mb-4 text-black">Signin</span>
-                    <i onClick={() => setIsLoginModalOpen(false)} className="material-icons">
+                    <button
+                        aria-label="Close"
+                        onClick={() => setIsLoginModalOpen(false)}
+                        className="material-icons"
+                    >
                         close
-                    </i>
+                    </button>
                 </div>
                 <div className="min-h-[400px] w-full">
 
-                <form onSubmit={handleLoginSubmit} className="p-2 mb-12">
-                    <div className="mb-4">
-                        <input
-                            className="w-full px-3 py-2 border border-gray-400 rounded-lg my-2"
-                            type="email"
-                            id="email"
-                            name="email"
-                            onChange={handleChange}
-                            required
-                            placeholder="Email..."
-                            autoFocus
-                        />
-                    </div>
-                    <div className="mb-4">
-                        <input
-                            className="w-full px-3 py-2 border border-gray-400 rounded-lg my-2"
-                            type="password"
-                            id="password"
-                            name="password"
-                            onChange={handleChange}
-                            required
-                            placeholder="Password..."
-                        />
-                    </div>
-                    <hr className="my-5"/>
-                    <button className="bg-txt text-white px-4 py-2 rounded-lg">Login</button>
-                </form>
-                Don't have account?  <span className="text-main px-2 underline" onClick={handleOptReg}>Create</span>
-                Forgot password?  <span className="text-main px-2 underline" onClick={handleOptReset}>Reset</span>
+                    <form onSubmit={handleLoginSubmit} className="p-2 mb-12">
+                        <div className="mb-4">
+                            <input
+                                className="w-full px-3 py-2 border border-gray-400 rounded-lg my-2"
+                                type="email"
+                                id="email"
+                                name="email"
+                                onChange={handleChange}
+                                required
+                                placeholder="Email..."
+                                autoFocus
+                            />
+                        </div>
+                        <div className="mb-4">
+                            <input
+                                className="w-full px-3 py-2 border border-gray-400 rounded-lg my-2"
+                                type="password"
+                                id="password"
+                                name="password"
+                                onChange={handleChange}
+                                required
+                                placeholder="Password..."
+                            />
+                        </div>
+                        <hr className="my-5" />
+                        
+                        <p className="text-gray-600 text-sm mb-4">By clicking Login, you agree to our <a href="#" className="text-blue-500">Terms of Use</a> and <a href="#" className="text-blue-500">Privacy Policy</a>.</p>
+                        <button className="bg-txt text-white px-4 py-2 rounded-lg ">Login</button>
+                    </form>
+
+                </div>
+                <div className="text-center">
+                    <p className="text-gray-600 text-sm mb-2">Don't have an account? <span className="text-blue-500 cursor-pointer" onClick={handleOptReg}>Register</span></p>
+                    <p className="text-gray-600 text-sm">Forgot Password? <span className="text-blue-500 cursor-pointer" onClick={handleOptReset}>Reset Password</span></p>
                 </div>
             </div>
 
