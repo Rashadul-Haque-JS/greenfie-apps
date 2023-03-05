@@ -41,3 +41,15 @@ export type TLink = {
   mode: 'primary' | 'others';
   url?:string;
 };
+
+export interface IUser {
+  name: string;
+  email: string;
+  password: string;
+  area: string;
+  city: string;
+  country: string;
+  phone: string;
+  gender: string;
+  avatar: string | null;
+}

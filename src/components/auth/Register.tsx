@@ -3,7 +3,9 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import Select from 'react-select'
 import { dhakaWards } from "@/utils/data/wards";
-const Register = ({ setIsSignupModalOpen }: any) => {
+import axios from "axios";
+
+const Register = ({ setIsSignupModalOpen, signup }: any) => {
     const [user, setUser] = useState({
         name: '',
         email: '',
@@ -12,11 +14,11 @@ const Register = ({ setIsSignupModalOpen }: any) => {
         city: '',
         country: 'BD',
         phone: '',
-        avatar: null
+        gender: '',
+        avatar: ''
     });
 
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [profilePicture, setProfilePicture] = useState<File>();
     const [error, setError] = useState("");
     const router = useRouter();
 
@@ -35,28 +37,22 @@ const Register = ({ setIsSignupModalOpen }: any) => {
 
         if (user.password !== confirmPassword) {
             setError("Passwords do not match");
-            return;
+            return
         }
-
         try {
-            const userData = {
-                ...user,
-                avatar: profilePicture ? profilePicture : null,
-            };
-
-            // submit user data to server and redirect
+            await axios.post(signup, user)
             router.push("/");
         } catch (err: any) {
             setError(err.message);
         }
     };
 
-
     return (
         <div
             className="fixed top-0 left-0 w-full h-full overlay bg-main flex flex-wrap-reverse justify-evenly items-center overflow-y-auto"
         >   <div className="relative">
-                <div className="absolute top-0 left-0 right-0 bottom-0 bg-gradient-to-b from-green-400 via-green-500 to-green-600 opacity-60"></div>
+                <div className="absolute bottom-10 left-0 w-56 h-4 bg-txt"></div>
+                <div className="absolute top-14 right-0 w-56 h-4 bg-txt"></div>
                 <div className="text-3xl text-white text-center font-semibold pt-4 my-12 relative z-10 shadow-md rounded-lg">
                     <Image src="/images/tomatos.jpg" width={500} height={500} alt="green" />
                 </div>
@@ -115,16 +111,16 @@ const Register = ({ setIsSignupModalOpen }: any) => {
                             placeholder="Confirm Password..."
                         />
                     </div>
-                            <div className="mt-4">
-                                <input
-                                    className="w-full p-2  text-gray-700  rounded"
-                                    type="text"
-                                    name="city"
-                                    onChange={handleChange}
-                                    required
-                                    placeholder="City"
-                                />
-                            </div>
+                    <div className="mt-4">
+                        <input
+                            className="w-full p-2  text-gray-700  rounded"
+                            type="text"
+                            name="city"
+                            onChange={handleChange}
+                            required
+                            placeholder="City"
+                        />
+                    </div>
 
                     <div className="mt-4">
                         <Select
@@ -135,14 +131,25 @@ const Register = ({ setIsSignupModalOpen }: any) => {
                             styles={{
                                 control: (provided) => ({
                                     ...provided,
-                                    backgroundColor: "#71ceac",
-                                }),
-                                option: (provided, state) => ({
-                                    ...provided,
-                                    backgroundColor: state.isSelected ? "#71ceac" : "white",
-                                    color: state.isSelected ? "white" : "black",
+                                    backgroundColor: "#fff",
                                 }),
                             }}
+                        />
+                    </div>
+                    <div className="mt-4">
+                        <Select
+                            name="gender"
+                            options={[{ label: "male", value: "male" }, { label: "female", value: "female" }]}
+                            placeholder="Select gender"
+                            onChange={(e) => handleChangeSelect(e, 'gender')}
+                            styles={{
+                                control: (provided) => ({
+                                    ...provided,
+                                    backgroundColor: "#fff",
+                                }),
+
+                            }}
+                            required
                         />
                     </div>
                     <div className="mt-4">
@@ -156,15 +163,7 @@ const Register = ({ setIsSignupModalOpen }: any) => {
 
                         />
                     </div>
-                    <div className="mt-4">
-                        <input
-                            className="w-full p-2  text-gray-700  rounded"
-                            type="file"
-                            name="profilePicture"
-                            onChange={(e) => setProfilePicture(e.target.files?.[0])}
-                            required
-                        />
-                    </div>
+                   
                     <hr className="my-5" />
                     <button className="bg-txt text-white px-4 py-2 rounded-lg ">Submit</button>
                 </form>

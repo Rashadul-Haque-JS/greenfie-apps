@@ -35,7 +35,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "src/server/middlewares/imageUpload.ts"  ],
   "exclude": [
     "node_modules"
   ]

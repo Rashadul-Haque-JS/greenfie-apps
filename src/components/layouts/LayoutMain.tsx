@@ -4,7 +4,7 @@ import Head from 'next/head'
 import Navbar from '../navbar/navbar';
 import NavbarPrivate from '../navbar/NavPrivate'
 
-const Layout = ({ children }:any) => {
+const Layout = ({ children ,signup}:any) => {
   const {pathname}= useRouter();
   console.log(pathname);
   
@@ -18,7 +18,7 @@ const Layout = ({ children }:any) => {
     
       </Head>
       <header className='bg-white shadow-md '>
-        {pathname === '/' ? <Navbar/> : <NavbarPrivate/>}
+        {pathname === '/' ? <Navbar signup={signup}/> : <NavbarPrivate/>}
       </header>
       <main className='container w-full lg:w-5/6 xl:w-5/6 lg:float-right xl:float-right mx-auto px-4 mt-20'>
         {children}

@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import connectToDB from '@/server/connection';
 import { createRecipe, getRecipes, getRecipe, updateRecipe, deleteRecipe } from '@/server/models/recipes';
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+const recipeHandler=async(req: NextApiRequest, res: NextApiResponse) =>{
   const { method, body, query } = req;
 
   await connectToDB();
@@ -68,3 +68,5 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       res.status(405).end(`Method ${method} Not Allowed`);
   }
 }
+
+export default recipeHandler

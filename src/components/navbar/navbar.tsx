@@ -4,7 +4,7 @@ import Login from '../auth/Login';
 import Register from '../auth/Register';
 import Reset from '../auth/Reset';
 
-const Navbar = () => {
+const Navbar = ({signup}:any) => {
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
     const [isSignModalOpen, setIsSignupModalOpen] = useState(false);
     const [isResetModalOpen, setIsResetModalOpen] = useState(false);
@@ -60,7 +60,7 @@ const Navbar = () => {
                 <Login setIsLoginModalOpen={setIsLoginModalOpen} setIsSignupModalOpen={setIsSignupModalOpen} setIsResetModalOpen={setIsResetModalOpen}/>
             )}
             {isSignModalOpen && (
-                <Register setIsSignupModalOpen={setIsSignupModalOpen}/>
+                <Register setIsSignupModalOpen={setIsSignupModalOpen} signup={signup}/>
             )}
             {isResetModalOpen && (
                 <Reset setIsResetModalOpen={setIsResetModalOpen}/>
