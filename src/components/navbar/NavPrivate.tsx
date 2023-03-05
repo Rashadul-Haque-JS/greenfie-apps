@@ -47,10 +47,13 @@ const handleLogout = () => {
 
         </div>
       </div>
-      <div className='items-center hidden lg:flex xl:flex'>
+      <div className='hidden w-full lg:flex xl:flex justify-between items-center '>
         <Link href='/'>
           <Image className='w-[36px] h-auto' src='/images/greenfie.png' alt='Greenfie logo' width={500} height={500} />
         </Link>
+        <div className='text-3xl text-white font-bold rounded-full bg-white w-5 h-5'>
+
+        </div>
       </div>
 
       <div id='drawer-navigation' className={`fixed sm:top-0 sm:left-0 xs:top-0 xs:left-0 md:top-0 md:left-0 w-80 lg:top-[56px] lg:left-[240px] xl:top-[51px] xl:left-[240px] z-40 h-screen px-4 lg:pr-0 xl:pr-0 overflow-y-auto xs:transition-transform sm:transition-transform md:transition-transform ${isOpen ? '' : '-translate-x-full'

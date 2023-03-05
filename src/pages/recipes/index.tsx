@@ -16,7 +16,7 @@ const Recipes = ({recipes}:GenericProps) => {
 
 export const getServerSideProps : GetServerSideProps= async ()=>{
   try {
-    const res = await axios.get('http://127.0.0.1:9000/api/recipes');
+    const res = await axios.get('http://127.0.0.1:9000/api/recipes/recipes');
     const recipes = res.data;
     return { props: { recipes } };
   } catch (error:any) {

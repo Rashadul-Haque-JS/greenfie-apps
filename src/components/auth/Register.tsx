@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Select from 'react-select'
-import { dhakaWards } from "@/utils/data/wards";
+import divisions from "@/utils/data/divisions";
 import axios from "axios";
 
 const Register = ({ setIsSignupModalOpen, signup }: any) => {
@@ -19,12 +19,30 @@ const Register = ({ setIsSignupModalOpen, signup }: any) => {
     });
 
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [wards, setWards] = useState<any[]>([]);
     const [error, setError] = useState("");
+    const [errorPhone, setErrorPhone] = useState("");
     const router = useRouter();
 
     const handleChange = (e: any) => {
         const { name, value } = e.target
-        setUser({ ...user, [name]: value })
+        // // Regular expression for validating Bangladesh phone numbers
+        // const landlineRegex = /^\+880-2-\d{7}$/;
+        // const mobileRegex = /^\+880-(11|13|14|15|16|17|18|19)-\d{8}$/;
+
+        // // Check if the phone number matches the regular expressions
+        // const isLandlineValid = landlineRegex.test(value);
+        // const isMobileValid = mobileRegex.test(value);
+
+        // const prefixedValue = "+880" + value.replace(/\D/g,'');
+
+        // // Set error message based on validation result
+        // let errorMessage = '';
+        // if (!isLandlineValid && !isMobileValid) {
+        //     errorMessage = 'mobile:+880-17-XXXXXXX or landline:+880-2-XXXXXX';
+        // }
+        setUser({ ...user, [name]: value})
+        // setErrorPhone(errorMessage)
     }
 
     const handleChangeSelect = (event: any, name: string) => {
@@ -46,6 +64,13 @@ const Register = ({ setIsSignupModalOpen, signup }: any) => {
             setError(err.message);
         }
     };
+
+    useEffect(() => {
+        if (user.city !== undefined) {
+            const [selectedDivision] = divisions.filter(division => division.label === user.city);
+            setWards(selectedDivision?.wards);
+        }
+    }, [user.city]);
 
     return (
         <div
@@ -112,20 +137,25 @@ const Register = ({ setIsSignupModalOpen, signup }: any) => {
                         />
                     </div>
                     <div className="mt-4">
-                        <input
-                            className="w-full p-2  text-gray-700  rounded"
-                            type="text"
+                        <Select
                             name="city"
-                            onChange={handleChange}
+                            options={divisions}
+                            placeholder="Choose your city"
+                            onChange={(e) => handleChangeSelect(e, 'city')}
+                            styles={{
+                                control: (provided) => ({
+                                    ...provided,
+                                    backgroundColor: "#fff",
+                                }),
+                            }}
                             required
-                            placeholder="City"
                         />
                     </div>
 
                     <div className="mt-4">
                         <Select
                             name="area"
-                            options={dhakaWards}
+                            options={wards}
                             placeholder="Choose your Area"
                             onChange={(e) => handleChangeSelect(e, 'area')}
                             styles={{
@@ -134,6 +164,8 @@ const Register = ({ setIsSignupModalOpen, signup }: any) => {
                                     backgroundColor: "#fff",
                                 }),
                             }}
+                            noOptionsMessage={() => 'Select city first'}
+                            required
                         />
                     </div>
                     <div className="mt-4">
@@ -158,12 +190,11 @@ const Register = ({ setIsSignupModalOpen, signup }: any) => {
                             type="tel"
                             name="phone"
                             onChange={handleChange}
-                            required
                             placeholder="Phone Number"
 
                         />
                     </div>
-                   
+
                     <hr className="my-5" />
                     <button className="bg-txt text-white px-4 py-2 rounded-lg ">Submit</button>
                 </form>

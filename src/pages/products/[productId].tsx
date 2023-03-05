@@ -43,7 +43,7 @@ const SingleProduct = ({ product }: GenericProps) => {
                 </div>
                <Buttons mode='primary' children='Add To Cart' onClick={handleAddToCart}/>
                 <div className='flex justify-between items-center gap-2'>
-                <Links children='To lists' mode='others' style='w-1/2'/>
+                <Links url='/products' children='To lists' mode='others' style='w-1/2'/>
                 <Links children ='To cart' mode='others'style='w-1/2'/>
 
                 </div>
@@ -62,7 +62,7 @@ const SingleProduct = ({ product }: GenericProps) => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
     try {
         const { productId } = context.query;
-        const res = await axios.get(`http://127.0.0.1:9000/api/products?id=${productId}`);
+        const res = await axios.get(`http://127.0.0.1:9000/api/products/products?id=${productId}`);
         const product = res.data;
         return { props: { product } };
     } catch (error: any) {

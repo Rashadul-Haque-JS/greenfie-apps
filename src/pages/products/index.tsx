@@ -19,7 +19,7 @@ const Products = ({ products }:GenericProps) => {
 
 export const getServerSideProps: GetServerSideProps = async () => {
   try {
-    const res = await axios.get('http://127.0.0.1:9000/api/products');
+    const res = await axios.get('http://127.0.0.1:9000/api/products/products');
     const products = res.data;
     return { props: { products } };
   } catch (error:any) {

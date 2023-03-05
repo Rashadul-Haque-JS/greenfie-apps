@@ -15,7 +15,7 @@ const Login = ({ setIsLoginModalOpen, setIsSignupModalOpen, setIsResetModalOpen 
     const handleLoginSubmit = async (event:any) => {
         event.preventDefault();
         try {
-          const response = await axios.post('/api/login', credentials);
+          const response = await axios.post('/api/auth/login', credentials);
           const data = response.data;
           console.log(data);
           router.replace('/products')
