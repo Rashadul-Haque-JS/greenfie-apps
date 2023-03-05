@@ -1,18 +1,29 @@
 import React, { useState } from "react";
 import Image from "next/image";
+import axios from "axios";
+import { useRouter } from "next/router";
 
 const Login = ({ setIsLoginModalOpen, setIsSignupModalOpen, setIsResetModalOpen }: any) => {
     const [credentials, setCredentials] = useState({ email: "", password: "" });
+    const router = useRouter();
 
     const handleChange = (event: any) => {
         const { name, value } = event.target;
         setCredentials({ ...credentials, [name]: value });
     };
 
-    const handleLoginSubmit = (event: any) => {
+    const handleLoginSubmit = async (event:any) => {
         event.preventDefault();
-        //codes here...
-    };
+        try {
+          const response = await axios.post('/api/login', credentials);
+          const data = response.data;
+          console.log(data);
+          router.replace('/products')
+        } catch (error) {
+          console.log(error);
+          // handle error here, e.g. show error message
+        }
+      };
     const handleOptReg = () => {
         setIsSignupModalOpen(true)
         setIsLoginModalOpen(false)

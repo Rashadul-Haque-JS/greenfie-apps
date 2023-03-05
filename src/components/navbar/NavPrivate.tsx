@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useMediaQuery } from '@material-ui/core';
 import Image from 'next/image';
+import { destroyCookie } from 'nookies';
 const Navbar = () => {
   const isMobileScreen = useMediaQuery('(max-width: 960px)');
   const [isActive, setIsActive] = useState(false);
@@ -20,6 +21,15 @@ const Navbar = () => {
   const handleClickClose = () => {
     setIsOpen(false)
   }
+
+  
+const handleLogout = () => {
+  // Remove the token cookie
+  destroyCookie(null, 'token', { path: '/' });
+
+  // Redirect the user to the login page or any other page of your choice
+  window.location.href = '/';
+};
 
   return (
     <div className='flex flex-col lg:flex-row xl:flex-row justify-between lg:justify-start xl:justify-start bg-main xs:px-3 sm:px-3 px-8 py-2 fixed top-0 left-0 w-full z-40 '>
@@ -128,7 +138,7 @@ const Navbar = () => {
             <li>
               <button type='button' className='flex items-center p-2 text-base font-normal text-txt rounded-lg hover:text-background'>
                 <svg className='flex-shrink-0 w-6 h-6 text-txt transition duration-75 group-hover:text-background dark:group-hover:text-white' fill='currentColor' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><path d='M8.707 7.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l2-2a1 1 0 00-1.414-1.414L11 7.586V3a1 1 0 10-2 0v4.586l-.293-.293z'></path><path d='M3 5a2 2 0 012-2h1a1 1 0 010 2H5v7h2l1 2h4l1-2h2V5h-1a1 1 0 110-2h1a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5z'></path></svg>
-                <span className='flex-1 ml-3 whitespace-nowrap'>Logout</span>
+                <span className='flex-1 ml-3 whitespace-nowrap' onClick={handleLogout}>Logout</span>
 
               </button>
             </li>

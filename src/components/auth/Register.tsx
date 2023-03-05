@@ -57,7 +57,7 @@ const Register = ({ setIsSignupModalOpen, signup }: any) => {
                     <Image src="/images/tomatos.jpg" width={500} height={500} alt="green" />
                 </div>
             </div>
-            <div className=" bg-background p-8 md:w-[384px] lg:w-[384px] xl:w-[384px] mx-2 mb-10 sm:mt-10 xs:mt-10">
+            <div className=" bg-background p-8 w-[356px] mx-2 mb-10 sm:mt-10 xs:mt-10">
                 <div className='flex justify-between items-center'>
                     <span className="text-lg font-bold mb-4 text-black">Signup</span>
                     <i onClick={() => setIsSignupModalOpen(false)} className="material-icons">close</i>
