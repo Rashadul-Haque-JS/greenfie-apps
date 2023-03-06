@@ -3,31 +3,22 @@ import Link from 'next/link';
 import { useMediaQuery } from '@material-ui/core';
 import Image from 'next/image';
 import { destroyCookie } from 'nookies';
+import { toggleStates } from '@/utils/data/misc';
 const Navbar = () => {
   const isMobileScreen = useMediaQuery('(max-width: 960px)');
-  const [isProduct, setIsProduct] = useState(false);
-  const [isRecipe, setIsRecipe] = useState(false);
-  const [isOthers, setIsOthers] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleClick = (string:string) => {
-    switch (string) {
-      case 'product':
-        setIsProduct(!isProduct);
-        break;
-      case 'recipe':
-        setIsRecipe(!isRecipe)
-        break;
-      // Add more cases for additional toggles as needed
-      default:
-        setIsOthers(!isOthers);
-        break
-    }
-  }
+  const [styleState, setStyleState] = useState<any>(toggleStates);
 
-  const renderPlusIcon = (isTarget:boolean) => {
+  const toggleStyleState = (componentName: any) => {
+    setStyleState((prevState: any) => {
+      return { ...prevState, [componentName]: !prevState[componentName] };
+    });
+  };
+
+  const renderPlusIcon = (key: string) => {
     return (
-      <span className='text-4xl' style={{ transform: isTarget ? 'rotate(45deg)' : 'rotate(0)' }}>+</span>
+      <span className='text-4xl' style={{ transform: styleState[key] ? 'rotate(45deg)' : 'rotate(0)' }}>+</span>
     );
   }
 
@@ -101,10 +92,10 @@ const Navbar = () => {
             </li>
             <hr />
             <li>
-              <button type='button' id='products' className='flex items-center w-full p-2 text-base font-normal text-txt hover:text-background transition duration-75 rounded-lg group ' aria-controls='dropdown-example' data-collapse-toggle='dropdown-example' onClick={()=>handleClick('product')}>
+              <button type='button' id='products' className='flex items-center w-full p-2 text-base font-normal text-txt hover:text-background transition duration-75 rounded-lg group ' aria-controls='dropdown-example' data-collapse-toggle='dropdown-example' onClick={() => toggleStyleState('product')}>
                 <svg className='flex-shrink-0 w-6 h-6 text-txt transition duration-75 group-hover:text-background dark:group-hover:text-white' fill='currentColor' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><path fillRule='evenodd' d='M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z' clipRule='evenodd'></path></svg>
                 <span className='flex-1 ml-3 text-left whitespace-nowrap'>Products</span>
-                {renderPlusIcon(isProduct)}
+                {renderPlusIcon('product')}
               </button>
 
               <ul id='dropdown-example' className='hidden py-2 space-y-2  bg-lightGreen'>
@@ -121,10 +112,10 @@ const Navbar = () => {
             </li>
             <hr />
             <li>
-              <button type='button' className='flex items-center w-full p-2 text-base font-normal text-txt hover:text-background transition duration-75 rounded-lg group ' aria-controls='dropdown-example' data-collapse-toggle='dropdown-example-2' onClick={()=>handleClick('recipe')}>
+              <button type='button' className='flex items-center w-full p-2 text-base font-normal text-txt hover:text-background transition duration-75 rounded-lg group ' aria-controls='dropdown-example' data-collapse-toggle='dropdown-example-2' onClick={() => toggleStyleState('recipe')}>
                 <svg className='flex-shrink-0 w-6 h-6 text-txt transition duration-75 group-hover:text-background dark:group-hover:text-white' fill='currentColor' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><path fillRule='evenodd' d='M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z' clipRule='evenodd'></path></svg>
                 <span className='flex-1 ml-3 text-left whitespace-nowrap'>Recipes</span>
-                {renderPlusIcon(isRecipe)}</button>
+                {renderPlusIcon('recipe')}</button>
               <ul id='dropdown-example-2' className='hidden py-2 space-y-2  bg-lightGreen'>
                 <li>
                   <Link href='/recipes' className='flex items-center w-full p-2 text-base font-normal text-txt transition duration-75 rounded-lg pl-11 group ' onClick={handleClickClose}>Lists</Link>
@@ -139,10 +130,10 @@ const Navbar = () => {
             </li>
             <hr />
             <li>
-              <button type='button' className='flex items-center w-full p-2 text-base font-normal text-txt hover:text-background transition duration-75 rounded-lg group ' aria-controls='dropdown-example' data-collapse-toggle='dropdown-example-3' onClick={()=>handleClick('ohers')}>
-        ()        <svg className='flex-shrink-0 w-6 h-6 text-txt transition duration-75 group-hover:text-background dark:group-hover:text-white' fill='currentColor' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><path fillRule='evenodd' d='M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z' clipRule='evenodd'></path></svg>
+              <button type='button' className='flex items-center w-full p-2 text-base font-normal text-txt hover:text-background transition duration-75 rounded-lg group ' aria-controls='dropdown-example' data-collapse-toggle='dropdown-example-3' onClick={() => toggleStyleState('others')}>
+                <svg className='flex-shrink-0 w-6 h-6 text-txt transition duration-75 group-hover:text-background dark:group-hover:text-white' fill='currentColor' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><path fillRule='evenodd' d='M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z' clipRule='evenodd'></path></svg>
                 <span className='flex-1 ml-3 text-left whitespace-nowrap'>Products-3</span>
-                {renderPlusIcon(isOthers)}
+                {renderPlusIcon('others')}
               </button>
               <ul id='dropdown-example-3' className='hidden py-2 space-y-2  bg-lightGreen'>
                 <li>
