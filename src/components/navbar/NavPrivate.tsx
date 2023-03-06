@@ -5,12 +5,32 @@ import Image from 'next/image';
 import { destroyCookie } from 'nookies';
 const Navbar = () => {
   const isMobileScreen = useMediaQuery('(max-width: 960px)');
-  const [isActive, setIsActive] = useState(false);
+  const [isProduct, setIsProduct] = useState(false);
+  const [isRecipe, setIsRecipe] = useState(false);
+  const [isOthers, setIsOthers] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleClick = () => {
-    setIsActive(!isActive);
+  const handleClick = (string:string) => {
+    switch (string) {
+      case 'product':
+        setIsProduct(!isProduct);
+        break;
+      case 'recipe':
+        setIsRecipe(!isRecipe)
+        break;
+      // Add more cases for additional toggles as needed
+      default:
+        setIsOthers(!isOthers);
+        break
+    }
   }
+
+  const renderPlusIcon = (isTarget:boolean) => {
+    return (
+      <span className='text-4xl' style={{ transform: isTarget ? 'rotate(45deg)' : 'rotate(0)' }}>+</span>
+    );
+  }
+
 
   const handleClickOpen = () => {
     if (isMobileScreen) {
@@ -22,14 +42,14 @@ const Navbar = () => {
     setIsOpen(false)
   }
 
-  
-const handleLogout = () => {
-  // Remove the token cookie
-  destroyCookie(null, 'token', { path: '/' });
 
-  // Redirect the user to the login page or any other page of your choice
-  window.location.href = '/';
-};
+  const handleLogout = () => {
+    // Remove the token cookie
+    destroyCookie(null, 'token', { path: '/' });
+
+    // Redirect the user to the login page or any other page of your choice
+    window.location.href = '/';
+  };
 
   return (
     <div className='flex flex-col lg:flex-row xl:flex-row justify-between lg:justify-start xl:justify-start bg-main xs:px-3 sm:px-3 px-8 py-2 fixed top-0 left-0 w-full z-40 '>
@@ -81,10 +101,10 @@ const handleLogout = () => {
             </li>
             <hr />
             <li>
-              <button type='button' className='flex items-center w-full p-2 text-base font-normal text-txt hover:text-background transition duration-75 rounded-lg group ' aria-controls='dropdown-example' data-collapse-toggle='dropdown-example' onClick={handleClick}>
+              <button type='button' id='products' className='flex items-center w-full p-2 text-base font-normal text-txt hover:text-background transition duration-75 rounded-lg group ' aria-controls='dropdown-example' data-collapse-toggle='dropdown-example' onClick={()=>handleClick('product')}>
                 <svg className='flex-shrink-0 w-6 h-6 text-txt transition duration-75 group-hover:text-background dark:group-hover:text-white' fill='currentColor' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><path fillRule='evenodd' d='M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z' clipRule='evenodd'></path></svg>
                 <span className='flex-1 ml-3 text-left whitespace-nowrap'>Products</span>
-                <span className='text-4xl' style={{ transform: isActive ? 'rotate(45deg)' : 'rotate(0)' }}>+</span>
+                {renderPlusIcon(isProduct)}
               </button>
 
               <ul id='dropdown-example' className='hidden py-2 space-y-2  bg-lightGreen'>
@@ -101,11 +121,10 @@ const handleLogout = () => {
             </li>
             <hr />
             <li>
-              <button type='button' className='flex items-center w-full p-2 text-base font-normal text-txt hover:text-background transition duration-75 rounded-lg group ' aria-controls='dropdown-example' data-collapse-toggle='dropdown-example-2' onClick={handleClick}>
+              <button type='button' className='flex items-center w-full p-2 text-base font-normal text-txt hover:text-background transition duration-75 rounded-lg group ' aria-controls='dropdown-example' data-collapse-toggle='dropdown-example-2' onClick={()=>handleClick('recipe')}>
                 <svg className='flex-shrink-0 w-6 h-6 text-txt transition duration-75 group-hover:text-background dark:group-hover:text-white' fill='currentColor' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><path fillRule='evenodd' d='M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z' clipRule='evenodd'></path></svg>
                 <span className='flex-1 ml-3 text-left whitespace-nowrap'>Recipes</span>
-                <span className='text-4xl' style={{ transform: isActive ? 'rotate(45deg)' : 'rotate(0)' }}>+</span>
-              </button>
+                {renderPlusIcon(isRecipe)}</button>
               <ul id='dropdown-example-2' className='hidden py-2 space-y-2  bg-lightGreen'>
                 <li>
                   <Link href='/recipes' className='flex items-center w-full p-2 text-base font-normal text-txt transition duration-75 rounded-lg pl-11 group ' onClick={handleClickClose}>Lists</Link>
@@ -120,10 +139,10 @@ const handleLogout = () => {
             </li>
             <hr />
             <li>
-              <button type='button' className='flex items-center w-full p-2 text-base font-normal text-txt hover:text-background transition duration-75 rounded-lg group ' aria-controls='dropdown-example' data-collapse-toggle='dropdown-example-3' onClick={handleClick}>
-                <svg className='flex-shrink-0 w-6 h-6 text-txt transition duration-75 group-hover:text-background dark:group-hover:text-white' fill='currentColor' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><path fillRule='evenodd' d='M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z' clipRule='evenodd'></path></svg>
+              <button type='button' className='flex items-center w-full p-2 text-base font-normal text-txt hover:text-background transition duration-75 rounded-lg group ' aria-controls='dropdown-example' data-collapse-toggle='dropdown-example-3' onClick={()=>handleClick('ohers')}>
+        ()        <svg className='flex-shrink-0 w-6 h-6 text-txt transition duration-75 group-hover:text-background dark:group-hover:text-white' fill='currentColor' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><path fillRule='evenodd' d='M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z' clipRule='evenodd'></path></svg>
                 <span className='flex-1 ml-3 text-left whitespace-nowrap'>Products-3</span>
-                <span className='text-4xl' style={{ transform: isActive ? 'rotate(45deg)' : 'rotate(0)' }}>+</span>
+                {renderPlusIcon(isOthers)}
               </button>
               <ul id='dropdown-example-3' className='hidden py-2 space-y-2  bg-lightGreen'>
                 <li>
