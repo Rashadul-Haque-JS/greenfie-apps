@@ -1,13 +1,11 @@
 import React from 'react'
-import { useRouter } from 'next/router';
 import Head from 'next/head'
 import Navbar from '../navbar/navbar';
 import NavbarPrivate from '../navbar/NavPrivate'
 import Footer from '../misc/footer';
+import pathname from '../misc/pathname';
 const Layout = ({ children, signup }: any) => {
-  const { pathname } = useRouter();
-  console.log(pathname);
-
+  
   return (
     <div className='mx-auto min-h-screen'>
       <Head>
@@ -18,9 +16,9 @@ const Layout = ({ children, signup }: any) => {
 
       </Head>
       <header className='bg-white shadow-md '>
-        {pathname === '/' ? <Navbar signup={signup} /> : <NavbarPrivate />}
+        {pathname() === '/' ? <Navbar signup={signup} /> : <NavbarPrivate />}
       </header>
-      <main className={`container w-full lg:w-5/6 xl:w-5/6 mx-auto px-4 mt-20 ${pathname !== '/' ? 'md:float-right lg:float-right xl:float-right' : ''}`} style={{ marginTop: pathname === '/' ? '3rem' : '5rem' }}>
+      <main className={`container w-full lg:w-5/6 xl:w-5/6 mx-auto px-4 mt-20 ${pathname() !== '/' ? 'md:float-right lg:float-right xl:float-right' : ''}`} style={{ marginTop: pathname() === '/' ? '3rem' : '5rem' }}>
         {children}
       </main>
       <Footer/>

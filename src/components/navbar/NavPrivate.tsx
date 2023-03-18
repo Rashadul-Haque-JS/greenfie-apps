@@ -4,6 +4,7 @@ import { useMediaQuery } from '@material-ui/core';
 import Image from 'next/image';
 import { destroyCookie } from 'nookies';
 import { toggleStates } from '@/utils/data/misc';
+import DeshboardLink from '../misc/deshboardLink';
 const Navbar = () => {
   const isMobileScreen = useMediaQuery('(max-width: 960px)');
   const [isOpen, setIsOpen] = useState(false);
@@ -83,10 +84,7 @@ const Navbar = () => {
           <ul className='space-y-2 w-full lg:ml-16 xl:ml-16 '>
             <hr />
             <li>
-              <Link href='#' className='flex items-center p-2 text-base font-normal text-txt rounded-lg hover:text-background' onClick={handleClickClose}>
-                <svg className='w-6 h-6 text-txt transition duration-75 group-hover:text-background dark:group-hover:text-white' fill='currentColor' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><path d='M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z'></path><path d='M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z'></path></svg>
-                <span className='ml-3'>Dashboard</span>
-              </Link>
+              <DeshboardLink/>
             </li>
             <hr />
             <li>

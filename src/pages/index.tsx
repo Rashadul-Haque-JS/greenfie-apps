@@ -13,7 +13,6 @@ const Home = ({ apps }: GenericProps) => {
   }
 
   return (
-
     <div className='w-full flex flex-col items-center'>
     <div className="flex justify-center w-full">
       <Greetings/>

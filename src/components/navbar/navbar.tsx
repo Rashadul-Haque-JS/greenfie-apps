@@ -3,7 +3,6 @@ import Image from 'next/image';
 import Login from '../auth/Login';
 import Register from '../auth/Register';
 import Reset from '../auth/Reset';
-
 const Navbar = ({ signup }: any) => {
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
     const [isSignModalOpen, setIsSignupModalOpen] = useState(false);
