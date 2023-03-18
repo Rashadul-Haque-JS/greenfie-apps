@@ -26,8 +26,11 @@ const Reset = ({ setIsResetModalOpen }: any) => {
                     </button>
                 </div>
                 <div className="min-h-[400px] w-full">
-                    <form onSubmit={handleResetSubmit} className="p-2 ">
+                    <form onSubmit={handleResetSubmit} className="p-2">
                         <div className="mb-4">
+                            <label htmlFor="email" className="block text-gray-700 font-bold mb-2">
+                                Email Address
+                            </label>
                             <input
                                 className="w-full px-3 py-2 border border-gray-400 rounded-lg my-2"
                                 type="email"
@@ -35,10 +38,13 @@ const Reset = ({ setIsResetModalOpen }: any) => {
                                 name="email"
                                 onChange={(e) => setEmail(e.target.value)}
                                 required
-                                placeholder="Email..."
+                                placeholder="Enter your email address"
                                 autoFocus
                             />
                         </div>
+                        <p className="text-gray-600 mb-4">
+                            We'll send you an email with instructions on how to reset your password.
+                        </p>
                         <hr className="my-5" />
                         <button className="bg-txt text-white px-4 py-2 rounded-lg">Send</button>
                     </form>

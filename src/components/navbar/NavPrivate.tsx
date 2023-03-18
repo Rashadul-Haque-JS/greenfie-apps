@@ -32,8 +32,6 @@ const Navbar = () => {
   const handleClickClose = () => {
     setIsOpen(false)
   }
-
-
   const handleLogout = () => {
     // Remove the token cookie
     destroyCookie(null, 'token', { path: '/' });
@@ -158,6 +156,7 @@ const Navbar = () => {
           </ul>
         </div>
       </div>
+      
     </div>
   );
   //className='hover:bg-txt'

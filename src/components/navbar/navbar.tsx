@@ -8,10 +8,7 @@ const Navbar = ({ signup }: any) => {
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
     const [isSignModalOpen, setIsSignupModalOpen] = useState(false);
     const [isResetModalOpen, setIsResetModalOpen] = useState(false);
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-
-
+    
     const openModal = (modalType: string) => {
         const modalStates = {
             login: [true, false, false],

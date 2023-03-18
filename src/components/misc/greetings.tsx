@@ -8,7 +8,7 @@ const Greetings= () => {
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-      width: '100%',
+      width: '180%',
       padding: '20px',
       backgroundColor: '#000',
       position: 'relative',
@@ -22,14 +22,14 @@ const Greetings= () => {
     },
     whiteBg: {
       backgroundColor: '#fff',
-      width: '100px',
+      width: '180px',
       height: '4px',
       margin: '0px 8px 0px 8px',
       animation: `${swap ? 'slideRight' : 'slideLeft'} 5s ease-in-out infinite`,
     },
     greenBg: {
       backgroundColor: 'green',
-      width: '100px',
+      width: '180px',
       height: '4px',
       margin: '0px 8px 0px 8px',
       animation: `${swap ? 'slideLeft' : 'slideRight'} 5s ease-in-out infinite`,
@@ -38,10 +38,11 @@ const Greetings= () => {
       position: 'absolute',
       top: '50%',
       left: '50%',
+      letterSpacing:'1px',
       transform: 'translate(-50%, -50%)',
       opacity: swap ? 0: 1,
-      transition: 'opacity 1s ease-in-out'
-    }
+      transition: 'opacity 2s ease-in-out'
+    },
   };
 
   useEffect(() => {
@@ -52,7 +53,7 @@ const Greetings= () => {
   }, []);
 
   return (
-    <div style={styles.chatBox}>
+    <div style={styles.chatBox} className='rounded'>
       <div style={styles.lineRow}>
         <span style={styles.whiteBg}></span>
         <span style={styles.whiteBg}></span>
@@ -90,7 +91,7 @@ const Greetings= () => {
         <span style={styles.greenBg}></span>
       </div>
       <div style={styles.text}>
-        <p className='text-background text-center' >Welcome <span className='block text-2xl'>Greenfie</span></p>
+      <p className='text-lime-400 text-center text-xs my-2'>WELCOME TO<span className='block text-xl text-background'>GREENFIE</span></p>
       </div>
       <style>
         {`
@@ -101,7 +102,7 @@ const Greetings= () => {
             50% {
               transform: translateX(200%);
             }
-            100% {
+            180% {
               transform: translateX(0);
             }
           }
@@ -113,7 +114,7 @@ const Greetings= () => {
             50% {
               transform: translateX(-200%);
             }
-            100% {
+            180% {
               transform: translateX(0);
             }
           }

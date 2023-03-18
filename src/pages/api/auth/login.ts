@@ -4,12 +4,10 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import Users from "@/server/models/users";
 import dotenv from "dotenv";
 dotenv.config();
-// This is a sample user object. In a real-world application, you would get this from a database.
 
 export default async function handler(req:NextApiRequest, res:NextApiResponse) {
   if (req.method === 'POST') {
     const { email, password } = req.body;
-
     const user  = await Users.findOne({ email})
     if(!user)return res.status(404).json({ message: 'User not found' });
 

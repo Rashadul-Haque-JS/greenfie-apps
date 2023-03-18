@@ -13,7 +13,7 @@
   /* Hide scrollbar for all elements except when hovering */
   scrollbar-width: none; /* Firefox */
   &::-webkit-scrollbar {
-    width: 0.3em; /* width of scrollbar */
+    width: 0.0em; /* width of scrollbar */
   }
   &::-webkit-scrollbar-track {
     background: none; /* color of scrollbar track */

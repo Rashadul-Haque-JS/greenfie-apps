@@ -4,9 +4,7 @@ import { createUser, getUsers, getUser, updateUser, deleteUser } from '@/server/
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { method, body, query } = req;
-
    await connect();
-
   switch (method) {
     case 'POST':
       try {
