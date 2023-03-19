@@ -15,7 +15,7 @@ const Reset = ({ setIsResetModalOpen }: any) => {
                 <div className="w-3/4 sm:w-full xs:w-full flex flex-col mx-auto">
                     <span className="sm:block xs:block hidden bg-main text-background text-center px-4 py-2  transform translate-y-[-30px]">Greenfie</span>
 
-                    <div className="flex justify-between items-center mb-4">
+                    <div className="flex justify-between items-center mb-4 px-2">
                         <span className="text-lg font-bold text-black">Reset password</span>
                         <button
                             aria-label="Close"
@@ -26,7 +26,7 @@ const Reset = ({ setIsResetModalOpen }: any) => {
                         </button>
                     </div>
                     <div className="h-full w-full ">
-                        <form onSubmit={handleResetSubmit} className="p-2">
+                        <form onSubmit={handleResetSubmit} className="p-2 flex flex-col">
                             <div className="mb-4">
                                 <input
                                     className="w-full px-3 py-2 border border-gray-400 rounded-lg my-2"

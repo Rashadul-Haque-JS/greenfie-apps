@@ -40,7 +40,7 @@ const Login = ({ setIsLoginModalOpen, setIsSignupModalOpen, setIsResetModalOpen 
             <div className="bg-background p-8 w-[546px] sm:mt-8 xs:mt-8">
                 <div className="w-3/4 sm:w-full xs:w-full flex flex-col mx-auto">
                     <span className="sm:block xs:block hidden bg-main text-background px-4 py-2 transform translate-y-[-30px] text-center">Greenfie</span>
-                    <div className="flex justify-between items-center mb-2">
+                    <div className="flex justify-between items-center mb-2 px-2">
                         <span className="text-lg font-bold text-black">Signin</span>
                         <button
                             aria-label="Close"
@@ -51,7 +51,7 @@ const Login = ({ setIsLoginModalOpen, setIsSignupModalOpen, setIsResetModalOpen 
                         </button>
                     </div>
                     <div className="h-full w-full">
-                        <form onSubmit={handleLoginSubmit} className="p-2 mb-12">
+                        <form onSubmit={handleLoginSubmit} className="p-2 mb-12 flex flex-col">
                             <div className="mb-4">
                                 <input
                                     className="w-full px-3 py-2 border border-gray-400 rounded-lg my-2"
@@ -81,7 +81,7 @@ const Login = ({ setIsLoginModalOpen, setIsSignupModalOpen, setIsResetModalOpen 
                             <button className="bg-txt text-white px-4 py-2 rounded-lg ">Login</button>
                         </form>
                     </div>
-                <div className="text-start">
+                <div className="text-start px-2">
                     <p className="text-gray-600 text-sm mb-2">Don't have an account? <span className="text-blue-500 cursor-pointer" onClick={handleOptReg}>Register</span></p>
                     <p className="text-gray-600 text-sm">Forgot Password? <span className="text-blue-500 cursor-pointer" onClick={handleOptReset}>Reset Password</span></p>
                 </div>

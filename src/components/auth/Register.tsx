@@ -79,7 +79,7 @@ const Register = ({ setIsSignupModalOpen, signup }: any) => {
             <div className="bg-background p-8 w-[546px] sm:mt-8 xs:mt-8">
             <div className="w-3/4 sm:w-full xs:w-full flex flex-col mx-auto">
             <span className="sm:block xs:block hidden bg-main text-background text-center px-4 py-2  transform translate-y-[-30px]">Greenfie</span>
-                <div className="flex justify-between items-center mb-2">
+                <div className="flex justify-between items-center mb-2 px-3">
                     <span className="text-lg font-bold text-black">Signup</span>
                     <button
                         aria-label="Close"
@@ -90,7 +90,7 @@ const Register = ({ setIsSignupModalOpen, signup }: any) => {
                     </button>
                 </div>
                 <div className="h-full w-full">
-                    <form onSubmit={handleSignup} className="px-4 py-2 max-h-fit w-full ">
+                    <form onSubmit={handleSignup} className="px-4 py-2 max-h-fit w-full flex flex-col">
                         <div className="mt-4">
                             <input
                                 className="w-full px-3 py-2 border rounded-lg"
