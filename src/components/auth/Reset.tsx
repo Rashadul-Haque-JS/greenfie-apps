@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import Image from "next/image";
-
 const Reset = ({ setIsResetModalOpen }: any) => {
     const [email, setEmail] = useState('');
 
@@ -10,27 +8,25 @@ const Reset = ({ setIsResetModalOpen }: any) => {
     };
 
     return (
-        <div className="fixed top-0 left-0 w-full h-full overlay bg-main flex flex-wrap-reverse justify-evenly items-center overflow-y-auto">
-            <div className="text-3xl text-white text-center font-semibold pt-4 my-12">
-                <Image src="/images/tomatos.jpg" width={500} height={500} alt="green" />
+        <div className="fixed top-0 left-0 w-full h-full overlay bg-background flex flex-wrap-reverse justify-evenly items-center overflow-y-auto">
+            <div className="text-3xl text-white text-center md:flex-grow lg:flex-grow xl:flex-grow  h-full sm:h-[320px] xs:h-[320px] font-semibold " style={{ backgroundImage: 'url(/images/tomatos.jpg)', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
             </div>
-            <div className="bg-background p-8 w-[356px] sm:mt-10 xs:mt-10">
-                <div className="flex justify-between items-center">
-                    <span className="text-lg font-bold mb-4 text-black">Reset Password</span>
+            <div className="bg-background p-8 w-[400px] sm:mt-10 xs:mt-10 transform translate-y-[-100px] sm:translate-y-[100px] xs:translate-y-[100px]">
+            <span className="sm:block xs:block hidden bg-main text-background text-center px-4 py-2  transform translate-y-[-30px]">Greenfie</span>
+
+                <div className="flex justify-between items-center mb-4">
+                    <span className="text-lg font-bold text-black">Reset password</span>
                     <button
                         aria-label="Close"
                         onClick={() => setIsResetModalOpen(false)}
-                        className="material-icons"
+                        className="material-icons" style={{ marginBottom: '14px' }}
                     >
                         close
                     </button>
                 </div>
-                <div className="min-h-[400px] w-full">
+                <div className="h-full w-full ">
                     <form onSubmit={handleResetSubmit} className="p-2">
                         <div className="mb-4">
-                            <label htmlFor="email" className="block text-gray-700 font-bold mb-2">
-                                Email Address
-                            </label>
                             <input
                                 className="w-full px-3 py-2 border border-gray-400 rounded-lg my-2"
                                 type="email"
@@ -42,7 +38,7 @@ const Reset = ({ setIsResetModalOpen }: any) => {
                                 autoFocus
                             />
                         </div>
-                        <p className="text-gray-600 mb-4">
+                        <p className="mb-4 text-sky-400">
                             We'll send you an email with instructions on how to reset your password.
                         </p>
                         <hr className="my-5" />

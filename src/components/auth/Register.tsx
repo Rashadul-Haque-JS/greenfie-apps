@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import Image from "next/image";
 import Select from 'react-select'
 import divisions from "@/utils/data/divisions";
 import axios from "axios";
@@ -41,7 +40,7 @@ const Register = ({ setIsSignupModalOpen, signup }: any) => {
         // if (!isLandlineValid && !isMobileValid) {
         //     errorMessage = 'mobile:+880-17-XXXXXXX or landline:+880-2-XXXXXX';
         // }
-        setUser({ ...user, [name]: value})
+        setUser({ ...user, [name]: value })
         // setErrorPhone(errorMessage)
     }
 
@@ -73,131 +72,133 @@ const Register = ({ setIsSignupModalOpen, signup }: any) => {
     }, [user.city]);
 
     return (
-        <div
-            className="fixed top-0 left-0 w-full h-full overlay bg-main flex flex-wrap-reverse justify-evenly items-center overflow-y-auto"
-        >   <div className="relative">
-                <div className="absolute bottom-10 left-0 w-56 h-4 bg-txt"></div>
-                <div className="absolute top-14 right-0 w-56 h-4 bg-txt"></div>
-                <div className="text-3xl text-white text-center font-semibold pt-4 my-12 relative z-10 shadow-md rounded-lg">
-                    <Image src="/images/tomatos.jpg" width={500} height={500} alt="green" />
-                </div>
+        <div className="fixed top-0 left-0 w-full h-full overlay bg-background flex flex-wrap-reverse justify-evenly items-center overflow-y-auto">
+            <div className="text-3xl text-white text-center md:flex-grow lg:flex-grow xl:flex-grow  h-full sm:h-[320px] xs:h-[320px] font-semibold " style={{ backgroundImage: 'url(/images/tomatos.jpg)', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
+
             </div>
-            <div className=" bg-background p-8 w-[356px] mx-2 mb-10 sm:mt-10 xs:mt-10">
-                <div className='flex justify-between items-center'>
-                    <span className="text-lg font-bold mb-4 text-black">Signup</span>
-                    <i onClick={() => setIsSignupModalOpen(false)} className="material-icons">close</i>
+            <div className="bg-background p-8 w-[400px] sm:mt-8 xs:mt-8">
+            <span className="sm:block xs:block hidden bg-main text-background text-center px-4 py-2  transform translate-y-[-30px]">Greenfie</span>
+                <div className="flex justify-between items-center mb-2">
+                    <span className="text-lg font-bold text-black">Signup</span>
+                    <button
+                        aria-label="Close"
+                        onClick={() => setIsSignupModalOpen(false)}
+                        className="material-icons"
+                    >
+                        close
+                    </button>
                 </div>
-                <form onSubmit={handleSignup} className="px-4 py-2 max-h-fit w-full ">
+                <div className="h-full w-full">
+                    <form onSubmit={handleSignup} className="px-4 py-2 max-h-fit w-full ">
+                        <div className="mt-4">
+                            <input
+                                className="w-full px-3 py-2 border rounded-lg"
+                                type="text"
+                                id="name"
+                                name="name"
+                                onChange={handleChange}
+                                required
+                                placeholder="Name..."
+                                style={{ color: "#000" }}
+                                autoFocus
 
-                    <div className="mt-4">
-                        <input
-                            className="w-full px-3 py-2 border rounded-lg bg-main"
-                            type="text"
-                            id="name"
-                            name="name"
-                            onChange={handleChange}
-                            required
-                            placeholder="Name..."
-                            style={{ color: "#000" }}
-                            autoFocus
+                            />
+                        </div>
+                        <div className="mt-4">
+                            <input
+                                className="w-full px-3 py-2 border rounded-lg"
+                                type="email"
+                                name="email"
+                                onChange={handleChange}
+                                required
+                                placeholder="example@mail.com"
 
-                        />
-                    </div>
-                    <div className="mt-4">
-                        <input
-                            className="w-full px-3 py-2 border rounded-lg bg-main"
-                            type="email"
-                            name="email"
-                            onChange={handleChange}
-                            required
-                            placeholder="example@mail.com"
+                            />
+                        </div>
+                        <div className="mt-4">
+                            <input
+                                className="w-full px-3 py-2 border rounded-lg"
+                                type="password"
+                                name="password"
+                                onChange={handleChange}
+                                required
+                                placeholder="Password..."
+                            />
+                        </div>
+                        <div className="mt-4">
+                            <input
+                                className="w-full px-3 py-2 border rounded-lg"
+                                type="password"
+                                id="confirmPassword"
+                                name="confirmPassword"
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
+                                required
+                                placeholder="Confirm Password..."
+                            />
+                        </div>
+                        <div className="mt-4">
+                            <Select
+                                name="city"
+                                options={divisions}
+                                placeholder="Choose your city"
+                                onChange={(e) => handleChangeSelect(e, 'city')}
+                                styles={{
+                                    control: (provided) => ({
+                                        ...provided,
+                                        backgroundColor: "#fff",
+                                    }),
+                                }}
+                                required
+                            />
+                        </div>
+                        <div className="mt-4">
+                            <Select
+                                name="area"
+                                options={wards}
+                                placeholder="Choose your Area"
+                                onChange={(e) => handleChangeSelect(e, 'area')}
+                                styles={{
+                                    control: (provided) => ({
+                                        ...provided,
+                                        backgroundColor: "#fff",
+                                    }),
+                                }}
+                                noOptionsMessage={() => 'Select city first'}
+                                required
+                            />
+                        </div>
+                        <div className="mt-4">
+                            <Select
+                                name="gender"
+                                options={[{ label: "male", value: "male" }, { label: "female", value: "female" }]}
+                                placeholder="Select gender"
+                                onChange={(e) => handleChangeSelect(e, 'gender')}
+                                styles={{
+                                    control: (provided) => ({
+                                        ...provided,
+                                        backgroundColor: "#fff",
+                                    }),
 
-                        />
-                    </div>
-                    <div className="mt-4">
-                        <input
-                            className="w-full px-3 py-2 border rounded-lg bg-main"
-                            type="password"
-                            name="password"
-                            onChange={handleChange}
-                            required
-                            placeholder="Password..."
-                        />
-                    </div>
-                    <div className="mt-4">
-                        <input
-                            className="w-full px-3 py-2 border rounded-lg"
-                            type="password"
-                            id="confirmPassword"
-                            name="confirmPassword"
-                            value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
-                            required
-                            placeholder="Confirm Password..."
-                        />
-                    </div>
-                    <div className="mt-4">
-                        <Select
-                            name="city"
-                            options={divisions}
-                            placeholder="Choose your city"
-                            onChange={(e) => handleChangeSelect(e, 'city')}
-                            styles={{
-                                control: (provided) => ({
-                                    ...provided,
-                                    backgroundColor: "#fff",
-                                }),
-                            }}
-                            required
-                        />
-                    </div>
-
-                    <div className="mt-4">
-                        <Select
-                            name="area"
-                            options={wards}
-                            placeholder="Choose your Area"
-                            onChange={(e) => handleChangeSelect(e, 'area')}
-                            styles={{
-                                control: (provided) => ({
-                                    ...provided,
-                                    backgroundColor: "#fff",
-                                }),
-                            }}
-                            noOptionsMessage={() => 'Select city first'}
-                            required
-                        />
-                    </div>
-                    <div className="mt-4">
-                        <Select
-                            name="gender"
-                            options={[{ label: "male", value: "male" }, { label: "female", value: "female" }]}
-                            placeholder="Select gender"
-                            onChange={(e) => handleChangeSelect(e, 'gender')}
-                            styles={{
-                                control: (provided) => ({
-                                    ...provided,
-                                    backgroundColor: "#fff",
-                                }),
-
-                            }}
-                            required
-                        />
-                    </div>
-                    <div className="mt-4">
-                        <input
-                            className="w-full p-2  text-gray-700  rounded"
-                            type="tel"
-                            name="phone"
-                            onChange={handleChange}
-                            placeholder="Phone Number"
-
-                        />
-                    </div>
-
-                    <hr className="my-5" />
-                    <button className="bg-txt text-white px-4 py-2 rounded-lg ">Submit</button>
-                </form>
+                                }}
+                                required
+                            />
+                        </div>
+                        <div className="mt-4">
+                            <input
+                                className="w-full p-2  text-gray-700  rounded"
+                                type="tel"
+                                name="phone"
+                                onChange={handleChange}
+                                placeholder="Phone Number"
+                            />
+                        </div>
+                        <hr className="my-5" />
+                        <p className="text-gray-600 text-sm mb-4">By clicking Login, you agree to our <a href="#" className="text-blue-500">Terms of Use</a> and <a href="#" className="text-blue-500">Privacy Policy</a>.</p>
+                        <button className="bg-txt text-white px-4 py-2 rounded-lg ">Submit</button>
+                    </form>
+                </div>
+                
             </div>
         </div>
     )

@@ -14,6 +14,7 @@ const Navbar = () => {
   const [styleState, setStyleState] = useState<any>(toggleStates);
   const dispatch = useDispatch()
   const user = useSelector((state:RootState)=>state.auth.auth)  
+  
   const toggleStyleState = (componentName: any) => {
     setStyleState((prevState: any) => {
       return { ...prevState, [componentName]: !prevState[componentName] };
