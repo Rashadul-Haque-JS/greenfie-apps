@@ -76,7 +76,8 @@ const Register = ({ setIsSignupModalOpen, signup }: any) => {
             <div className="text-3xl text-white text-center md:flex-grow lg:flex-grow xl:flex-grow  h-full sm:h-[320px] xs:h-[320px] font-semibold " style={{ backgroundImage: 'url(/images/tomatos.jpg)', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
 
             </div>
-            <div className="bg-background p-8 w-[400px] sm:mt-8 xs:mt-8">
+            <div className="bg-background p-8 w-[546px] sm:mt-8 xs:mt-8">
+            <div className="w-3/4 sm:w-full xs:w-full flex flex-col mx-auto">
             <span className="sm:block xs:block hidden bg-main text-background text-center px-4 py-2  transform translate-y-[-30px]">Greenfie</span>
                 <div className="flex justify-between items-center mb-2">
                     <span className="text-lg font-bold text-black">Signup</span>
@@ -198,7 +199,7 @@ const Register = ({ setIsSignupModalOpen, signup }: any) => {
                         <button className="bg-txt text-white px-4 py-2 rounded-lg ">Submit</button>
                     </form>
                 </div>
-                
+                </div>
             </div>
         </div>
     )
