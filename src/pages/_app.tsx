@@ -1,9 +1,9 @@
 import '@/styles/global.scss'
 import type { AppProps } from 'next/app'
 import Layout from '@/components/layouts/LayoutMain'
+import { wrapper } from '@/store/store'
 
-export default function App({ Component, pageProps }: AppProps) {
-
+const App = ({ Component, pageProps }: AppProps) => {
   const signup = '/api/users'
   
   return <>
@@ -12,3 +12,4 @@ export default function App({ Component, pageProps }: AppProps) {
   </Layout>
   </>
 }
+export default wrapper.withRedux(App);

@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import Image from "next/image";
 import axios from "axios";
 import { useRouter } from "next/router";
-
+import { getAuth } from "@/store/features/auth";
+import { useDispatch } from "react-redux";
 const Login = ({ setIsLoginModalOpen, setIsSignupModalOpen, setIsResetModalOpen }: any) => {
     const [credentials, setCredentials] = useState({ email: "", password: "" });
     const router = useRouter();
+    const dispatch = useDispatch()
 
     const handleChange = (event: any) => {
         const { name, value } = event.target;
@@ -17,6 +19,7 @@ const Login = ({ setIsLoginModalOpen, setIsSignupModalOpen, setIsResetModalOpen 
         try {
           const response = await axios.post('/api/auth/login', credentials);
           const data = response.data;
+          dispatch(getAuth(data))
           console.log(data);
           router.replace('/products')
         } catch (error) {

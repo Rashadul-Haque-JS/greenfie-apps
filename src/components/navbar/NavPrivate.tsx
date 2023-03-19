@@ -5,42 +5,42 @@ import Image from 'next/image';
 import { destroyCookie } from 'nookies';
 import { toggleStates } from '@/utils/data/misc';
 import DeshboardLink from '../misc/deshboardLink';
+import { logoutAuth } from '@/store/features/auth';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/store/store';
 const Navbar = () => {
   const isMobileScreen = useMediaQuery('(max-width: 960px)');
   const [isOpen, setIsOpen] = useState(false);
-
   const [styleState, setStyleState] = useState<any>(toggleStates);
-
+  const dispatch = useDispatch()
+  const user = useSelector((state:RootState)=>state.auth.auth)  
   const toggleStyleState = (componentName: any) => {
     setStyleState((prevState: any) => {
       return { ...prevState, [componentName]: !prevState[componentName] };
     });
   };
-
   const renderPlusIcon = (key: string) => {
     return (
       <span className='text-4xl' style={{ transform: styleState[key] ? 'rotate(45deg)' : 'rotate(0)' }}>+</span>
     );
   }
-
-
   const handleClickOpen = () => {
     if (isMobileScreen) {
       setIsOpen(true)
     }
   }
-
   const handleClickClose = () => {
     setIsOpen(false)
   }
   const handleLogout = () => {
-    // Remove the token cookie
-    destroyCookie(null, 'token', { path: '/' });
-
-    // Redirect the user to the login page or any other page of your choice
-    window.location.href = '/';
+    try {
+      destroyCookie(null, 'token', { path: '/', expires: new Date(0) });
+      dispatch(logoutAuth())
+      window.location.href = '/';
+    } catch (err: any) {
+      console.log(err.message);
+    }
   };
-
   return (
     <div className='flex flex-col lg:flex-row xl:flex-row justify-between lg:justify-start xl:justify-start bg-main xs:px-3 sm:px-3 px-8 py-2 fixed top-0 left-0 w-full z-40 '>
       <div className='flex justify-between items-center lg:hidden xl:hidden'>
@@ -53,8 +53,8 @@ const Navbar = () => {
         <div className='text-2xl text-white font-bold'>
           Greenfie
         </div>
+        <div>{user?.name}</div>
         <div className='text-3xl text-white font-bold rounded-full bg-white w-5 h-5'>
-
         </div>
       </div>
       <div className='hidden w-full lg:flex xl:flex justify-between items-center '>
@@ -62,10 +62,8 @@ const Navbar = () => {
           <Image className='w-[36px] h-auto' src='/images/greenfie.png' alt='Greenfie logo' width={500} height={500} />
         </Link>
         <div className='text-3xl text-white font-bold rounded-full bg-white w-5 h-5'>
-
         </div>
       </div>
-
       <div id='drawer-navigation' className={`fixed sm:top-0 sm:left-0 xs:top-0 xs:left-0 md:top-0 md:left-0 w-80 lg:top-[56px] lg:left-[240px] xl:top-[51px] xl:left-[240px] z-40 h-screen px-4 lg:pr-0 xl:pr-0 overflow-y-auto xs:transition-transform sm:transition-transform md:transition-transform ${isOpen ? '' : '-translate-x-full'
         } bg-main dark:bg-gray-800`}
         tabIndex={-1} aria-labelledby='drawer-navigation-label'>
@@ -84,7 +82,7 @@ const Navbar = () => {
           <ul className='space-y-2 w-full lg:ml-16 xl:ml-16 '>
             <hr />
             <li>
-              <DeshboardLink/>
+              <DeshboardLink />
             </li>
             <hr />
             <li>
@@ -93,7 +91,6 @@ const Navbar = () => {
                 <span className='flex-1 ml-3 text-left whitespace-nowrap'>Products</span>
                 {renderPlusIcon('product')}
               </button>
-
               <ul id='dropdown-example' className='hidden py-2 space-y-2  bg-lightGreen'>
                 <li>
                   <Link href='/products' className='flex items-center w-full p-2 text-base font-normal text-txt transition duration-75 rounded-lg pl-11 group ' onClick={handleClickClose}>Lists</Link>
@@ -148,16 +145,12 @@ const Navbar = () => {
               <button type='button' className='flex items-center p-2 text-base font-normal text-txt rounded-lg hover:text-background'>
                 <svg className='flex-shrink-0 w-6 h-6 text-txt transition duration-75 group-hover:text-background dark:group-hover:text-white' fill='currentColor' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><path d='M8.707 7.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l2-2a1 1 0 00-1.414-1.414L11 7.586V3a1 1 0 10-2 0v4.586l-.293-.293z'></path><path d='M3 5a2 2 0 012-2h1a1 1 0 010 2H5v7h2l1 2h4l1-2h2V5h-1a1 1 0 110-2h1a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5z'></path></svg>
                 <span className='flex-1 ml-3 whitespace-nowrap' onClick={handleLogout}>Logout</span>
-
               </button>
             </li>
           </ul>
         </div>
       </div>
-      
     </div>
   );
-  //className='hover:bg-txt'
 }
-
 export default Navbar;
