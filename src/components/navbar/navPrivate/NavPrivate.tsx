@@ -48,7 +48,7 @@ const Navbar = () => {
             &#9776;
           </button>
           <div className="text-2xl text-white font-bold">Greenfie</div>
-          <div>{user?.name}</div>
+         {user.name && <span>{user.name}</span>}
           <div className="text-3xl text-white font-bold rounded-full bg-white w-5 h-5"></div>
         </div>
         <div className="hidden w-full lg:flex xl:flex justify-between items-center ">
@@ -103,7 +103,7 @@ const Navbar = () => {
           <div className="text-xl text-white text-center hidden lg:block xl:block font-semibold pt-4">
             Greenfie
           </div>
-          <div className="py-4 overflow-hidden lg:flex lg:justify-end xl:flex xl:justify-end ">
+          <div className="py-4 overflow-hidden lg:flex lg:justify-end xl:flex xl:justify-end lg:p-[5px] xl:p-[5px]">
             <ul className="space-y-2 w-full lg:ml-16 xl:ml-16 ">
               <hr />
               <li>

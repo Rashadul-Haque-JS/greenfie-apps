@@ -3,20 +3,31 @@ import React, { useState, useContext } from "react";
 import navs from "@/utils/data/navbar";
 import { toggleStates } from "@/utils/data/misc";
 import { NavContext } from "./NavPrivate";
+import pathname from "@/components/misc/pathname";
 
 const NavLinks = () => {
   const { setIsOpen } = useContext(NavContext);
   const [styleState, setStyleState] = useState<any>(toggleStates);
+  const [openNav, setOpenNav] = useState<any>();
+
   const toggleStyleState = (componentName: any) => {
+    if (openNav === componentName) {
+      setOpenNav("");
+    } else {
+      setOpenNav(componentName);
+    }
     setStyleState((prevState: any) => {
       return { ...prevState, [componentName]: !prevState[componentName] };
     });
   };
+
   const renderPlusIcon = (key: string) => {
+    console.log(key);
+    
     return (
       <span
         className="text-4xl"
-        style={{ transform: styleState[key] ? "rotate(45deg)" : "rotate(0)" }}
+        style={{ transform: (styleState[key] && openNav === key)? "rotate(45deg)" : "rotate(0)" }}
       >
         +
       </span>
@@ -51,12 +62,24 @@ const NavLinks = () => {
                   clipRule="evenodd"
                 ></path>
               </svg>
-              <span className="flex-1 ml-3 text-left whitespace-nowrap capitalize">
+              <span
+                className={`flex-1 ml-3 text-left whitespace-nowrap capitalize ${
+                  nav.links.some((link) => link.route === pathname())
+                    ? "text-background"
+                    : "text-txt"
+                }`}
+              >
                 {nav.name}
               </span>
+
               {renderPlusIcon(nav.name)}
             </button>
-            <ul id={nav.name} className="hidden py-2 space-y-2  bg-lightGreen">
+            <ul
+              id={nav.name}
+              className={`py-2 space-y-2  bg-lightGreen ${
+                openNav === nav.name ? "" : "hidden"
+              }`}
+            >
               {nav?.links?.map((link: any) => (
                 <li>
                   <Link
