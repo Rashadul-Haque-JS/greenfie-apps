@@ -1,4 +1,3 @@
-
 import Link from 'next/link';
 import Image from 'next/image';
 export interface AppPage {
@@ -6,7 +5,6 @@ export interface AppPage {
   name: string;
   page: string;
 }
-
 
 const AppSymbol = ({ image, name, page }: AppPage) => {
   return (

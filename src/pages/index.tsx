@@ -19,10 +19,10 @@ const Home = ({ apps }: GenericProps) => {
     </div>
     <div className='w-full flex flex-wrap justify-center mx-6 p-4 items-start gap-10 md:gap-20 first-letter: lg:gap-36 xl:gap-52 md:py-10 shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px] mt-12'>
       <Hero />
-      <div className='w-full md:w-1/3 lg:w-1/3 xl:w-1/3 grid grid-cols-3 gap-2 place-items-center justify-items-center'>
+      <div className='w-full md:w-1/3 lg:w-2/3 xl:w-1/3 grid grid-cols-3 gap-2 place-items-center justify-items-center'>
         {apps.map((page: IApps, index: number) => {
           return (
-            <AppSymbol
+            <AppSymbol 
               key={index}
               image={page.image}
               name={page.name}

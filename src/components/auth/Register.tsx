@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import Select from 'react-select'
 import divisions from "@/utils/data/divisions";
 import axios from "axios";
+import Button from "../experiments/Button";
 
 const Register = ({ setIsSignupModalOpen, signup }: any) => {
     const [user, setUser] = useState({
@@ -196,7 +197,7 @@ const Register = ({ setIsSignupModalOpen, signup }: any) => {
                         </div>
                         <hr className="my-5" />
                         <p className="text-gray-600 text-sm mb-4">By clicking Login, you agree to our <a href="#" className="text-blue-500">Terms of Use</a> and <a href="#" className="text-blue-500">Privacy Policy</a>.</p>
-                        <button className="bg-txt text-white px-4 py-2 rounded-lg ">Submit</button>
+                        <Button children='Signup' type="submit"/>
                     </form>
                 </div>
                 </div>

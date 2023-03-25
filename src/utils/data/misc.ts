@@ -1,1 +1,1 @@
-export const toggleStates = { product: false, recipe: false, others: false }
+export const toggleStates = { products: false, recipes: false, interiors: false, blogs: false, news: false,  others: false }

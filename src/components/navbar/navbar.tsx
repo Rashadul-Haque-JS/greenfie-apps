@@ -20,9 +20,6 @@ const Navbar = ({ signup }: any) => {
         setIsResetModalOpen(modalStates[modalType][2]);
 
     };
-
-
-
     return (
         <div className="bg-main xs:px-2 sm:px-2 px-8 py-0">
             <nav className="mx-auto flex justify-between py-2 items-center">
@@ -41,21 +38,21 @@ const Navbar = ({ signup }: any) => {
                         style={{ backgroundColor: '#2ECC40' }}
                         onClick={() => openModal('login')}
                     >
-                        <i className="material-icons">person</i>
+                        <i className="material-icons cursor-pointer">person</i>
                     </div>
                     <div
                         className="flex justify-center items-center w-7 h-7 rounded-full text-background"
                         style={{ backgroundColor: '#2ECC40' }}
                         onClick={() => openModal('signup')}
                     >
-                        <i className="material-icons">person_add</i>
+                        <i className="material-icons cursor-pointer">person_add</i>
                     </div>
                     <div
                         className="flex justify-center items-center w-7 h-7 rounded-full text-background"
                         style={{ backgroundColor: '#2ECC40' }}
                         onClick={() => openModal('reset')}
                     >
-                        <i className="material-icons">help_outline</i>
+                        <i className="material-icons cursor-pointer">help_outline</i>
                     </div>
                 </div>
             </nav>

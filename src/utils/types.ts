@@ -53,3 +53,7 @@ export interface IUser {
   gender: string;
   avatar: string | null;
 }
+
+export interface ILink {
+  setIsOpen: (option:boolean) => void;
+}

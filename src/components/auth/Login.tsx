@@ -3,6 +3,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { getAuth } from "@/store/features/auth";
 import { useDispatch } from "react-redux";
+import Button from "../experiments/Button";
 const Login = ({ setIsLoginModalOpen, setIsSignupModalOpen, setIsResetModalOpen }: any) => {
     const [credentials, setCredentials] = useState({ email: "", password: "" });
     const router = useRouter();
@@ -78,7 +79,7 @@ const Login = ({ setIsLoginModalOpen, setIsSignupModalOpen, setIsResetModalOpen 
                             <hr className="my-5" />
 
                             <p className="text-gray-600 text-sm mb-4">By clicking Login, you agree to our <a href="#" className="text-blue-500">Terms of Use</a> and <a href="#" className="text-blue-500">Privacy Policy</a>.</p>
-                            <button className="bg-txt text-white px-4 py-2 rounded-lg ">Login</button>
+                           <Button children='Login' type="submit"/>
                         </form>
                     </div>
                 <div className="text-start px-2">

@@ -1,0 +1,18 @@
+@layer components {
+    .card {
+      background-color: white;
+      border-radius: 0.375rem;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 1px 3px 1px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+  
+    .card-header {
+      background-color: #F3F4F6;
+      padding: 1rem;
+    }
+  
+    .card-body {
+      padding: 1rem;
+    }
+  }
+  

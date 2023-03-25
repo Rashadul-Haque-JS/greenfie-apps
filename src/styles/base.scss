@@ -1,0 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap");
+
+
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    /* Hide scrollbar for all elements except when hovering */
+    scrollbar-width: none; /* Firefox */
+    &::-webkit-scrollbar {
+      width: 0.0em; /* width of scrollbar */
+    }
+    &::-webkit-scrollbar-track {
+      background: none; /* color of scrollbar track */
+    }
+  
+    &::-webkit-scrollbar-thumb {
+      border-radius: 6px;
+      border: 3px solid #f4f1f1;
+    }
+   }
+  }
+  

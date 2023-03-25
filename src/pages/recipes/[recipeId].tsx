@@ -11,8 +11,8 @@ const Recipe = ({ recipe }: GenericProps) => {
   return (
     <div>
       <div className='w-full'>
-        <video controls autoPlay className='rounded' style={{ width: '100%', height: '382px', background: 'black' }}>
-          <source src={recipe.video} type='video/mp4' style={{ width: '100%', height: '100%' }} />
+        <video controls autoPlay className='w-full h-[400px] xs:h-auto sm:h-auto bg-txt rounded'>
+          <source src={recipe.video} type='video/mp4' className='w-full h-full' />
         </video>
       </div>
       <div className='max-h-96 overflow-scroll'>

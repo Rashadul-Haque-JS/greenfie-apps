@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Button from "../experiments/Button";
 const Reset = ({ setIsResetModalOpen }: any) => {
     const [email, setEmail] = useState('');
 
@@ -43,7 +44,7 @@ const Reset = ({ setIsResetModalOpen }: any) => {
                                 We'll send you an email with instructions on how to reset your password.
                             </p>
                             <hr className="my-5" />
-                            <button className="bg-txt text-white px-4 py-2 rounded-lg">Send</button>
+                            <Button children='Send' type="submit"/>
                         </form>
                     </div>
                 </div>
