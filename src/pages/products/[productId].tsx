@@ -23,7 +23,7 @@ const SingleProduct = ({ product }: GenericProps) => {
     };
 
     return (
-        <div>
+        <div className='px-4'>
             <div className='flex flex-wrap justify-between items-center gap-5'>
             <div className='relative w-full md:w-1/2 lg:w-1/2 xl:w-1/2 h-full'>
                 <Image src={product.image} alt={product.name} className='w-full object-cover rounded h-full shadow-lg' width={500} height={500} />

@@ -17,7 +17,7 @@ const Layout = ({ children, signup }: any) => {
         {pathname() === "/" ? <Navbar signup={signup} /> : <NavbarPrivate />}
       </header>
       <main
-        className={`container w-full lg:w-5/6 xl:w-5/6 mx-auto px-4 mt-20 ${
+        className={`container w-full lg:w-5/6 xl:w-5/6 mx-auto mt-20 ${
           pathname() !== "/"
             ? "md:float-right lg:float-right xl:float-right"
             : ""
