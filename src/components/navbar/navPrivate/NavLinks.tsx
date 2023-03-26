@@ -1,13 +1,13 @@
 import Link from "next/link";
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import navs from "@/utils/data/navbar";
 import { toggleStates } from "@/utils/data/misc";
 import { NavContext } from "./NavPrivate";
 import pathname from "@/components/misc/pathname";
-
+import { GenericProps } from "@/utils/types";
 const NavLinks = () => {
   const { setIsOpen } = useContext(NavContext);
-  const [styleState, setStyleState] = useState<any>(toggleStates);
+  const [styleState, setStyleState] = useState<GenericProps>(toggleStates);
   const [openNav, setOpenNav] = useState<any>();
 
   const toggleStyleState = (componentName: any) => {
@@ -17,23 +17,23 @@ const NavLinks = () => {
       setOpenNav(componentName);
     }
     setStyleState((prevState: any) => {
-      return { ...prevState, [componentName]: !prevState[componentName] };
+      // Set all keys in styleState to false except the current componentName
+      const newState = Object.keys(prevState).reduce((acc:any, key) => {
+        acc[key] = key === componentName;
+        return acc;
+      }, {});
+      return newState;
     });
   };
 
   const renderPlusIcon = (key: string) => {
-    console.log(key);
-    
-    return (
-      <span
-        className="text-4xl"
-        style={{ transform: (styleState[key] && openNav === key)? "rotate(45deg)" : "rotate(0)" }}
-      >
-        +
-      </span>
+    return styleState[key] && openNav === key ? (
+      <i className="material-icons text-[18px] text-gray-200">visibility_off</i>
+    ) : (
+      <i className="material-icons text-[18px] text-gray-200">remove_red_eye</i>
     );
   };
-
+  
   const handleClickClose = () => {
     setIsOpen(false);
   };
@@ -71,7 +71,6 @@ const NavLinks = () => {
               >
                 {nav.name}
               </span>
-
               {renderPlusIcon(nav.name)}
             </button>
             <ul
