@@ -1,13 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { getAuth } from "@/store/features/auth";
 import { useDispatch } from "react-redux";
 import Button from "../experiments/Button";
+import { AuthContext } from "../navbar/navbar";
+
 const Login = ({ setIsLoginModalOpen, setIsSignupModalOpen, setIsResetModalOpen }: any) => {
     const [credentials, setCredentials] = useState({ email: "", password: "" });
     const router = useRouter();
     const dispatch = useDispatch()
+    const {newUserEmail} = useContext(AuthContext)
+
+    useEffect(() => {
+        if (newUserEmail) {
+          setCredentials({...credentials, email: newUserEmail});
+        }
+      }, [newUserEmail]);
 
     const handleChange = (event: any) => {
         const { name, value } = event.target;
@@ -59,6 +68,7 @@ const Login = ({ setIsLoginModalOpen, setIsSignupModalOpen, setIsResetModalOpen 
                                     type="email"
                                     id="email"
                                     name="email"
+                                   value={credentials.email}
                                     onChange={handleChange}
                                     required
                                     placeholder="Email..."

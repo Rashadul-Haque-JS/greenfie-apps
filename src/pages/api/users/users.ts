@@ -1,19 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import connect from '@/server/connection';
-import { createUser, getUsers, getUser, updateUser, deleteUser } from '@/server/models/users';
+import {getUsers, getUser, updateUser, deleteUser } from '@/server/models/users';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { method, body, query } = req;
    await connect();
   switch (method) {
-    case 'POST':
-      try {
-        const result = await createUser(body);
-        res.status(201).json(result);
-      } catch (error) {
-        res.status(500).json({ message: 'Error creating user' });
-      }
-      break;
     case 'GET':
       try {
         const results = await getUsers();
@@ -62,7 +54,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
       break;
     default:
-      res.setHeader('Allow', ['POST', 'GET', 'PUT', 'DELETE']);
+      res.setHeader('Allow', ['GET', 'PUT', 'DELETE']);
       res.status(405).end(`Method ${method} Not Allowed`);
   }
 }

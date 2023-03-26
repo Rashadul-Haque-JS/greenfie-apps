@@ -4,7 +4,7 @@ import Layout from '@/components/layouts/LayoutMain'
 import { wrapper } from '@/store/store'
 
 const App = ({ Component, pageProps }: AppProps) => {
-  const signup = '/api/users'
+  const signup = '/api/auth/register'
   
   return <>
   <Layout signup={signup}>

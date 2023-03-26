@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext} from "react";
 import navs from "@/utils/data/navbar";
 import { toggleStates } from "@/utils/data/misc";
 import { NavContext } from "./NavPrivate";
