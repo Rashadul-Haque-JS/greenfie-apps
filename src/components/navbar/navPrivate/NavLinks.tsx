@@ -17,12 +17,9 @@ const NavLinks = () => {
       setOpenNav(componentName);
     }
     setStyleState((prevState: any) => {
-      // Set all keys in styleState to false except the current componentName
-      const newState = Object.keys(prevState).reduce((acc:any, key) => {
-        acc[key] = key === componentName;
-        return acc;
-      }, {});
-      return newState;
+      return Object.fromEntries(
+        Object.keys(prevState).map((key) => [key, key === componentName])
+      );
     });
   };
 
@@ -33,7 +30,7 @@ const NavLinks = () => {
       <i className="material-icons text-[18px] text-gray-200">remove_red_eye</i>
     );
   };
-  
+
   const handleClickClose = () => {
     setIsOpen(false);
   };
