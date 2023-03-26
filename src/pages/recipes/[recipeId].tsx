@@ -9,13 +9,13 @@ const Recipe = ({ recipe }: GenericProps) => {
   }
 
   return (
-    <div>
-      <div className='w-full'>
-        <video controls autoPlay className='w-full h-[400px] xs:h-auto sm:h-auto bg-txt rounded'>
+    <div className='transform translate-y-[-28px]'>
+      <div className='w-full transform translate-y-[-26px]'>
+        <video controls autoPlay className='w-full h-[400px] xs:h-auto sm:h-auto bg-txt '>
           <source src={recipe.video} type='video/mp4' className='w-full h-full' />
         </video>
       </div>
-      <div className='max-h-96 overflow-scroll'>
+      <div className='max-h-96 overflow-scroll mx-4'>
         <div className='max-w-4xl mx-auto my-10'>
           <h1 className='text-3xl font-bold mb-5'>{recipe.title}</h1>
           <p className='text-gray-700 text-xl mb-5'>{recipe.description}</p>
