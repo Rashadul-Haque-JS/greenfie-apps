@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React, { useState, useContext} from "react";
+import React, { useState, useContext } from "react";
 import navs from "@/utils/data/navbar";
 import { toggleStates } from "@/utils/data/misc";
 import { NavContext } from "./NavPrivate";
@@ -39,7 +39,7 @@ const NavLinks = () => {
     <>
       {navs.map((nav) => (
         <>
-          <li>
+          <li key={nav.name}>
             <button
               type="button"
               className="flex items-center w-full p-2 text-base font-normal text-txt hover:text-background transition duration-75 rounded-lg group "
@@ -76,12 +76,12 @@ const NavLinks = () => {
                 openNav === nav.name ? "" : "hidden"
               }`}
             >
-              {nav?.links?.map((link: any) => (
-                <li>
+              {nav?.links?.map((link: any, index:number) => (
+                <li key={link.route}>
                   <Link
+                    key={Math.random().toString(36).substring(2) + index}
                     href={link.route}
                     className="flex items-center w-full p-2 text-base font-normal text-txt transition duration-75 rounded-lg pl-11 group capitalize "
-                    key={link.route}
                     onClick={handleClickClose}
                   >
                     {link.name}

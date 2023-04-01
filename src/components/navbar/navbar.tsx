@@ -6,7 +6,6 @@ import Reset from "../auth/Reset";
 import { useRouter } from "next/router";
 
 export const AuthContext = createContext<any>([]);
-
 const Navbar = ({ signup }: any) => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isSignModalOpen, setIsSignupModalOpen] = useState(false);
@@ -27,8 +26,8 @@ const Navbar = ({ signup }: any) => {
   };
 
   useEffect(() => {
-    const { confirmToken, email } = router.query;
-    if (confirmToken && email) {
+    const { confirmToken, email, login = null } = router.query;
+    if ((confirmToken && email) || login) {
       setIsLoginModalOpen(true);
       setNewUserEmail(email);
     }
