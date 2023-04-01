@@ -37,8 +37,8 @@ const NavLinks = () => {
 
   return (
     <>
-      {navs.map((nav) => (
-        <>
+      {navs.map((nav,index) => (
+        <div key={Math.random().toString(36).substring(2) + index}>
           <li key={nav.name}>
             <button
               type="button"
@@ -76,12 +76,12 @@ const NavLinks = () => {
                 openNav === nav.name ? "" : "hidden"
               }`}
             >
-              {nav?.links?.map((link: any, index:number) => (
+              {nav?.links?.map((link: any) => (
                 <li key={link.route}>
                   <Link
-                    key={Math.random().toString(36).substring(2) + index}
                     href={link.route}
-                    className="flex items-center w-full p-2 text-base font-normal text-txt transition duration-75 rounded-lg pl-11 group capitalize "
+                    className="flex items-center w-full p-2 text-base font-normal text-txt 
+                     transition duration-75 rounded-lg pl-11 group capitalize "
                     onClick={handleClickClose}
                   >
                     {link.name}
@@ -91,7 +91,7 @@ const NavLinks = () => {
             </ul>
           </li>
           <hr />
-        </>
+        </div>
       ))}
     </>
   );
