@@ -58,7 +58,7 @@ export default async function handler(req:NextApiRequest, res:NextApiResponse) {
     //   res.status(500).json({ error: "Failed to send password reset email" });
     //   return;
     // }
-    res.status(200).json({ message: "Password reset email sent" });
+    res.status(200).json({  message: `Request is successful. A reset link has been sent to ${email}. Thank you!`,});
   } catch (error) {
     console.error(error);
     res

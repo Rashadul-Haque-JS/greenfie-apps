@@ -15,7 +15,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return;
   }
   // Get user by email from database
-  const user = await Users.findOne(email);
+  const user = await Users.findOne({email});
   // Check if user exists
   if (!user) {
     res.status(400).json({ error: 'Invalid email' });

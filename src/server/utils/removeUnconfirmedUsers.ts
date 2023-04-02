@@ -2,7 +2,7 @@ import Users from "@/server/models/users";
 import { addMinutes } from "date-fns";
 
 export const removeUnconfirmedUsers = async () => {
-  const tenMinutesAgo = addMinutes(new Date(), -1);
+  const tenMinutesAgo = addMinutes(new Date(), -2);
   const confirmedUsersAfterCutoff = await Users.find({
     confirmed: true,
     createdAt: { $gte: tenMinutesAgo },

@@ -11,16 +11,19 @@ export default async function handler(
   if (resetPasswordToken) {
     const user = await Users.findOne({ resetPasswordToken });
     if (user) {
-    // Redirect to login page with query parameter to display login form
-      res.redirect(`/?resetPasswordToken=${resetPasswordToken}&email=${user.email}`);
+      // Construct the login URL with query parameters
+      const resetUrl = `/?resetPasswordToken=${resetPasswordToken}&email=${user.email}`;
+
+      // Use client-side JavaScript to handle the redirect
+      res.status(200).send(
+        `<html><head><script>window.location.href='${resetUrl}';</script></head><body></body></html>`
+      );
     } else {
-      console.log('no')
       return res
         .status(404)
         .json({ message: "No user by this query is found" });
     }
   } else {
-    console.log('no reset')
     return res.status(400).json({ message: "Invalid confirmation token" });
   }
 }

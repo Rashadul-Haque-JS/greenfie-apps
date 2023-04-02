@@ -101,7 +101,7 @@ const Navbar = ({ signup }: any) => {
           <Reset setIsResetModalOpen={setIsResetModalOpen} />
         )}
         {isPassFormOpen && (
-          <PasswordForm setIsPassFormOpen={setIsPassFormOpen} />
+          <PasswordForm setIsPassFormOpen={setIsPassFormOpen} setIsLoginModalOpen={setIsLoginModalOpen}/>
         )}
       </div>
     </AuthContext.Provider>

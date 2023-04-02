@@ -52,7 +52,7 @@ const Login = ({ setIsLoginModalOpen, setIsSignupModalOpen, setIsResetModalOpen 
             </div>
             <div className="bg-background p-8 w-[546px] sm:mt-8 xs:mt-8">
                 <div className="w-3/4 sm:w-full xs:w-full flex flex-col mx-auto">
-                    <span className="sm:block xs:block hidden bg-main text-background px-4 py-2 transform translate-y-[-30px] text-center">Greenfie</span>
+                    <span className="sm:block xs:block hidden bg-main text-background px-4 py-2 transform translate-y-[-30px] rounded-lg text-center">Greenfie</span>
                     <div className="flex justify-between items-center mb-4 px-2">
                         <h1 className="text-lg font-bold text-black">Signin</h1>
                         <button
@@ -66,7 +66,7 @@ const Login = ({ setIsLoginModalOpen, setIsSignupModalOpen, setIsResetModalOpen 
                     <div className="h-full w-full">
                         <form onSubmit={handleLoginSubmit} className="p-2 mb-12 flex flex-col">
                             <div className="mb-4">
-                                {errorMessage && errorMessage.includes('User') && <p className="text-red-500 my-1 px-2 text-sm">{errorMessage}</p>}
+                                {errorMessage && errorMessage.includes('User') && <p className="text-red-500 my-1 px-2 text-notification ">{errorMessage}</p>}
                                 <input
                                     className="w-full px-3 py-2 border border-gray-400 rounded-lg my-2"
                                     type="email"
@@ -81,7 +81,7 @@ const Login = ({ setIsLoginModalOpen, setIsSignupModalOpen, setIsResetModalOpen 
 
                             </div>
                             <div className="mb-4">
-                                {errorMessage && errorMessage.includes('Password') && <p className="text-red-500 mb-1 px-2 text-sm">{errorMessage}</p>}
+                                {errorMessage && errorMessage.includes('Password') && <p className="text-red-500 mb-1 px-2 text-notification">{errorMessage}</p>}
                                 <input
                                     className="w-full px-3 py-2 border border-gray-400 rounded-lg my-2"
                                     type="password"

@@ -12,8 +12,14 @@ export default async function handler(
     const user = await Users.findOne({ confirmToken });
     if (user) {
       await Users.findOneAndUpdate({ confirmToken }, { confirmed: true });
-      // Redirect to login page with query parameter to display login form
-      res.redirect(`/?confirmToken=${confirmToken}&email=${user.email}`);
+
+      // Construct the login URL with query parameters
+      const loginUrl = `/?confirmToken=${confirmToken}&email=${user.email}`;
+
+      // Use client-side JavaScript to handle the redirect
+      res.status(200).send(
+        `<html><head><script>window.location.href='${loginUrl}';</script></head><body></body></html>`
+      );
     } else {
       return res
         .status(404)

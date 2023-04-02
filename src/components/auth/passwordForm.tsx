@@ -3,7 +3,7 @@ import Button from "../experiments/Button";
 import { AuthContext } from "../navbar/navbar";
 import axios from "axios";
 import router from "next/router";
-const PasswordForm = ({ setIsPassFormOpen }: any) => {
+const PasswordForm = ({ setIsPassFormOpen,setIsLoginModalOpen }: any) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -17,9 +17,10 @@ const PasswordForm = ({ setIsPassFormOpen }: any) => {
             return;
         }
         try {
-            const resp = await axios.post('#',{email: email, password: password});
+            const resp = await axios.post('/api/auth/updateForgotPassword',{email: email, password: password});
             router.replace("/", { message: resp.data.message } as any);
             setIsPassFormOpen(false)
+            setIsLoginModalOpen(true)
         } catch (error: any) {
             const { response } = error.response && error
             const { message } = error
@@ -39,8 +40,8 @@ const PasswordForm = ({ setIsPassFormOpen }: any) => {
             </div>
             <div className="bg-background p-8 w-[546px] sm:mt-10 xs:mt-10 transform translate-y-[-100px] sm:translate-y-[100px] xs:translate-y-[100px]">
                 <div className="w-3/4 sm:w-full xs:w-full flex flex-col mx-auto">
-                    <span className="sm:block xs:block hidden bg-main text-background text-center px-4 py-2  transform translate-y-[-30px]">Greenfie</span>
-                    {errorMessage && !errorMessage.includes('match') && <p className="text-red-500 my-1 px-2 text-sm">{errorMessage}</p>}
+                    <span className="sm:block xs:block hidden bg-main text-background text-center px-4 py-2  transform translate-y-[-30px] rounded-lg">Greenfie</span>
+                    {errorMessage && !errorMessage.includes('match') && <p className="text-red-500 my-1 px-2 text-notification">{errorMessage}</p>}
                     <div className="flex justify-between items-center mb-4 px-2">
                         <h1 className="text-lg font-bold text-black"> Set new password</h1>
                         <button
@@ -64,7 +65,7 @@ const PasswordForm = ({ setIsPassFormOpen }: any) => {
                                 />
                             </div>
                             <div className="mt-4">
-                                {errorMessage && errorMessage.includes('match') && <span className="my-2"><p className="text-red-500 mb-1 px-2 text-sm text-center">{errorMessage}</p><hr /></span>}
+                                {errorMessage && errorMessage.includes('match') && <span className="my-2"><p className="text-red-500 mb-1 px-2 text-notification text-center">{errorMessage}</p><hr /></span>}
                                 <input
                                     className="w-full px-3 py-2 border rounded-lg"
                                     type="password"

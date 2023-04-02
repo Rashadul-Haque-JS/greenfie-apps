@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import Button from "../experiments/Button";
 import axios from "axios";
-import router from "next/router";
 const Reset = ({ setIsResetModalOpen }: any) => {
     const [email, setEmail] = useState('');
+    const [message, setMessage] = useState('')
     const [errorMessage, setErrorMessage] = useState('')
 
     const handleResetSubmit = async (e: any) => {
        e.preventDefault();
         try {
             const resp = await axios.post('/api/auth/forgotPassword',{email: email});
-            router.replace("/", { message: resp.data.message } as any);
+            setMessage(resp.data.message)
         } catch (error: any) {
             const { response } = error.response && error
             const { message } = error
@@ -25,8 +25,9 @@ const Reset = ({ setIsResetModalOpen }: any) => {
             </div>
             <div className="bg-background p-8 w-[546px] sm:mt-10 xs:mt-10 transform translate-y-[-100px] sm:translate-y-[100px] xs:translate-y-[100px]">
                 <div className="w-3/4 sm:w-full xs:w-full flex flex-col mx-auto">
-                    <span className="sm:block xs:block hidden bg-main text-background text-center px-4 py-2  transform translate-y-[-30px]">Greenfie</span>
-                    {errorMessage && <p className="text-red-500 my-1 px-2 text-sm">{errorMessage}</p>}
+                    <span className="sm:block xs:block hidden bg-main text-background text-center px-4 py-2  transform translate-y-[-30px] rounded-lg">Greenfie</span>
+                    {message &&  <p className="my-2"><p className="text-main mb-1 px-2 text-notification text-center">{message}</p><hr/></p>}
+                    {errorMessage && <p className="text-red-500 my-1 px-2 text-notification">{errorMessage}</p>}
                     <div className="flex justify-between items-center mb-4 px-2">
                         <h1 className="text-lg font-bold text-black">Reset password</h1>
                         <button
@@ -51,7 +52,7 @@ const Reset = ({ setIsResetModalOpen }: any) => {
                                     autoFocus
                                 />
                             </div>
-                            <p className="mb-4 text-sky-400">
+                            <p className="mb-4 text-[#1A77BC]">
                                 We'll send you an email with instructions on how to reset your password.
                             </p>
                             <hr className="my-5" />
