@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React from 'react';
 import '@/styles/global.scss';
 import type { AppProps } from 'next/app';
 import Layout from '@/components/layouts/LayoutMain';
@@ -8,7 +8,6 @@ import { RootState } from '@/store/store';
 import { useSelector } from 'react-redux';
 import { useRouter} from 'next/router';
 import { useEffect } from 'react';
-
 const unprotectedRoutes = ['/', '/about', '/info', '/blogs'];
 
 const App = ({ Component, pageProps }: AppProps) => {
@@ -41,7 +40,5 @@ const App = ({ Component, pageProps }: AppProps) => {
     </>
   );
 };
-
-
 
 export default wrapper.withRedux(App);

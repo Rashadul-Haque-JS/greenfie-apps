@@ -15,19 +15,18 @@ const Register = ({ setIsSignupModalOpen, signup }: any) => {
     country: "BD",
     phone: "",
     gender: "",
-    token:"",
     avatar: "",
   });
 
   const [confirmPassword, setConfirmPassword] = useState("");
   const [wards, setWards] = useState<any[]>([]);
-  const [error, setError] = useState("");
+  const [errorMessage, setErrorMessage] = useState('')
   const router = useRouter();
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setUser({ ...user, [name]: value });
-    };
+  };
 
   const handleChangeSelect = (event: any, name: string) => {
     const { value } = event;
@@ -37,14 +36,16 @@ const Register = ({ setIsSignupModalOpen, signup }: any) => {
   const handleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (user.password !== confirmPassword) {
-      setError("Passwords do not match");
+      setErrorMessage("Passwords do not match");
       return;
     }
     try {
-      await axios.post(signup, user);
-    //   router.push("/");
-    } catch (err: any) {
-      setError(err.message);
+      const resp = await axios.post(signup, user);
+      router.replace("/", { message: resp.data.message } as any);
+    } catch (error: any) {
+      const { response } = error.response && error
+      const { message } = error
+      setErrorMessage(response.data.message || message)
     }
   };
 
@@ -72,8 +73,9 @@ const Register = ({ setIsSignupModalOpen, signup }: any) => {
           <span className="sm:block xs:block hidden bg-main text-background text-center px-4 py-2  transform translate-y-[-30px]">
             Greenfie
           </span>
+          {errorMessage && !errorMessage.includes('Password') && <span className="my-2"><p className="text-red-500 mb-1 px-2 text-sm text-center">{errorMessage}</p><hr/></span>}
           <div className="flex justify-between items-center mb-2 px-3">
-            <span className="text-lg font-bold text-black">Signup</span>
+            <h1 className="text-lg font-bold text-black">Signup</h1>
             <button
               aria-label="Close"
               onClick={() => setIsSignupModalOpen(false)}
@@ -121,6 +123,7 @@ const Register = ({ setIsSignupModalOpen, signup }: any) => {
                 />
               </div>
               <div className="mt-4">
+                {errorMessage && errorMessage.includes('Password') && <p className="text-red-500 my-1 px-2 text-sm">{errorMessage}</p>}
                 <input
                   className="w-full px-3 py-2 border rounded-lg"
                   type="password"

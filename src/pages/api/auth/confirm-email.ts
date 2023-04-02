@@ -8,9 +8,10 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.query.confirmToken) {
-    const {confirmToken} = req.query 
+    const { confirmToken } = req.query;
     const user = await Users.findOne({ confirmToken });
     if (user) {
+      await Users.findOneAndUpdate({ confirmToken }, { confirmed: true });
       // Redirect to login page with query parameter to display login form
       res.redirect(`/?confirmToken=${confirmToken}&email=${user.email}`);
     } else {

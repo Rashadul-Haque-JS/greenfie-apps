@@ -31,7 +31,7 @@ export default async function handler(
     await Users.create({
       ...req.body,
       password : hashedPassword,
-      confirmToken: confirmToken,
+      confirmToken
     });
     
     const confirmUrl = `${process.env.GREENFIE_DOMAIN}/api/auth/confirm-email?confirmToken=${confirmToken}`;

@@ -51,12 +51,16 @@ const UsersSchema = new mongoose.Schema({
     type: String,
     default:""
   },
+  confirmed:{
+    type: Boolean,
+    default:false
+  },
   avatar: {
     type: Buffer,
     required:false
   },
   
-});
+},{timestamps: true });
 
 const Users = mongoose.models.Users || mongoose.model("Users", UsersSchema);
 

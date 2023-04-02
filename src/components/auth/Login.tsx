@@ -8,15 +8,17 @@ import { AuthContext } from "../navbar/navbar";
 
 const Login = ({ setIsLoginModalOpen, setIsSignupModalOpen, setIsResetModalOpen }: any) => {
     const [credentials, setCredentials] = useState({ email: "", password: "" });
+    const [errorMessage, setErrorMessage] = useState('')
+
     const router = useRouter();
     const dispatch = useDispatch()
-    const {newUserEmail} = useContext(AuthContext)
+    const { newUserEmail } = useContext(AuthContext)
 
     useEffect(() => {
         if (newUserEmail) {
-          setCredentials({...credentials, email: newUserEmail});
+            setCredentials({ ...credentials, email: newUserEmail });
         }
-      }, [newUserEmail]);
+    }, [newUserEmail]);
 
     const handleChange = (event: any) => {
         const { name, value } = event.target;
@@ -30,9 +32,10 @@ const Login = ({ setIsLoginModalOpen, setIsSignupModalOpen, setIsResetModalOpen 
             dispatch(getAuth(data))
             console.log(data);
             router.replace('/products')
-        } catch (error) {
-            console.log(error);
-            // handle error here, e.g. show error message
+        } catch (error: any) {
+            const { response } = error.response && error
+            const { message } = error
+            setErrorMessage(response.data.message || message)
         }
     };
     const handleOptReg = () => {
@@ -50,8 +53,8 @@ const Login = ({ setIsLoginModalOpen, setIsSignupModalOpen, setIsResetModalOpen 
             <div className="bg-background p-8 w-[546px] sm:mt-8 xs:mt-8">
                 <div className="w-3/4 sm:w-full xs:w-full flex flex-col mx-auto">
                     <span className="sm:block xs:block hidden bg-main text-background px-4 py-2 transform translate-y-[-30px] text-center">Greenfie</span>
-                    <div className="flex justify-between items-center mb-2 px-2">
-                        <span className="text-lg font-bold text-black">Signin</span>
+                    <div className="flex justify-between items-center mb-4 px-2">
+                        <h1 className="text-lg font-bold text-black">Signin</h1>
                         <button
                             aria-label="Close"
                             onClick={() => setIsLoginModalOpen(false)}
@@ -63,19 +66,22 @@ const Login = ({ setIsLoginModalOpen, setIsSignupModalOpen, setIsResetModalOpen 
                     <div className="h-full w-full">
                         <form onSubmit={handleLoginSubmit} className="p-2 mb-12 flex flex-col">
                             <div className="mb-4">
+                                {errorMessage && errorMessage.includes('User') && <p className="text-red-500 my-1 px-2 text-sm">{errorMessage}</p>}
                                 <input
                                     className="w-full px-3 py-2 border border-gray-400 rounded-lg my-2"
                                     type="email"
                                     id="email"
                                     name="email"
-                                   value={credentials.email}
+                                    value={credentials.email}
                                     onChange={handleChange}
                                     required
                                     placeholder="Email..."
                                     autoFocus
                                 />
+
                             </div>
                             <div className="mb-4">
+                                {errorMessage && errorMessage.includes('Password') && <p className="text-red-500 mb-1 px-2 text-sm">{errorMessage}</p>}
                                 <input
                                     className="w-full px-3 py-2 border border-gray-400 rounded-lg my-2"
                                     type="password"
@@ -85,17 +91,18 @@ const Login = ({ setIsLoginModalOpen, setIsSignupModalOpen, setIsResetModalOpen 
                                     required
                                     placeholder="Password..."
                                 />
+
                             </div>
                             <hr className="my-5" />
 
                             <p className="text-gray-600 text-sm mb-4">By clicking Login, you agree to our <a href="#" className="text-blue-500">Terms of Use</a> and <a href="#" className="text-blue-500">Privacy Policy</a>.</p>
-                           <Button children='Login' type="submit"/>
+                            <Button children='Login' type="submit" />
                         </form>
                     </div>
-                <div className="text-start px-2">
-                    <p className="text-gray-600 text-sm mb-2">Don't have an account? <span className="text-blue-500 cursor-pointer" onClick={handleOptReg}>Register</span></p>
-                    <p className="text-gray-600 text-sm">Forgot Password? <span className="text-blue-500 cursor-pointer" onClick={handleOptReset}>Reset Password</span></p>
-                </div>
+                    <div className="text-start px-2">
+                        <p className="text-gray-600 text-sm mb-2">Don't have an account? <span className="text-blue-500 cursor-pointer" onClick={handleOptReg}>Register</span></p>
+                        <p className="text-gray-600 text-sm">Forgot Password? <span className="text-blue-500 cursor-pointer" onClick={handleOptReset}>Reset Password</span></p>
+                    </div>
                 </div>
             </div>
         </div>
