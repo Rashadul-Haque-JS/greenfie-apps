@@ -3,6 +3,8 @@ import Button from "../experiments/Button";
 import { AuthContext } from "../navbar/navbar";
 import axios from "axios";
 import router from "next/router";
+import { toast } from 'react-toastify';
+
 const PasswordForm = ({ setIsPassFormOpen,setIsLoginModalOpen }: any) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -18,9 +20,10 @@ const PasswordForm = ({ setIsPassFormOpen,setIsLoginModalOpen }: any) => {
         }
         try {
             const resp = await axios.post('/api/auth/updateForgotPassword',{email: email, password: password});
-            router.replace("/", { message: resp.data.message } as any);
             setIsPassFormOpen(false)
+            router.replace("/");
             setIsLoginModalOpen(true)
+            toast.success(resp.data.message)
         } catch (error: any) {
             const { response } = error.response && error
             const { message } = error

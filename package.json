@@ -40,7 +40,8 @@
     "react-instantsearch-core": "^6.39.0",
     "react-instantsearch-dom": "^6.39.0",
     "react-redux": "^8.0.5",
-    "react-select": "^5.7.0"
+    "react-select": "^5.7.0",
+    "react-toastify": "^9.1.2"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^13.2.1",

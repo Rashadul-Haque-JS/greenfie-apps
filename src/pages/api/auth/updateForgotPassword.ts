@@ -26,5 +26,5 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const hashedPassword = await hash(password, salt);
   // Update user's password in database
   await user.updateOne({ password: hashedPassword });
-  res.status(200).json({ message: 'Password reset successful' });
+  res.status(200).json({ message: 'Password reset successful!' });
 }
