@@ -9,6 +9,7 @@ import { AuthContext } from "../navbar/navbar";
 const Login = ({ setIsLoginModalOpen, setIsSignupModalOpen, setIsResetModalOpen }: any) => {
     const [credentials, setCredentials] = useState({ email: "", password: "" });
     const [errorMessage, setErrorMessage] = useState('')
+    const [showPassword, setShowPassword] = useState(false);
 
     const router = useRouter();
     const dispatch = useDispatch()
@@ -82,15 +83,24 @@ const Login = ({ setIsLoginModalOpen, setIsSignupModalOpen, setIsResetModalOpen 
                             </div>
                             <div className="mb-4">
                                 {errorMessage && errorMessage.includes('Password') && <p className="text-red-500 mb-1 px-2 text-notification">{errorMessage}</p>}
-                                <input
-                                    className="w-full px-3 py-2 border border-gray-400 rounded-lg my-2"
-                                    type="password"
-                                    id="password"
-                                    name="password"
-                                    onChange={handleChange}
-                                    required
-                                    placeholder="Password..."
-                                />
+                                <div className="relative">
+                                    <input
+                                        className="w-full px-3 py-2 border border-gray-400 rounded-lg my-2"
+                                        type={showPassword ? "text" : "password"}
+                                        id="password"
+                                        name="password"
+                                        onChange={handleChange}
+                                        required
+                                        placeholder="Password..."
+                                    />
+                                    <button
+                                        type="button"
+                                        className="absolute top-1/2 right-3 transform -translate-y-1/2 focus:outline-none"
+                                        onClick={() => setShowPassword(!showPassword)}
+                                    >
+                                        {showPassword ? "Hide" : "Show"}
+                                    </button>
+                                </div>
 
                             </div>
                             <hr className="my-5" />

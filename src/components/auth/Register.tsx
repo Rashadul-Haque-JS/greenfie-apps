@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
 import Select from "react-select";
 import divisions from "@/utils/data/divisions";
 import axios from "axios";
@@ -22,6 +21,8 @@ const Register = ({ setIsSignupModalOpen, signup }: any) => {
   const [wards, setWards] = useState<any[]>([]);
   const [message, setMessage] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -114,17 +115,27 @@ const Register = ({ setIsSignupModalOpen, signup }: any) => {
                 />
               </div>
               <div className="mt-4">
+                <div className="relative">
                 <input
                   className="w-full px-3 py-2 border rounded-lg"
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   name="password"
                   onChange={handleChange}
                   required
                   placeholder="Password..."
                 />
+                 <button
+                    type="button"
+                    className="absolute top-1/2 right-3 transform -translate-y-1/2 focus:outline-none"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? "Hide" : "Show"}
+                  </button>
+                </div>
               </div>
               <div className="mt-4">
                 {errorMessage && errorMessage.includes('Password') && <p className="text-red-500 my-1 px-2 text-notification">{errorMessage}</p>}
+                <div className="relative">
                 <input
                   className="w-full px-3 py-2 border rounded-lg"
                   type="password"
@@ -135,6 +146,14 @@ const Register = ({ setIsSignupModalOpen, signup }: any) => {
                   required
                   placeholder="Confirm Password..."
                 />
+                 <button
+                    type="button"
+                    className="absolute top-1/2 right-3 transform -translate-y-1/2 focus:outline-none"
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  >
+                    {showConfirmPassword ? "Hide" : "Show"}
+                  </button>
+                </div>
               </div>
               <div className="mt-4">
                 <Select
