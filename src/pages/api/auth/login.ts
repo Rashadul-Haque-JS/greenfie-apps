@@ -7,6 +7,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export default async function handler(req:NextApiRequest, res:NextApiResponse) {
+  //This functions is called temporary here...it will be called in suitable place later.
     await removeUnconfirmedUsers()
   if (req.method === 'POST') {
     const { email, password } = req.body;
