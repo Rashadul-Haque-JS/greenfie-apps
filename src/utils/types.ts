@@ -52,8 +52,14 @@ export interface IUser {
   phone: string;
   gender: string;
   avatar: string | null;
+  confirm_token: string | null;
 }
 
 export interface ILink {
   setIsOpen: (option:boolean) => void;
+}
+
+export interface IUserUpdate {
+  $set?: Partial<IUser>;
+  $unset?: { [key in keyof IUser]?: boolean } & { confirmationToken?: boolean };
 }

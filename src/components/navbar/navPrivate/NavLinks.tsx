@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import navs from "@/utils/data/navbar";
 import { toggleStates } from "@/utils/data/misc";
 import { NavContext } from "./NavPrivate";
@@ -37,9 +37,9 @@ const NavLinks = () => {
 
   return (
     <>
-      {navs.map((nav) => (
-        <>
-          <li>
+      {navs.map((nav,index) => (
+        <div key={Math.random().toString(36).substring(2) + index}>
+          <li key={nav.name}>
             <button
               type="button"
               className="flex items-center w-full p-2 text-base font-normal text-txt hover:text-background transition duration-75 rounded-lg group "
@@ -77,11 +77,11 @@ const NavLinks = () => {
               }`}
             >
               {nav?.links?.map((link: any) => (
-                <li>
+                <li key={link.route}>
                   <Link
                     href={link.route}
-                    className="flex items-center w-full p-2 text-base font-normal text-txt transition duration-75 rounded-lg pl-11 group capitalize "
-                    key={link.route}
+                    className="flex items-center w-full p-2 text-base font-normal text-txt 
+                     transition duration-75 rounded-lg pl-11 group capitalize "
                     onClick={handleClickClose}
                   >
                     {link.name}
@@ -91,7 +91,7 @@ const NavLinks = () => {
             </ul>
           </li>
           <hr />
-        </>
+        </div>
       ))}
     </>
   );

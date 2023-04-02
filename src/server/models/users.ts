@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-import bcrypt from "bcryptjs";
-import { IUser } from "@/utils/types";
+import { IUser} from "@/utils/types";
+
 const UsersSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -47,23 +47,22 @@ const UsersSchema = new mongoose.Schema({
    trim:true,
    required:[true, "Please enter your gender"],
   },
+  confirmToken:{
+    type: String,
+    default:""
+  },
+  confirmed:{
+    type: Boolean,
+    default:false
+  },
   avatar: {
     type: Buffer,
     required:false
   },
-});
+  
+},{timestamps: true });
 
 const Users = mongoose.models.Users || mongoose.model("Users", UsersSchema);
-
-// Define CRUD operations
-export async function createUser(data: IUser) {
-  const { password, ...userData } = data;
-  const salt = await bcrypt.genSalt(10);
-  const hashedPassword = await bcrypt.hash(password, salt);
-  const user = new Users({ ...userData, password: hashedPassword });
-  await user.save();
-  return user.toObject();
-}
 
 export async function getUsers() {
   const users = await Users.find();
@@ -84,5 +83,6 @@ export async function deleteUser(id: string) {
   const user = await Users.findByIdAndDelete(id);
   return user ? user.toObject() : null;
 }
+
 
 export default Users;

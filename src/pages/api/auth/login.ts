@@ -2,17 +2,20 @@ import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import Users from "@/server/models/users";
+import { removeUnconfirmedUsers } from '@/server/utils/removeUnconfirmedUsers';
 import dotenv from "dotenv";
 dotenv.config();
 
 export default async function handler(req:NextApiRequest, res:NextApiResponse) {
+    await removeUnconfirmedUsers()
   if (req.method === 'POST') {
     const { email, password } = req.body;
     const user  = await Users.findOne({ email})
-    if(!user)return res.status(404).json({ message: 'User not found' });
+    if(!user)return res.status(404).json({ message: 'User is not registered' });
+    if(!user.confirmed)return res.status(404).json({ message: 'User email not varified' })
     const isPasswordValid = await compare(password, user.password);
     if (!isPasswordValid) {
-      return res.status(401).json({ message: 'Invalid email or password' });
+      return res.status(401).json({ message: 'Password is not valid' });
     }
     // Generate JWT token
     const token = sign({ email }, process.env.JWT_SECRET? process.env.JWT_SECRET:'', { expiresIn: '1h' });

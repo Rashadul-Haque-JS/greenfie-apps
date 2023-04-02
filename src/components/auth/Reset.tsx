@@ -17,7 +17,7 @@ const Reset = ({ setIsResetModalOpen }: any) => {
                     <span className="sm:block xs:block hidden bg-main text-background text-center px-4 py-2  transform translate-y-[-30px]">Greenfie</span>
 
                     <div className="flex justify-between items-center mb-4 px-2">
-                        <span className="text-lg font-bold text-black">Reset password</span>
+                        <h1 className="text-lg font-bold text-black">Reset password</h1>
                         <button
                             aria-label="Close"
                             onClick={() => setIsResetModalOpen(false)}
