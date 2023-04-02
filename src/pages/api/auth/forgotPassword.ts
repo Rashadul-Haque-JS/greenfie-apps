@@ -41,7 +41,7 @@ export default async function handler(req:NextApiRequest, res:NextApiResponse) {
       res.status(404).json({ error: "No user found for this email address" });
       return;
     }
-    const confirmReset = `${process.env.CLIENT_URL}/api/auth/confirm-reset?resetPasswordToken=${resetPasswordToken}`;
+    const confirmReset = `${process.env.CLIENT_URL}/api/auth/confirmReset?resetPasswordToken=${resetPasswordToken}`;
     console.log('Confirm url ',confirmReset)
     // Send password reset email
     // const emailSent = await transporter.sendMail({

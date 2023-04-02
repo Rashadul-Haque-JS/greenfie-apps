@@ -35,7 +35,7 @@ export default async function handler(
       confirmToken
     });
     
-    const confirmUrl = `${process.env.CLIENT_URL}/api/auth/confirm-email?confirmToken=${confirmToken}`;
+    const confirmUrl = `${process.env.CLIENT_URL}/api/auth/confirmEmail?confirmToken=${confirmToken}`;
     console.log('Confirm url ',confirmUrl)
 
     // const mailOptions = {
