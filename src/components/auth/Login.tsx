@@ -98,7 +98,7 @@ const Login = ({ setIsLoginModalOpen, setIsSignupModalOpen, setIsResetModalOpen 
                                         className="absolute top-1/2 right-3 transform -translate-y-1/2 focus:outline-none"
                                         onClick={() => setShowPassword(!showPassword)}
                                     >
-                                        {showPassword ? "Hide" : "Show"}
+                                        {showPassword ? (<i className="material-icons text-[20px] mt-2">visibility_off</i>) : (<i className="material-icons text-[20px] mt-2">remove_red_eye</i>)}
                                     </button>
                                 </div>
 
