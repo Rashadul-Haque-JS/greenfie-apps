@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
 import Select from "react-select";
 import divisions from "@/utils/data/divisions";
 import axios from "axios";
@@ -20,9 +19,11 @@ const Register = ({ setIsSignupModalOpen, signup }: any) => {
 
   const [confirmPassword, setConfirmPassword] = useState("");
   const [wards, setWards] = useState<any[]>([]);
+  const [message, setMessage] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
-  const router = useRouter();
-
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setUser({ ...user, [name]: value });
@@ -41,7 +42,7 @@ const Register = ({ setIsSignupModalOpen, signup }: any) => {
     }
     try {
       const resp = await axios.post(signup, user);
-      router.replace("/", { message: resp.data.message } as any);
+      setMessage(resp.data.message)
     } catch (error: any) {
       const { response } = error.response && error
       const { message } = error
@@ -70,10 +71,11 @@ const Register = ({ setIsSignupModalOpen, signup }: any) => {
       ></div>
       <div className="bg-background p-8 w-[546px] sm:mt-8 xs:mt-8">
         <div className="w-3/4 sm:w-full xs:w-full flex flex-col mx-auto">
-          <span className="sm:block xs:block hidden bg-main text-background text-center px-4 py-2  transform translate-y-[-30px]">
+          <span className="sm:block xs:block hidden bg-main text-background text-center px-4 py-2  transform translate-y-[-30px] rounded-lg">
             Greenfie
           </span>
-          {errorMessage && !errorMessage.includes('Password') && <span className="my-2"><p className="text-red-500 mb-1 px-2 text-sm text-center">{errorMessage}</p><hr/></span>}
+          {message &&  <p className="my-2"><p className="text-main mb-1 px-2 text-notification text-center">{message}</p><hr/></p>}
+          {errorMessage && !errorMessage.includes('Password') && <span className="my-2"><p className="text-red-500 mb-1 px-2 text-notification text-center">{errorMessage}</p><hr/></span>}
           <div className="flex justify-between items-center mb-2 px-3">
             <h1 className="text-lg font-bold text-black">Signup</h1>
             <button
@@ -113,17 +115,27 @@ const Register = ({ setIsSignupModalOpen, signup }: any) => {
                 />
               </div>
               <div className="mt-4">
+                <div className="relative">
                 <input
                   className="w-full px-3 py-2 border rounded-lg"
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   name="password"
                   onChange={handleChange}
                   required
                   placeholder="Password..."
                 />
+                 <button
+                    type="button"
+                    className="absolute top-1/2 right-3 transform -translate-y-1/2 focus:outline-none"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? (<i className="material-icons text-[20px] mt-2">visibility_off</i>) : (<i className="material-icons text-[20px] mt-2">remove_red_eye</i>)}
+                  </button>
+                </div>
               </div>
               <div className="mt-4">
-                {errorMessage && errorMessage.includes('Password') && <p className="text-red-500 my-1 px-2 text-sm">{errorMessage}</p>}
+                {errorMessage && errorMessage.includes('Password') && <p className="text-red-500 my-1 px-2 text-notification">{errorMessage}</p>}
+                <div className="relative">
                 <input
                   className="w-full px-3 py-2 border rounded-lg"
                   type="password"
@@ -134,6 +146,14 @@ const Register = ({ setIsSignupModalOpen, signup }: any) => {
                   required
                   placeholder="Confirm Password..."
                 />
+                 <button
+                    type="button"
+                    className="absolute top-1/2 right-3 transform -translate-y-1/2 focus:outline-none"
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  >
+                    {showConfirmPassword ?(<i className="material-icons text-[20px] mt-2">visibility_off</i>) : (<i className="material-icons text-[20px] mt-2">remove_red_eye</i>)}
+                  </button>
+                </div>
               </div>
               <div className="mt-4">
                 <Select

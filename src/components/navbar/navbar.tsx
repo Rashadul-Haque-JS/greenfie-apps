@@ -3,6 +3,7 @@ import Image from "next/image";
 import Login from "../auth/Login";
 import Register from "../auth/Register";
 import Reset from "../auth/Reset";
+import PasswordForm from "../auth/passwordForm";
 import { useRouter } from "next/router";
 
 export const AuthContext = createContext<any>([]);
@@ -10,6 +11,7 @@ const Navbar = ({ signup }: any) => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isSignModalOpen, setIsSignupModalOpen] = useState(false);
   const [isResetModalOpen, setIsResetModalOpen] = useState(false);
+  const [isPassFormOpen, setIsPassFormOpen] = useState(false);
   const [newUserEmail, setNewUserEmail] = useState<any>();
 
   const router = useRouter();
@@ -18,17 +20,28 @@ const Navbar = ({ signup }: any) => {
       login: [true, false, false],
       signup: [false, true, false],
       reset: [false, false, true],
+      password: [false, false, false,true],
     } as any;
 
     setIsLoginModalOpen(modalStates[modalType][0]);
     setIsSignupModalOpen(modalStates[modalType][1]);
     setIsResetModalOpen(modalStates[modalType][2]);
+    setIsPassFormOpen(modalStates[modalType][3])
   };
 
   useEffect(() => {
     const { confirmToken, email, login = null } = router.query;
     if ((confirmToken && email) || login) {
       setIsLoginModalOpen(true);
+      setNewUserEmail(email);
+    }
+  }, []);
+
+  useEffect(() => {
+    const { resetPasswordToken, email,  } = router.query;
+    if ((resetPasswordToken && email)) {
+      setIsLoginModalOpen(false);
+      setIsPassFormOpen(true);
       setNewUserEmail(email);
     }
   }, []);
@@ -86,6 +99,9 @@ const Navbar = ({ signup }: any) => {
         )}
         {isResetModalOpen && (
           <Reset setIsResetModalOpen={setIsResetModalOpen} />
+        )}
+        {isPassFormOpen && (
+          <PasswordForm setIsPassFormOpen={setIsPassFormOpen} setIsLoginModalOpen={setIsLoginModalOpen}/>
         )}
       </div>
     </AuthContext.Provider>

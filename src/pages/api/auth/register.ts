@@ -7,10 +7,12 @@ import crypto from "crypto";
 
 dotenv.config();
 // const transporter = nodemailer.createTransport({
-//   service: process.env.MAIL_SERVICE,
+//   host: process.env.SMTP_HOST,
+//   port: parseInt(process.env.SMTP_PORT!, 10),
+//   secure: process.env.SMTP_SECURE === 'true',
 //   auth: {
-//     user: process.env.MAIL_USERNAME,
-//     pass: process.env.MAIL_PASSWORD,
+//     user: process.env.SMTP_USERNAME,
+//     pass: process.env.SMTP_PASSWORD,
 //   },
 // });
 
@@ -27,21 +29,20 @@ export default async function handler(
     const confirmToken = crypto.randomBytes(16).toString("hex");
     const salt = await bcrypt.genSalt(12);
     const hashedPassword = await bcrypt.hash(password, salt);
-  
     await Users.create({
       ...req.body,
       password : hashedPassword,
       confirmToken
     });
     
-    const confirmUrl = `${process.env.GREENFIE_DOMAIN}/api/auth/confirm-email?confirmToken=${confirmToken}`;
+    const confirmUrl = `${process.env.CLIENT_URL}/api/auth/confirmEmail?confirmToken=${confirmToken}`;
     console.log('Confirm url ',confirmUrl)
 
     // const mailOptions = {
-    //   from: process.env.MAIL_FROM,
-    //   to: email,
-    //   subject: "Confirm your email",
-    //   text: `Please confirm your email address by clicking this link: ${confirmUrl}`,
+    //  from: process.env.SMTP_SENDER_EMAIL,
+   //   to: email,
+   //   subject: 'Confirm email',
+    //  text: `Please confirm your email address by clicking this link: ${confirmUrl}`,
     // };
 
     // let info = await transporter.sendMail(mailOptions);

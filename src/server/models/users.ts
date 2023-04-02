@@ -55,6 +55,10 @@ const UsersSchema = new mongoose.Schema({
     type: Boolean,
     default:false
   },
+  resetPasswordToken:{
+    type: String,
+    default:""
+  },
   avatar: {
     type: Buffer,
     required:false
@@ -75,9 +79,14 @@ export async function getUser(id: string) {
 }
 
 export async function updateUser(id: string, data: IUser) {
+  // Check if data has password or confirmPassword key
+  if (data.hasOwnProperty('password') || data.hasOwnProperty('confirmPassword')) {
+    return { message: 'Please use the update password section to update your password.' };
+  }
   const user = await Users.findByIdAndUpdate(id, data, { new: true });
   return user ? user.toObject() : null;
 }
+
 
 export async function deleteUser(id: string) {
   const user = await Users.findByIdAndDelete(id);
