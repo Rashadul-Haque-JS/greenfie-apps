@@ -8,9 +8,10 @@ import { logoutAuth } from "@/store/features/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import NavLinks from "./NavLinks";
+import router from "next/router";
+import RenderNavIcon from "../partials/IconLoginOrProfile";
 
 export const NavContext = createContext<any>([]);
-
 const Navbar = () => {
   const isMobileScreen = useMediaQuery("(max-width: 960px)");
   const [isOpen, setIsOpen] = useState(false);
@@ -21,6 +22,13 @@ const Navbar = () => {
     if (isMobileScreen) {
       setIsOpen(true);
     }
+  };
+
+  const toLogin = () => {
+    const randomString = [...Array(10)]
+      .map(() => Math.random().toString(36)[2])
+      .join("");
+    router.push(`/?login=${randomString}`);
   };
 
   const handleLogout = () => {
@@ -48,8 +56,7 @@ const Navbar = () => {
             &#9776;
           </button>
           <div className="text-2xl text-white font-bold">Greenfie</div>
-         {user.name && <span>{user.name}</span>}
-          <div className="text-3xl text-white font-bold rounded-full bg-white w-5 h-5"></div>
+          <RenderNavIcon user={user} toLogin={toLogin} />
         </div>
         <div className="hidden w-full lg:flex xl:flex justify-between items-center ">
           <Link href="/">
@@ -61,7 +68,7 @@ const Navbar = () => {
               height={500}
             />
           </Link>
-          <div className="text-3xl text-white font-bold rounded-full bg-white w-5 h-5"></div>
+          <RenderNavIcon user={user} toLogin={toLogin} />
         </div>
         <div
           id="drawer-navigation"
@@ -111,28 +118,30 @@ const Navbar = () => {
               </li>
               <hr />
               <NavLinks />
-              <li>
-                <button
-                  type="button"
-                  className="flex items-center p-2 text-base font-normal text-txt rounded-lg hover:text-background"
-                >
-                  <svg
-                    className="flex-shrink-0 w-6 h-6 text-txt transition duration-75 group-hover:text-background dark:group-hover:text-white"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
+              {user.name && (
+                <li>
+                  <button
+                    type="button"
+                    className="flex items-center p-2 text-base font-normal text-txt rounded-lg hover:text-background"
                   >
-                    <path d="M8.707 7.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l2-2a1 1 0 00-1.414-1.414L11 7.586V3a1 1 0 10-2 0v4.586l-.293-.293z"></path>
-                    <path d="M3 5a2 2 0 012-2h1a1 1 0 010 2H5v7h2l1 2h4l1-2h2V5h-1a1 1 0 110-2h1a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5z"></path>
-                  </svg>
-                  <span
-                    className="flex-1 ml-3 whitespace-nowrap"
-                    onClick={handleLogout}
-                  >
-                    Logout
-                  </span>
-                </button>
-              </li>
+                    <svg
+                      className="flex-shrink-0 w-6 h-6 text-txt transition duration-75 group-hover:text-background dark:group-hover:text-white"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M8.707 7.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l2-2a1 1 0 00-1.414-1.414L11 7.586V3a1 1 0 10-2 0v4.586l-.293-.293z"></path>
+                      <path d="M3 5a2 2 0 012-2h1a1 1 0 010 2H5v7h2l1 2h4l1-2h2V5h-1a1 1 0 110-2h1a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5z"></path>
+                    </svg>
+                    <span
+                      className="flex-1 ml-3 whitespace-nowrap"
+                      onClick={handleLogout}
+                    >
+                      Logout
+                    </span>
+                  </button>
+                </li>
+              )}
             </ul>
           </div>
         </div>

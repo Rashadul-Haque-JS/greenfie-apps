@@ -109,7 +109,7 @@ const Login = ({ setIsLoginModalOpen, setIsSignupModalOpen, setIsResetModalOpen 
                             <Button children='Login' type="submit" />
                         </form>
                     </div>
-                    <div className="text-start px-2">
+                    <div className="px-2 text-center">
                         <p className="text-gray-600 text-sm mb-2">Don't have an account? <span className="text-blue-500 cursor-pointer" onClick={handleOptReg}>Register</span></p>
                         <p className="text-gray-600 text-sm">Forgot Password? <span className="text-blue-500 cursor-pointer" onClick={handleOptReset}>Reset Password</span></p>
                     </div>

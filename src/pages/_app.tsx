@@ -11,7 +11,7 @@ import { useSelector } from 'react-redux';
 import { useRouter} from 'next/router';
 import { useEffect } from 'react';
 
-const unprotectedRoutes = ['/', '/about', '/info', '/blogs'];
+const unprotectedRoutes = ['/', '/about', '/info', '/blogs','/contact'];
 
 const App = ({ Component, pageProps }: AppProps) => {
   const signup = '/api/auth/register';

@@ -35,4 +35,4 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-/src/pages/about/index.tsx
+/src/pages/about/**/*
