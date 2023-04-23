@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { GetServerSideProps } from 'next';
 import { GenericProps } from '@/utils/types';
-
+import VideoPlayer from '@/components/video/videoPlayer';
 const Recipe = ({ recipe }: GenericProps) => {
 
   if (!recipe) {
@@ -11,9 +11,7 @@ const Recipe = ({ recipe }: GenericProps) => {
   return (
     <div className='transform translate-y-[-28px]'>
       <div className='w-full transform translate-y-[-26px]'>
-        <video controls autoPlay className='w-full h-[400px] xs:h-auto sm:h-auto bg-txt '>
-          <source src={recipe.video} type='video/mp4' className='w-full h-full' />
-        </video>
+       <VideoPlayer src={recipe.video}/>
       </div>
       <div className='max-h-96 overflow-scroll mx-4'>
         <div className='max-w-4xl mx-auto my-10'>
