@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import connect from '@/server/connection';
 import {getUsers, getUser, updateUser, deleteUser } from '@/server/models/users';
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function userHandler(req: NextApiRequest, res: NextApiResponse) {
   const { method, body, query } = req;
    await connect();
   switch (method) {
