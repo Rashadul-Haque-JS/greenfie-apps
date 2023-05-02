@@ -1,10 +1,9 @@
 import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
-import { getAuth } from "@/store/features/auth";
-import { useDispatch } from "react-redux";
 import Button from "../experiments/Button";
 import { AuthContext } from "../navbar/navbar";
+import { setCookies } from "@/server/utils/cookies";
 
 const Login = ({ setIsLoginModalOpen, setIsSignupModalOpen, setIsResetModalOpen }: any) => {
     const [credentials, setCredentials] = useState({ email: "", password: "" });
@@ -12,7 +11,6 @@ const Login = ({ setIsLoginModalOpen, setIsSignupModalOpen, setIsResetModalOpen 
     const [showPassword, setShowPassword] = useState(false);
 
     const router = useRouter();
-    const dispatch = useDispatch()
     const { newUserEmail } = useContext(AuthContext)
 
     useEffect(() => {
@@ -29,9 +27,8 @@ const Login = ({ setIsLoginModalOpen, setIsSignupModalOpen, setIsResetModalOpen 
         event.preventDefault();
         try {
             const response = await axios.post('/api/auth/login', credentials);
-            const data = response.data;
-            dispatch(getAuth(data))
-            console.log(data);
+            const {token} = response.data;
+            setCookies('token', token);
             router.replace('/products')
         } catch (error: any) {
             const { response } = error.response && error

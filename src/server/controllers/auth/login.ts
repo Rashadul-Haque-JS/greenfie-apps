@@ -22,11 +22,8 @@ export default async function login(req:NextApiRequest, res:NextApiResponse) {
     const {_id} = user
     const token = jwt.sign({ _id }, process.env.JWT_SECRET? process.env.JWT_SECRET:'', { expiresIn: '1h' });
 
-    // Set cookie
-    res.setHeader('Set-Cookie', `token=${token}; Path=/; HttpOnly; Max-Age=${3600}`);
-
     // Send response
-    return res.status(200).json({ message: 'Login successful' });
+    return res.status(200).json({token});
   } else {
     return res.status(405).json({ message: 'Method not allowed' });
   }

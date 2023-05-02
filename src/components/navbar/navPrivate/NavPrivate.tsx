@@ -2,7 +2,7 @@ import React, { useState, createContext } from "react";
 import Link from "next/link";
 import { useMediaQuery } from "@material-ui/core";
 import Image from "next/image";
-import { destroyCookie } from "nookies";
+import { removeCookie } from "@/server/utils/cookies";
 import DeshboardLink from "../../misc/deshboardLink";
 import { logoutAuth } from "@/store/features/auth";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,6 +10,7 @@ import { RootState } from "@/store/store";
 import NavLinks from "./NavLinks";
 import router from "next/router";
 import RenderNavIcon from "../partials/IconLoginOrProfile";
+import { getCookies } from "@/server/utils/cookies";
 
 export const NavContext = createContext<any>([]);
 const Navbar = () => {
@@ -17,7 +18,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.auth.auth);
-
+  const token = getCookies('token')
   const handleClickOpen = () => {
     if (isMobileScreen) {
       setIsOpen(true);
@@ -33,7 +34,7 @@ const Navbar = () => {
 
   const handleLogout = () => {
     try {
-      destroyCookie(null, "token", { path: "/", expires: new Date(0) });
+     removeCookie('token')
       dispatch(logoutAuth());
       window.location.href = "/";
     } catch (err: any) {
@@ -118,7 +119,7 @@ const Navbar = () => {
               </li>
               <hr />
               <NavLinks />
-              {user.name && (
+              {token && (
                 <li>
                   <button
                     type="button"
