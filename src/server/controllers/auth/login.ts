@@ -1,5 +1,5 @@
 import { compare } from 'bcryptjs';
-import { sign } from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import Users from "@/server/models/users";
 import { removeUnconfirmedUsers } from '@/server/utils/removeUnconfirmedUsers';
@@ -8,7 +8,7 @@ dotenv.config();
 
 export default async function login(req:NextApiRequest, res:NextApiResponse) {
   //This functions is called temporary here...it will be called in suitable place later.
-    await removeUnconfirmedUsers()
+  await removeUnconfirmedUsers()
   if (req.method === 'POST') {
     const { email, password } = req.body;
     const user  = await Users.findOne({ email})
@@ -19,11 +19,14 @@ export default async function login(req:NextApiRequest, res:NextApiResponse) {
       return res.status(401).json({ message: 'Password is not valid' });
     }
     // Generate JWT token
-    const token = sign({ email }, process.env.JWT_SECRET? process.env.JWT_SECRET:'', { expiresIn: '1h' });
-    // Save JWT token to cookies or local storage
-    res.setHeader('Set-Cookie', `token=${token}; HttpOnly; Path=/`);
-    const {_id,name} = user
-    return res.status(200).json({ message: 'Login successful', auth:{_id,name}});
+    const {_id} = user
+    const token = jwt.sign({ _id }, process.env.JWT_SECRET? process.env.JWT_SECRET:'', { expiresIn: '1h' });
+
+    // Set cookie
+    res.setHeader('Set-Cookie', `token=${token}; Path=/; HttpOnly; Max-Age=${3600}`);
+
+    // Send response
+    return res.status(200).json({ message: 'Login successful' });
   } else {
     return res.status(405).json({ message: 'Method not allowed' });
   }
