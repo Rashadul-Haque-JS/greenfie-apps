@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { IUser} from "@/utils/types";
 
 const UsersSchema = new mongoose.Schema({
   name: {
@@ -67,31 +66,5 @@ const UsersSchema = new mongoose.Schema({
 },{timestamps: true });
 
 const Users = mongoose.models.Users || mongoose.model("Users", UsersSchema);
-
-export async function getUsers() {
-  const users = await Users.find();
-  return users.map((user) => user.toObject());
-}
-
-export async function getUser(id: string) {
-  const user = await Users.findById(id);
-  return user ? user.toObject() : null;
-}
-
-export async function updateUser(id: string, data: IUser) {
-  // Check if data has password or confirmPassword key
-  if (data.hasOwnProperty('password') || data.hasOwnProperty('confirmPassword')) {
-    return { message: 'Please use the update password section to update your password.' };
-  }
-  const user = await Users.findByIdAndUpdate(id, data, { new: true });
-  return user ? user.toObject() : null;
-}
-
-
-export async function deleteUser(id: string) {
-  const user = await Users.findByIdAndDelete(id);
-  return user ? user.toObject() : null;
-}
-
 
 export default Users;

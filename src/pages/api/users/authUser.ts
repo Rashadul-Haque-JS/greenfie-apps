@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import blogs from '@/server/controllers/blogs/green-blogs';
+import user from '@/server/controllers/users/userById';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-//   await blogs (req, res);
+  await user (req, res);
 }

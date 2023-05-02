@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import blogs from '@/server/controllers/blogs/green-blogs';
+import interiors from '@/server/controllers/interiors/virtual-interior.design';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-//   await blogs (req, res);
+//   await interiors (req, res);
 }
