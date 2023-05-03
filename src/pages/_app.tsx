@@ -11,7 +11,7 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import { useDispatch} from 'react-redux';
 import { AppDispatch} from '@/store/store';
-import { getAuth } from '@/store/features/auth';
+import { setAuth } from '@/store/features/auth';
 import { getCookies } from '@/utils/cookies';
 
 const unprotectedRoutes = ['/', '/about', '/info', '/blogs','/contact'];
@@ -36,7 +36,7 @@ const App = ({ Component, pageProps }: AppProps) => {
       router.push(`/?login=${randomString}`);
     }else{
       setBearerToken(null);
-      dispatch(getAuth({}))
+      dispatch(setAuth({}))
     }
   }, [bearerToken, isAuthenticated, isUnprotectedRoute, router]);
   
@@ -66,7 +66,7 @@ const fetchUser = async (dispatch:AppDispatch) => {
     const res = await axios.get(`http://127.0.0.1:9000/api/users/authUser`);
     const { user } = res.data;
     const newData = {_id:user?._id, name:user?.name}
-    dispatch(getAuth(newData))
+    dispatch(setAuth(newData))
   } catch (error: any) {
     console.error(error.message);
   }
