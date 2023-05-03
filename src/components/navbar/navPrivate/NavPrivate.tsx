@@ -1,4 +1,4 @@
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useMediaQuery } from "@material-ui/core";
 import Image from "next/image";
@@ -17,6 +17,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
   const token = getCookies('token')
+  const drawerRef = useRef<HTMLDivElement>(null);
   const handleClickOpen = () => {
     if (isMobileScreen) {
       setIsOpen(true);
@@ -39,6 +40,20 @@ const Navbar = () => {
       console.log(err.message);
     }
   };
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (drawerRef.current && !drawerRef.current.contains(event.target as Node)) {
+      setIsOpen(false);
+    }
+  };
+  
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside, true);
+    return () => {
+      document.removeEventListener("click", handleClickOutside, true);
+    };
+  }, []);
+  
 
   return (
     <NavContext.Provider value={{ setIsOpen }}>
@@ -71,6 +86,7 @@ const Navbar = () => {
         </div>
         <div
           id="drawer-navigation"
+          ref={drawerRef}
           className={`fixed sm:top-0 sm:left-0 xs:top-0 xs:left-0 md:top-0 md:left-0 w-80 lg:top-[56px] lg:left-[240px] xl:top-[51px] xl:left-[240px] z-40 h-screen px-4 lg:pr-0 xl:pr-0 overflow-y-auto xs:transition-transform sm:transition-transform md:transition-transform ${
             isOpen ? "" : "-translate-x-full"
           } bg-main dark:bg-gray-800`}
@@ -89,8 +105,9 @@ const Navbar = () => {
             data-drawer-hide="drawer-navigation"
             aria-controls="drawer-navigation"
             className="text-gray-400 bg-transparent hover:text-txt rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white lg:hidden xl:hidden"
+            onClick={() => setIsOpen(false)}
           >
-            <div className="bg-white rounded-full w-12 h-12 flex justify-center items-center">
+            <div className="bg-white rounded-full w-8 h-8 mt-1.5 flex justify-center items-center">
               <svg
                 className="w-5 h-5"
                 fill="#000"
@@ -117,6 +134,27 @@ const Navbar = () => {
               </li>
               <hr />
               <NavLinks />
+              <li >
+                  <Link
+                    href='/contact'
+                    className="flex items-center p-2 text-base font-normal text-txt rounded-lg hover:text-background"
+                  >
+                     <svg
+                      className="flex-shrink-0 w-6 h-6 text-txt transition duration-75 group-hover:text-background dark:group-hover:text-white"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M8.707 7.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l2-2a1 1 0 00-1.414-1.414L11 7.586V3a1 1 0 10-2 0v4.586l-.293-.293z"></path>
+                      <path d="M3 5a2 2 0 012-2h1a1 1 0 010 2H5v7h2l1 2h4l1-2h2V5h-1a1 1 0 110-2h1a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5z"></path>
+                    </svg>
+                    <span
+                      className="flex-1 ml-3 whitespace-nowrap"
+                    >
+                      Contact
+                    </span>
+                  </Link>
+                </li>
               {token && (
                 <li>
                   <button
