@@ -3,7 +3,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import Button from "../experiments/Button";
 import { AuthContext } from "../navbar/navbar";
-import { setCookies } from "@/server/utils/cookies";
+import { setCookies } from "@/utils/cookies";
 
 const Login = ({ setIsLoginModalOpen, setIsSignupModalOpen, setIsResetModalOpen }: any) => {
     const [credentials, setCredentials] = useState({ email: "", password: "" });

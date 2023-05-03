@@ -1,5 +1,4 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { parseCookies } from 'nookies';
 import Users from "@/server/models/users";
 import jwt from 'jsonwebtoken';
 
@@ -10,8 +9,9 @@ interface DecodedToken {
   }
 
 export default async function getUserById(req: NextApiRequest, res: NextApiResponse) {
-  const cookies = parseCookies({ req });
-  const token = cookies.token;
+  const token = req.headers.authorization?.split(' ')[1];
+  console.log(token);
+  
   if (!token) {
     return res.status(401).json({ message: 'Unauthorized' });
   }

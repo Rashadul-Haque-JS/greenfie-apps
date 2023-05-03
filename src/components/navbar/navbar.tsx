@@ -5,6 +5,8 @@ import Register from "../auth/Register";
 import Reset from "../auth/Reset";
 import PasswordForm from "../auth/passwordForm";
 import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 
 export const AuthContext = createContext<any>([]);
 const Navbar = ({ signup }: any) => {
@@ -13,20 +15,20 @@ const Navbar = ({ signup }: any) => {
   const [isResetModalOpen, setIsResetModalOpen] = useState(false);
   const [isPassFormOpen, setIsPassFormOpen] = useState(false);
   const [newUserEmail, setNewUserEmail] = useState<any>();
-
+  const [usr, setUsr] = useState<any>();
   const router = useRouter();
   const openModal = (modalType: string) => {
     const modalStates = {
       login: [true, false, false],
       signup: [false, true, false],
       reset: [false, false, true],
-      password: [false, false, false,true],
+      password: [false, false, false, true],
     } as any;
 
     setIsLoginModalOpen(modalStates[modalType][0]);
     setIsSignupModalOpen(modalStates[modalType][1]);
     setIsResetModalOpen(modalStates[modalType][2]);
-    setIsPassFormOpen(modalStates[modalType][3])
+    setIsPassFormOpen(modalStates[modalType][3]);
   };
 
   useEffect(() => {
@@ -38,16 +40,23 @@ const Navbar = ({ signup }: any) => {
   }, []);
 
   useEffect(() => {
-    const { resetPasswordToken, email,  } = router.query;
-    if ((resetPasswordToken && email)) {
+    const { resetPasswordToken, email } = router.query;
+    if (resetPasswordToken && email) {
       setIsLoginModalOpen(false);
       setIsPassFormOpen(true);
       setNewUserEmail(email);
     }
   }, []);
 
+  const user = useSelector((state: RootState) => state.auth.auth);
+  useEffect(() => {
+    if (user) {
+      setUsr(user);
+    }
+  }, [user]);
+
   return (
-    <AuthContext.Provider value={{newUserEmail}}>
+    <AuthContext.Provider value={{ newUserEmail }}>
       <div className="bg-main xs:px-2 sm:px-2 px-8 py-0">
         <nav className="mx-auto flex justify-between py-2 items-center">
           <div className="h-fit">
@@ -59,29 +68,39 @@ const Navbar = ({ signup }: any) => {
               height={500}
             />
           </div>
-          <div className="flex w-48  items-center justify-end  gap-4">
-            <div
-              className="flex justify-center items-center w-7 h-7 rounded-full text-background"
-              style={{ backgroundColor: "#2ECC40" }}
-              onClick={() => openModal("login")}
-            >
-              <i className="material-icons cursor-pointer">person</i>
+          {!usr?.name && (
+            <div className="flex w-48  items-center justify-end  gap-4">
+              <div
+                className="flex justify-center items-center w-7 h-7 rounded-full text-background"
+                style={{ backgroundColor: "#2ECC40" }}
+                onClick={() => openModal("login")}
+              >
+                <i className="material-icons cursor-pointer">person</i>
+              </div>
+              <div
+                className="flex justify-center items-center w-7 h-7 rounded-full text-background"
+                style={{ backgroundColor: "#2ECC40" }}
+                onClick={() => openModal("signup")}
+              >
+                <i className="material-icons cursor-pointer">person_add</i>
+              </div>
+              <div
+                className="flex justify-center items-center w-7 h-7 rounded-full text-background"
+                style={{ backgroundColor: "#2ECC40" }}
+                onClick={() => openModal("reset")}
+              >
+                <i className="material-icons cursor-pointer">help_outline</i>
+              </div>
             </div>
-            <div
-              className="flex justify-center items-center w-7 h-7 rounded-full text-background"
-              style={{ backgroundColor: "#2ECC40" }}
-              onClick={() => openModal("signup")}
-            >
-              <i className="material-icons cursor-pointer">person_add</i>
-            </div>
-            <div
-              className="flex justify-center items-center w-7 h-7 rounded-full text-background"
-              style={{ backgroundColor: "#2ECC40" }}
-              onClick={() => openModal("reset")}
-            >
-              <i className="material-icons cursor-pointer">help_outline</i>
-            </div>
+          )}
+        {usr?.name && (
+          <div
+            className="flex justify-center items-center w-7 h-7 rounded-full text-background"
+            style={{ backgroundColor: "#2ECC40" }}
+          >
+            <i className="material-icons cursor-pointer">check</i>
           </div>
+        )}
         </nav>
 
         {isLoginModalOpen && (
@@ -101,7 +120,10 @@ const Navbar = ({ signup }: any) => {
           <Reset setIsResetModalOpen={setIsResetModalOpen} />
         )}
         {isPassFormOpen && (
-          <PasswordForm setIsPassFormOpen={setIsPassFormOpen} setIsLoginModalOpen={setIsLoginModalOpen}/>
+          <PasswordForm
+            setIsPassFormOpen={setIsPassFormOpen}
+            setIsLoginModalOpen={setIsLoginModalOpen}
+          />
         )}
       </div>
     </AuthContext.Provider>

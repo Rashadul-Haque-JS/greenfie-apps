@@ -2,7 +2,7 @@ import { compare } from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import Users from "@/server/models/users";
-import { removeUnconfirmedUsers } from '@/server/utils/removeUnconfirmedUsers';
+import { removeUnconfirmedUsers } from '@/server/helpers/removeUnconfirmedUsers';
 import dotenv from "dotenv";
 dotenv.config();
 
