@@ -19,7 +19,7 @@ module.exports = {
       
       colors: {
         brownee: "#c70e05",
-        main: "#3EB489", //used
+        main: "#28B335", //used
         background: "#FFFFFF",//used
         txt: "#000000", //used
         lightBG: "#F5F5F5",//used in single product page
