@@ -1,19 +1,69 @@
-import React from "react";
-type ObjectProps ={
-[key: string]:any
-}
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/store/store';
+import Link from "next/link";
+import { removeCookie } from "@/utils/cookies";
+import { logoutAuth } from "@/store/features/auth";
 
 type TIcon = {
-user:ObjectProps;
-toLogin:()=>void;
+  toLogin?: () => void;
+  isLogoutIcon:boolean
 }
-const RenderNavIcon = ({ user, toLogin }: TIcon) => {
+const RenderNavIcon = ({ toLogin ,isLogoutIcon}: TIcon) => {
+  const [isProfile, setIsProfile] = useState<boolean>(false)
+  const [usr, setUsr] = useState<any>();
+  const user = useSelector((state: RootState) => state.auth.auth);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (user) {
+      setUsr(user);
+    }
+    setTimeout(()=>{
+      if(isProfile){
+        setIsProfile(false);
+      }
+    },5000)
+  }, [user,isProfile]);
+
+  const handleLogout = () => {
+    try {
+      removeCookie('token')
+      dispatch(logoutAuth());
+      window.location.href = "/";
+    } catch (err: any) {
+      console.log(err.message);
+    }
+  };
+
+  const letterIcon = () => {
+    const letter = user && usr?.name.slice(0, 1)
+    return (
+      <span>{letter.toUpperCase()}</span>
+    )
+  }
+
   return (
     <>
-      {user.name && (
-        <div className="text-3xl text-white font-bold rounded-full bg-white w-5 h-5"></div>
+      {usr?.name && (
+        <>
+          {!isProfile && (
+            <div
+              className="flex justify-center items-center w-7 h-7 rounded-full text-background bg-green cursor-pointer"
+              onClick={() => setIsProfile(!isProfile)} >
+              {letterIcon()}
+            </div>
+          )}
+          {
+            isProfile && (
+              <div className={`flex justify-${isLogoutIcon?'between':'end'} items-center px-2 gap-${isLogoutIcon ?2:0} float-right`} style={{ maxWidth: isLogoutIcon?'fit-content' :'28px' }}>
+                {isLogoutIcon && <span className="rounded px-2 text-white bg-green" onClick={handleLogout}>Logout</span>}
+                <Link href='#' className="rounded px-2 text-white bg-green" onClick={() => setIsProfile(!isProfile)}>Profile</Link>
+              </div>
+            )
+          }
+        </>
       )}
-      {!user.name && (
+      {!usr?.name && (
         <div
           className="flex justify-center items-center w-7 h-7 rounded-full text-background"
           style={{ backgroundColor: "#2ECC40" }}
@@ -25,5 +75,6 @@ const RenderNavIcon = ({ user, toLogin }: TIcon) => {
     </>
   );
 };
+
 
 export default RenderNavIcon;

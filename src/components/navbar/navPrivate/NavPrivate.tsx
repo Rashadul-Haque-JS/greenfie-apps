@@ -2,22 +2,20 @@ import React, { useState, createContext } from "react";
 import Link from "next/link";
 import { useMediaQuery } from "@material-ui/core";
 import Image from "next/image";
-import { removeCookie } from "@/server/utils/cookies";
+import { removeCookie } from "@/utils/cookies";
 import DeshboardLink from "../../misc/deshboardLink";
 import { logoutAuth } from "@/store/features/auth";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/store/store";
+import { useDispatch} from "react-redux";
 import NavLinks from "./NavLinks";
 import router from "next/router";
 import RenderNavIcon from "../partials/IconLoginOrProfile";
-import { getCookies } from "@/server/utils/cookies";
+import { getCookies } from "@/utils/cookies";
 
 export const NavContext = createContext<any>([]);
 const Navbar = () => {
   const isMobileScreen = useMediaQuery("(max-width: 960px)");
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
-  const user = useSelector((state: RootState) => state.auth.auth);
   const token = getCookies('token')
   const handleClickOpen = () => {
     if (isMobileScreen) {
@@ -44,7 +42,7 @@ const Navbar = () => {
 
   return (
     <NavContext.Provider value={{ setIsOpen }}>
-      <div className="flex flex-col lg:flex-row xl:flex-row justify-between lg:justify-start xl:justify-start bg-main xs:px-3 sm:px-3 px-8 py-2 fixed top-0 left-0 w-full z-40 ">
+      <div className="flex flex-col lg:flex-row xl:flex-row justify-between lg:justify-start xl:justify-start bg-main xs:px-1.5 sm:px-1.5 px-5 py-2 fixed top-0 left-0 w-full z-40 ">
         <div className="flex justify-between items-center lg:hidden xl:hidden">
           <button
             className="text-white p-0 rounded-full text-4xl"
@@ -57,7 +55,7 @@ const Navbar = () => {
             &#9776;
           </button>
           <div className="text-2xl text-white font-bold">Greenfie</div>
-          <RenderNavIcon user={user} toLogin={toLogin} />
+          <RenderNavIcon toLogin={toLogin} isLogoutIcon={false}/>
         </div>
         <div className="hidden w-full lg:flex xl:flex justify-between items-center ">
           <Link href="/">
@@ -69,7 +67,7 @@ const Navbar = () => {
               height={500}
             />
           </Link>
-          <RenderNavIcon user={user} toLogin={toLogin} />
+          <RenderNavIcon toLogin={toLogin} isLogoutIcon={false}/>
         </div>
         <div
           id="drawer-navigation"

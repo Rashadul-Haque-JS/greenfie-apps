@@ -1,9 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 // Define a reducer
-
+type TAuth={
+  [key:string]:any
+}
 const initialState= {
-  auth: {_id:0, name:''},
+  auth: {},
   
 };
 
@@ -11,17 +13,17 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    getAuth(state, {payload}: PayloadAction<{ auth:any}>) {
-      state.auth = payload.auth;
+    setAuth(state, {payload}: PayloadAction<TAuth>) {
+      state.auth = payload;
     },
 
     logoutAuth(state){
-      state.auth = {_id :0, name:''};
+      state.auth = {};
     }
   },
 });
 
-export const { getAuth, logoutAuth } = authSlice.actions;
+export const { setAuth, logoutAuth } = authSlice.actions;
 export default authSlice.reducer;
 
 

@@ -16,10 +16,20 @@ module.exports = {
         'lg': {'min': '992px', 'max': '1199.98px'},
         'xl': {'min': '1200px'},
       },
+      fontSize: {
+        'sm': '0.875rem', // 14px
+        'base': '1rem',   // 16px
+        'lg': '1.125rem', // 18px
+        'xl': '1.25rem',  // 20px
+        '2xl': '1.5rem',  // 24px
+        '3xl': '1.875rem', // 30px
+        '4xl': '2.25rem', // 36px
+        '5xl': '3rem',    // 48px
+      },
       
       colors: {
         brownee: "#c70e05",
-        main: "#3EB489", //used
+        main: "#28B335", //used
         background: "#FFFFFF",//used
         txt: "#000000", //used
         lightBG: "#F5F5F5",//used in single product page
