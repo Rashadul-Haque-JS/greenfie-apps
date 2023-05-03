@@ -7,6 +7,7 @@ import PasswordForm from "../auth/passwordForm";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
+import RenderNavIcon from "./partials/IconLoginOrProfile";
 
 export const AuthContext = createContext<any>([]);
 const Navbar = ({ signup }: any) => {
@@ -57,7 +58,7 @@ const Navbar = ({ signup }: any) => {
 
   return (
     <AuthContext.Provider value={{ newUserEmail }}>
-      <div className="bg-main xs:px-2 sm:px-2 px-8 py-0">
+      <div className="bg-main xs:px-1.5 sm:px-1.5 px-5 py-0">
         <nav className="mx-auto flex justify-between py-2 items-center">
           <div className="h-fit">
             <Image
@@ -93,14 +94,7 @@ const Navbar = ({ signup }: any) => {
               </div>
             </div>
           )}
-        {usr?.name && (
-          <div
-            className="flex justify-center items-center w-7 h-7 rounded-full text-background"
-            style={{ backgroundColor: "#2ECC40" }}
-          >
-            <i className="material-icons cursor-pointer">check</i>
-          </div>
-        )}
+        {usr?.name && <RenderNavIcon isLogoutIcon={true}/>}
         </nav>
 
         {isLoginModalOpen && (

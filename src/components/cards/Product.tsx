@@ -31,10 +31,10 @@ const ProductCard = ({ product }:GenericProps) => {
         <span className='inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2'>
           ${product.price}
         </span>
-        <Button onClick={toggleLove} className='px-2 mx-1 hover:bg-main'>
+        <Button onClick={toggleLove} className='px-2 mx-1 hover:bg-slate-300'>
           {isLoved ? 'Loved ❤️' : 'Love It'}
         </Button>
-        <Button onClick={addToCart} className='px-2 mx-1 hover:bg-main'>
+        <Button onClick={addToCart} className='px-2 mx-1 hover:bg-slate-300'>
           {isInCart ? 'In Cart 🛒' : 'Add to Cart'}
         </Button>
       </div>
