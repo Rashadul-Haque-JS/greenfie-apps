@@ -29,7 +29,9 @@ const RenderNavIcon = ({ toLogin ,isLogoutIcon}: TIcon) => {
     try {
       removeCookie('token')
       dispatch(logoutAuth());
+     if(window.location.pathname !== '/'){
       window.location.href = "/";
+     }
     } catch (err: any) {
       console.log(err.message);
     }
