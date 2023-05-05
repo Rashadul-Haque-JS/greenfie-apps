@@ -64,7 +64,7 @@ const Register = ({ setIsSignupModalOpen, signup }: any) => {
       <div
         className="text-3xl text-white text-center md:flex-grow lg:flex-grow xl:flex-grow  h-full sm:h-[320px] xs:h-[320px] font-semibold "
         style={{
-          backgroundImage: "url(/image/smiles.png)",
+          backgroundImage: "url(/images/smiles.png)",
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
         }}

@@ -76,7 +76,7 @@ const Navbar = () => {
           <Link href="/">
             <Image
               className="w-[30px] h-auto"
-              src="/image/greenfie.png"
+              src="/images/greenfie.png"
               alt="Greenfie logo"
               width={500}
               height={500}
