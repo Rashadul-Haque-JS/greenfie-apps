@@ -25,5 +25,13 @@
     .bg-green{
       background: #2ECC40;
     }
+
+    .glassy-shadow {
+      background-color: rgba(46, 204, 64, 0.7); 
+      box-shadow: 0px 0px 20px 0px rgba(255, 99, 71, 0.3);
+      backdrop-filter: blur(10px); /* creates the glass effect */
+      -webkit-backdrop-filter: blur(10px); /* Safari support for backdrop-filter */
+    }
+    
   }
   
