@@ -22,7 +22,7 @@ const Reset = ({ setIsResetModalOpen }: any) => {
 
     return (
         <div className="fixed top-0 left-0 w-full h-full overlay bg-background flex flex-wrap-reverse justify-evenly items-center overflow-y-auto">
-            <div className="text-3xl text-white text-center md:flex-grow lg:flex-grow xl:flex-grow  h-full sm:h-[320px] xs:h-[320px] font-semibold " style={{ backgroundImage: 'url(/images/tomatos.jpg)', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
+            <div className="text-3xl text-white text-center md:flex-grow lg:flex-grow xl:flex-grow  h-full sm:h-[320px] xs:h-[320px] font-semibold " style={{ backgroundImage: 'url(/images/smiles.png)', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
             </div>
             <div className="bg-background p-8 w-[546px] sm:mt-10 xs:mt-10 transform translate-y-[-100px] sm:translate-y-[100px] xs:translate-y-[100px]">
                 <div className="w-3/4 sm:w-full xs:w-full flex flex-col mx-auto">

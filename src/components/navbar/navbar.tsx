@@ -62,7 +62,7 @@ const Navbar = ({ signup }: any) => {
         <nav className="mx-auto flex justify-between py-2 items-center">
           <div className="h-fit">
             <Image
-              className="w-[36px] h-auto"
+              className="w-[30px] h-auto"
               src="/images/greenfie.png"
               alt="Greenfie logo"
               width={500}
@@ -72,22 +72,19 @@ const Navbar = ({ signup }: any) => {
           {!usr?.name && (
             <div className="flex w-48  items-center justify-end  gap-4">
               <div
-                className="flex justify-center items-center w-7 h-7 rounded-full text-background"
-                style={{ backgroundColor: "#2ECC40" }}
+                className="flex justify-center items-center  w-[30px] h-[30px] rounded-full text-background bg-green"
                 onClick={() => openModal("login")}
               >
                 <i className="material-icons cursor-pointer">person</i>
               </div>
               <div
-                className="flex justify-center items-center w-7 h-7 rounded-full text-background"
-                style={{ backgroundColor: "#2ECC40" }}
+                className="flex justify-center items-center  w-[30px] h-[30px] rounded-full text-background bg-green"
                 onClick={() => openModal("signup")}
               >
                 <i className="material-icons cursor-pointer">person_add</i>
               </div>
               <div
-                className="flex justify-center items-center w-7 h-7 rounded-full text-background"
-                style={{ backgroundColor: "#2ECC40" }}
+                className="flex justify-center items-center  w-[30px] h-[30px] rounded-full text-background bg-green"
                 onClick={() => openModal("reset")}
               >
                 <i className="material-icons cursor-pointer">help_outline</i>

@@ -75,7 +75,7 @@ const Navbar = () => {
         <div className="hidden w-full lg:flex xl:flex justify-between items-center ">
           <Link href="/">
             <Image
-              className="w-[36px] h-auto"
+              className="w-[30px] h-auto"
               src="/images/greenfie.png"
               alt="Greenfie logo"
               width={500}
