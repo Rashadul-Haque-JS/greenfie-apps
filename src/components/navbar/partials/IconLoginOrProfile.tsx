@@ -50,7 +50,7 @@ const RenderNavIcon = ({ toLogin ,isLogoutIcon}: TIcon) => {
         <>
           {!isProfile && (
             <div
-              className="flex justify-center items-center w-7 h-7 rounded-full text-background bg-green cursor-pointer"
+              className="flex justify-center items-center w-[30px] h-[30px] rounded-full text-background bg-green cursor-pointer"
               onClick={() => setIsProfile(!isProfile)} >
               {letterIcon()}
             </div>
@@ -67,8 +67,7 @@ const RenderNavIcon = ({ toLogin ,isLogoutIcon}: TIcon) => {
       )}
       {!usr?.name && (
         <div
-          className="flex justify-center items-center w-7 h-7 rounded-full text-background"
-          style={{ backgroundColor: "#2ECC40" }}
+          className="flex justify-center items-center w-7 h-7 rounded-full text-background bg-green"
           onClick={toLogin}
         >
           <i className="material-icons cursor-pointer">person</i>
