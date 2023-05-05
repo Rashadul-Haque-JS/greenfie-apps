@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 const Hero = () => {
   return (
-    <div className='w-full h-auto md:w-2/4 md:h-[164px] lg:w-[440px] xl:w-2/5 bg-gray-900 rounded '>
+    <div className='w-full'>
      <div className='relative '>
      <div className='overlay-two rounded-b-none '></div>
       <Image src='/images/tomatos.jpg' alt='Hero image' className='object-cover h-full w-full md:h-[164px] rounded-lg rounded-b-none ' width={500} height={500} />
