@@ -1,37 +1,44 @@
 @layer components {
-    .card {
-      background-color: white;
-      border-radius: 0.375rem;
-      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 1px 3px 1px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
-    }
-  
-    .card-header {
-      background-color: #F3F4F6;
-      padding: 1rem;
-    }
-  
-    .card-body {
-      padding: 1rem;
-    }
-
-    .stop-sign-cursor {
-      cursor: not-allowed;
-    }
-
-    .text-notification{
-      font-size: 16px;
-    }
-    .bg-green{
-      background: #2ECC40;
-    }
-
-    .glassy-shadow {
-      background-color: rgba(46, 204, 64, 0.7); 
-      box-shadow: 0px 0px 20px 0px rgba(255, 99, 71, 0.3);
-      backdrop-filter: blur(10px); /* creates the glass effect */
-      -webkit-backdrop-filter: blur(10px); /* Safari support for backdrop-filter */
-    }
-    
+  .card {
+    background-color: white;
+    border-radius: 0.375rem;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05),
+      0 1px 3px 1px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
   }
-  
+
+  .card-header {
+    background-color: #f3f4f6;
+    padding: 1rem;
+  }
+
+  .card-body {
+    padding: 1rem;
+  }
+
+  .stop-sign-cursor {
+    cursor: not-allowed;
+  }
+
+  .text-notification {
+    font-size: 16px;
+  }
+  .bg-green {
+    background: #2ecc40;
+  }
+
+  .glassy-shadow {
+    background-color: rgba(
+      46,
+      204,
+      64,
+      0.5
+    ); 
+    box-shadow: 0px 0px 20px 0px rgba(255, 99, 71, 0.2); 
+    border-radius: 10px;
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(
+      10px
+    ); /* Safari support for backdrop-filter */
+  }
+}
