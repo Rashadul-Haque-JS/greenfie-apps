@@ -1,9 +1,11 @@
 import Link from "next/link";
-import pathname from "./pathname";
+import { useRouter } from "next/router";
+
 const DeshboardLink = ()=> {
+  const {pathname} = useRouter()
   return (
     <>
-      {pathname() === '/deshboard'? (
+      {pathname === '/deshboard'? (
         <span className='flex items-center p-2 text-base font-normal text-txt rounded-lg'>
           <svg className='w-6 h-6 text-txt transition duration-75 group-hover:text-background dark:group-hover:text-white' fill='currentColor' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'>
             <path d='M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z'></path>

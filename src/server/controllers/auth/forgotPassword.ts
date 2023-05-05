@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import crypto from "crypto";
 import Users from "@/server/models/users";
-import nodemailer from 'nodemailer';
+// import nodemailer from 'nodemailer';
 
 // const transporter = nodemailer.createTransport({
 //   host: process.env.SMTP_HOST,

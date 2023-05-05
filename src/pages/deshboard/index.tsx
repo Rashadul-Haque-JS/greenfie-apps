@@ -1,13 +1,14 @@
+import { useRouter } from 'next/router';
 import React from 'react';
 // import axios from 'axios';
 // import { GetServerSideProps } from 'next';
-import pathname from '@/components/misc/pathname';
+
 
 const Deshboard = () => {
-
+  const {pathname} = useRouter()
   return (
     <div className='w-full flex flex-col items-center'>
-       <h1 className='text-2xl font-bold text-center capitalize'>{pathname().split('/')[1]}</h1>
+       <h1 className='text-2xl font-bold text-center capitalize'>{pathname.split('/')[1]}</h1>
       
      
     </div>

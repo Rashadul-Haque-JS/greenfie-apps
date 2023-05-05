@@ -225,7 +225,7 @@ const Register = ({ setIsSignupModalOpen, signup }: any) => {
                 </a>
                 .
               </p>
-              <Button children="Signup" type="submit" />
+              <Button type="submit">Signup</Button>
             </form>
           </div>
         </div>

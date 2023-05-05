@@ -5,7 +5,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import type { AppProps } from 'next/app';
 import Layout from '@/components/layouts/LayoutMain';
 import { wrapper } from '@/store/store';
-import pathname from '@/components/misc/pathname';
 import { useRouter} from 'next/router';
 import { useEffect } from 'react';
 import axios from 'axios';
@@ -19,10 +18,10 @@ const unprotectedRoutes = ['/', '/about', '/info', '/blogs','/contact'];
 const App = ({ Component, pageProps }: AppProps) => {
   const [bearerToken, setBearerToken] = useState<string | null>(null);
   const signup = '/api/auth/register';
-  const currentPath = pathname();
+  const router = useRouter()
+  const currentPath = router.pathname
   const isUnprotectedRoute = unprotectedRoutes.includes(currentPath);
   const isAuthenticated = !isUnprotectedRoute && bearerToken;
-  const router = useRouter()
   const dispatch = useDispatch() as AppDispatch
 
   useEffect(() => {

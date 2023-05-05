@@ -140,7 +140,7 @@ const PasswordForm = ({ setIsPassFormOpen, setIsLoginModalOpen }: any) => {
                 </div>
               </div>
               <hr className="my-5" />
-              <Button children="Send" type="submit" />
+              <Button type="submit">Submit</Button>
             </form>
           </div>
         </div>

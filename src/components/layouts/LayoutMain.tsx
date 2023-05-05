@@ -3,8 +3,9 @@ import Head from "next/head";
 import Navbar from "../navbar/navbar";
 import NavbarPrivate from "../navbar/navPrivate/NavPrivate";
 import Footer from "../misc/footer";
-import pathname from "../misc/pathname";
+import { useRouter } from "next/router";
 const Layout = ({ children, signup }: any) => {
+  const {pathname} = useRouter()
   return (
     <div className="mx-auto min-h-screen">
       <Head>
@@ -14,15 +15,15 @@ const Layout = ({ children, signup }: any) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header className="bg-white shadow-md ">
-        {pathname() === "/" ? <Navbar signup={signup} /> : <NavbarPrivate />}
+        {pathname === "/" ? <Navbar signup={signup} /> : <NavbarPrivate />}
       </header>
       <main
         className={`container w-full lg:w-5/6 xl:w-5/6 mx-auto mt-20 ${
-          pathname() !== "/"
+          pathname !== "/"
             ? "md:float-right lg:float-right xl:float-right"
             : ""
         }`}
-        style={{ marginTop: pathname() === "/" ? "3rem" : "5rem" }}
+        style={{ marginTop: pathname === "/" ? "3rem" : "5rem" }}
       >
         {children}
       </main>

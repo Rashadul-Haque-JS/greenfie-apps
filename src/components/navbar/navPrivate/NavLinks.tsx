@@ -3,13 +3,13 @@ import React, { useState, useContext } from "react";
 import navs from "@/utils/data/navbar";
 import { toggleStates } from "@/utils/data/misc";
 import { NavContext } from "./NavPrivate";
-import pathname from "@/components/misc/pathname";
 import { GenericProps } from "@/utils/types";
+import { useRouter } from "next/router";
 const NavLinks = () => {
   const { setIsOpen } = useContext(NavContext);
   const [styleState, setStyleState] = useState<GenericProps>(toggleStates);
   const [openNav, setOpenNav] = useState<any>();
-
+  const {pathname} = useRouter()
   const toggleStyleState = (componentName: any) => {
     if (openNav === componentName) {
       setOpenNav("");
@@ -61,7 +61,7 @@ const NavLinks = () => {
               </svg>
               <span
                 className={`flex-1 ml-3 text-left whitespace-nowrap capitalize ${
-                  nav.links.some((link) => link.route === pathname())
+                  nav.links.some((link) => link.route === pathname)
                     ? "text-background"
                     : "text-txt"
                 }`}

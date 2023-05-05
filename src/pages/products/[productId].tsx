@@ -46,10 +46,10 @@ const SingleProduct = ({ product }: GenericProps) => {
                             <i className='material-icons'>add_circle_outline</i>
                         </button>
                     </div>
-                    <Buttons mode='primary' children='Add To Cart' onClick={handleAddToCart} />
+                    <Buttons mode='primary' onClick={handleAddToCart}>Add To Cart</Buttons>
                     <div className='flex justify-between items-center gap-2'>
-                        <Links url='/products' children='To lists' mode='others' style='w-1/2' />
-                        <Links children='To cart' mode='others' style='w-1/2' />
+                        <Links url='/products' mode='others' style='w-1/2'>To lists</Links> 
+                        <Links mode='others' style='w-1/2'>To cart</Links> 
 
                     </div>
                 </div>

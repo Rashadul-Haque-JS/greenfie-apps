@@ -16,6 +16,11 @@ const QuerySection = () => {
         setLetterCount(letters);
     }, [query]);
 
+    useEffect(()=>{
+        console.log(email);
+        
+    },[])
+
     return (
         <div className="mt-12 w-3/4 mx-auto">
             <form>
@@ -46,7 +51,7 @@ const QuerySection = () => {
                     <span className={`${letterCount === 600? 'text-rose-500':'text-gray-500'} text-sm`}>{letterCount}/ 600 characters</span>
                 </div>
                 </div>
-                <Button children='Send' type="submit" />
+                <Button type="submit">Send</Button>
             </form>
         </div>
     );
