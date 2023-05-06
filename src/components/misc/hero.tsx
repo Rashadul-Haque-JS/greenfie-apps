@@ -5,11 +5,11 @@ const Hero = () => {
   return (
     <div className="w-full">
       <div className="relative ">
-        <div className="overlay-two rounded-b-none "></div>
+        <div className="overlay-two rounded rounded-b-none"></div>
         <Image
           src="/images/tomatos.jpg"
           alt="Hero image"
-          className="object-cover h-full w-full md:h-[164px] rounded-lg rounded-b-none "
+          className="object-cover h-full w-full md:h-[164px] rounded rounded-b-none"
           width={500}
           height={500}
         />
@@ -22,7 +22,7 @@ const Hero = () => {
           </Link>
         </div>
       </div>
-      <div className="bg-main text-white p-5 md:px-2 md:pt-3 lg:p-10 xl:p-10 z-20 rounded-b-lg">
+      <div className="bg-main text-white p-5 md:px-2 md:pt-3 lg:p-10 xl:p-10 z-20 rounded rounded-t-none">
         <h2 className="text-xl text-black">lorem</h2>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
       </div>

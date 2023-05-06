@@ -87,7 +87,7 @@ const Navbar = () => {
         <div
           id="drawer-navigation"
           ref={drawerRef}
-          className={`fixed sm:top-0 sm:left-0 xs:top-0 xs:left-0 md:top-0 md:left-0 w-80 lg:top-[56px] lg:left-[240px] xl:top-[51px] xl:left-[240px] z-40 h-screen px-4 lg:pr-0 xl:pr-0 overflow-y-auto xs:transition-transform sm:transition-transform md:transition-transform ${
+          className={`fixed sm:top-0 sm:left-0 xs:top-0 xs:left-0 md:top-0 md:left-0 w-80 lg:top-[46px] lg:left-[240px] xl:top-[46px] xl:left-[240px] z-40 h-screen px-4 lg:pr-0 xl:pr-0 overflow-y-auto xs:transition-transform sm:transition-transform md:transition-transform ${
             isOpen ? "" : "-translate-x-full"
           } bg-main dark:bg-gray-800`}
           tabIndex={-1}
