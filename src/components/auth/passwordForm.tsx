@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import Button from "../experiments/Button";
-import { AuthContext } from "../navbar/navbar";
+import { AuthContext } from "../navbar/navHome";
 import axios from "axios";
 import router from "next/router";
 import { toast } from "react-toastify";

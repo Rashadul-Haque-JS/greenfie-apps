@@ -2,7 +2,7 @@ import Link from "next/link";
 import React, { useState, useContext } from "react";
 import navs from "@/utils/data/navbar";
 import { toggleStates } from "@/utils/data/misc";
-import { NavContext } from "./NavPrivate";
+import { NavContext } from "../navInner";
 import { GenericProps } from "@/utils/types";
 import { useRouter } from "next/router";
 const NavLinks = () => {

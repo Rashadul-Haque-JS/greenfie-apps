@@ -1,5 +1,5 @@
 import React, { useEffect, useState, createContext } from "react";
-import Image from "next/image";
+import Logo from "../misc/logo";
 import Login from "../auth/Login";
 import Register from "../auth/Register";
 import Reset from "../auth/Reset";
@@ -7,7 +7,7 @@ import PasswordForm from "../auth/passwordForm";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
-import RenderNavIcon from "./partials/IconLoginOrProfile";
+import RenderNavIcon from "./navPartials/renderIcons";
 
 export const AuthContext = createContext<any>([]);
 const Navbar = ({ signup }: any) => {
@@ -60,31 +60,23 @@ const Navbar = ({ signup }: any) => {
     <AuthContext.Provider value={{ newUserEmail }}>
       <div className="bg-main xs:px-1.5 sm:px-1.5 px-5 py-0">
         <nav className="mx-auto flex justify-between py-2 items-center">
-          <div className="h-fit">
-            <Image
-              className="w-[30px] h-auto"
-              src="/images/greenfie.png"
-              alt="Greenfie logo"
-              width={500}
-              height={500}
-            />
-          </div>
+        <Logo/>
           {!usr?.name && (
             <div className="flex w-48  items-center justify-end  gap-4">
               <div
-                className="flex justify-center items-center  w-[30px] h-[30px] rounded-full text-background bg-green"
+                className="flex justify-center items-center  w-[28px] h-[28px] rounded-full text-background bg-green"
                 onClick={() => openModal("login")}
               >
                 <i className="material-icons cursor-pointer">person</i>
               </div>
               <div
-                className="flex justify-center items-center  w-[30px] h-[30px] rounded-full text-background bg-green"
+                className="flex justify-center items-center  w-[28px] h-[28px] rounded-full text-background bg-green"
                 onClick={() => openModal("signup")}
               >
                 <i className="material-icons cursor-pointer">person_add</i>
               </div>
               <div
-                className="flex justify-center items-center  w-[30px] h-[30px] rounded-full text-background bg-green"
+                className="flex justify-center items-center  w-[28px] h-[28px] rounded-full text-background bg-green"
                 onClick={() => openModal("reset")}
               >
                 <i className="material-icons cursor-pointer">help_outline</i>

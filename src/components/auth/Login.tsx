@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import Button from "../experiments/Button";
-import { AuthContext } from "../navbar/navbar";
+import { AuthContext } from "../navbar/navHome";
 import { setCookies } from "@/utils/cookies";
 
 const Login = ({

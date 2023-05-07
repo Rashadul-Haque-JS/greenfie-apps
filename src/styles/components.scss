@@ -28,8 +28,7 @@
   }
 
   .bg-screen {
-    background-color: rgba(0, 0, 0, 0.1); 
-    
+    background-color: rgba(0, 0, 0, 0.1);
   }
 
   .glass-screen {
@@ -41,7 +40,7 @@
     border: 1px solid rgba(255, 255, 255, 0.3);
   }
 
-  .apps-surface{
+  .apps-surface {
     background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -56,5 +55,14 @@
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.3);
     padding: 4px;
+  }
+
+  .logo {
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #ffffff;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 2px #333333;
   }
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import Head from "next/head";
-import Navbar from "../navbar/navbar";
-import NavbarPrivate from "../navbar/navPrivate/NavPrivate";
+import Navbar from "../navbar/navHome";
+import NavbarPrivate from "../navbar/navInner";
 import Footer from "../misc/footer";
 import { useRouter } from "next/router";
 const Layout = ({ children, signup }: any) => {

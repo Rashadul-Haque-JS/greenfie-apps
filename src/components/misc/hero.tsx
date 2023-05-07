@@ -9,7 +9,7 @@ const Hero = () => {
         <Image
           src="/images/hero_tom.jpg"
           alt="Hero image"
-          className="object-cover brightness-105 contrast-115 h-full w-full md:h-[180px] lg:h-[280px] xl:h-[330px] rounded rounded-b-none"
+          className="object-cover h-full w-full md:h-[180px] lg:h-[280px] xl:h-[330px] rounded rounded-b-none"
           width={500}
           height={500}
         />
