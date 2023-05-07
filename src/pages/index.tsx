@@ -24,7 +24,7 @@ const Home = ({ apps }: GenericProps) => {
           className="w-full md:w-1/3 lg:w-1/3 xl:w-1/3 bg-screen"
           style={{ borderRadius: "16px" }}
         >
-          <div className="w-full grid grid-cols-3 gap-2 place-items-center justify-content-center px-4 glass-screen pt-3">
+          <div className="w-full grid grid-cols-3 gap-2 place-items-center justify-content-center px-4 glass-screen pt-3 md:pb-2">
             {apps.map((page: IApps, index: number) => {
               return (
                 <AppSymbol
