@@ -121,9 +121,14 @@ const Navbar = () => {
             </div>
             <span className="sr-only">Close menu</span>
           </button>
-          <div className="text-xl text-white text-center hidden lg:block xl:block font-semibold pt-4">
-            Greenfie
-          </div>
+          <Link
+            href="/raffle-draw"
+            className="flex items-center justify-center ml-[40px] py-2"
+          >
+            <span className="font-bold px-4 py-2 mt-2 leading-none text-yellow-400 bg-red-500 ">SPECIAL</span>
+            <span className="font-bold text-lg mx-4 py-2 mt-2 leading-none text-yellow-400 " style={{ fontFamily: "'Pacifico', cursive" }}>Draw</span>
+          </Link>
+
           <div className="py-4 overflow-hidden lg:flex lg:justify-end xl:flex xl:justify-end lg:p-[5px] xl:p-[5px]">
             <ul className="space-y-2 w-full lg:ml-16 xl:ml-16 ">
               <hr />
