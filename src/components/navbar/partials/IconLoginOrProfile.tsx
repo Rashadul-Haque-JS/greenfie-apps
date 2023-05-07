@@ -58,8 +58,8 @@ const RenderNavIcon = ({ toLogin ,isLogoutIcon}: TIcon) => {
           {
             isProfile && (
               <div className={`flex justify-${isLogoutIcon?'between':'end'} items-center px-2 gap-${isLogoutIcon ?2:0} float-right`} style={{ maxWidth: isLogoutIcon?'fit-content' :'28px' }}>
-                {isLogoutIcon && <span className="rounded px-2 text-white bg-green" onClick={handleLogout}>Logout</span>}
-                <Link href='#' className="rounded px-2 text-white bg-green" onClick={() => setIsProfile(!isProfile)}>Profile</Link>
+                {isLogoutIcon && <span className="rounded px-2 text-white glass-screen" onClick={handleLogout}>Logout</span>}
+                <Link href='#' className="rounded px-2 text-white glass-screen" onClick={() => setIsProfile(!isProfile)}>Profile</Link>
               </div>
             )
           }
