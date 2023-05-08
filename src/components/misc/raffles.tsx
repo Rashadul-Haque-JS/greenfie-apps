@@ -25,8 +25,8 @@ const Raffles = () => {
       <p className="flex items-center justify-center text-white font-semibold text-sm bg-red-500 w-7 h-7 rounded-full mr-2">
         {weekNumber}
       </p>
-      <span className="font-bold leading-none text-background">Raffle</span>
-      <span className="font-bold leading-none text-yellow-400">Week</span>
+      <span className="font-bold leading-none text-lg text-background">Raffle</span>
+      <span className="font-bold leading-none text-lg text-yellow-400">Week</span>
     </Link>
   );
 };
