@@ -10,6 +10,7 @@ import Button from "@/components/experiments/Button";
 const ProfilePage = ({ user }: GenericProps) => {
   const [userData, setUserData] = useState(user);
   const [wards, setWards] = useState<any[]>([]);
+  const [email, setEmail] = useState("");
 
   useEffect(() => {
     if (userData?.city !== undefined) {
@@ -47,8 +48,8 @@ const ProfilePage = ({ user }: GenericProps) => {
   }
 
   return (
-    <div className="bg-gray-100 min-h-screen">
-      <div className="bg-background shadow-md rounded-lg mx-auto w-full">
+    <div className="bg-gray-100">
+      <div className="bg-background  mx-auto w-full">
         <div className="p-6">
           <div className="flex flex-col justify-center items-center gap-2 mb-6">
             <div className="relative rounded-full overflow-hidden w-48 h-64 md:w-64 md:h-80">
@@ -73,20 +74,28 @@ const ProfilePage = ({ user }: GenericProps) => {
             )}
           </div>
           <Accordion title="Edit and Update">
-            <div className="flex flex-col md:flex-row lg:flex-row xl:flex-row w-full gap-24">
+            <div className="flex flex-col md:flex-row lg:flex-row xl:flex-row w-full md:gap-24 lg:gap-24 xl:gap-24">
               <div className="mt-6 w-1/2 xs:w-full sm:w-full">
-                <form className="flex flex-col">
+                <form action="" className="flex flex-col w-full">
                   <label htmlFor="email" className="mb-1">
                     Email Address
                   </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={userData?.email}
-                    className="px-3 py-2 border rounded-lg outline-none focus:border-blue-500"
-                  />
-                  <label htmlFor="email" className=" mt-4 mb-1">
+                  <div className="flex w-full">
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={userData?.email}
+                      className="px-3 py-2 border rounded-lg rounded-r-none outline-none focus:border-blue-500 flex-grow"
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <Button className="py-1 rounded-l-none">Save</Button>
+                  </div>
+                </form>
+                <hr className="mt-6 mb-3" /> {/* Add a horizontal line here */}
+                <div className="font-semibold text-sm mb-2">Others</div>
+                <form className="flex flex-col">
+                  <label htmlFor="email" className="mb-1">
                     City
                   </label>
                   <Select
@@ -100,7 +109,7 @@ const ProfilePage = ({ user }: GenericProps) => {
                         backgroundColor: "#fff",
                         padding: "0.25rem",
                         border: "1px solid #000",
-                        outline:'none'
+                        outline: "none",
                       }),
                     }}
                     required
@@ -119,7 +128,7 @@ const ProfilePage = ({ user }: GenericProps) => {
                         backgroundColor: "#fff",
                         padding: "0.25rem",
                         border: "1px solid #000",
-                        outline:'none',
+                        outline: "none",
                       }),
                     }}
                     noOptionsMessage={() => "Select city first"}
@@ -136,10 +145,13 @@ const ProfilePage = ({ user }: GenericProps) => {
                     value={userData?.phone}
                     className="px-3 py-2 border rounded-lg outline-none focus:border-blue-500"
                   />
-                   <Button type="submit" className="mt-4">Update</Button>
+                  <Button type="submit" className="mt-4 text-[16px]">
+                    Update Info
+                  </Button>
                 </form>
               </div>
-              <div className="mt-6 w-1/2 xs:w-full sm:w-full">
+              <hr className="my-6 hidden sm:block xs:block"/>
+              <div className="mt-6 w-1/2 xs:w-full sm:w-full sm:mt-0 xs:mt-0">
                 <form className="flex flex-col">
                   <label htmlFor="current-password" className="mb-1">
                     Current Password
@@ -168,7 +180,9 @@ const ProfilePage = ({ user }: GenericProps) => {
                     name="confirm-password"
                     className="px-3 py-2 border rounded-lg outline-none focus:border-blue-500"
                   />
-                   <Button type="submit" className="mt-4">Update Password</Button>
+                  <Button type="submit" className="mt-4 text-[16px]">
+                    Update Password
+                  </Button>
                 </form>
               </div>
             </div>

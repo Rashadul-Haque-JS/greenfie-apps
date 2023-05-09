@@ -9,14 +9,14 @@ const Accordion = ({ title, children }: AccordionProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="border rounded-lg mb-4">
+    <div className="border-none rounded-lg mb-4">
       <div
-        className="flex justify-between items-center cursor-pointer bg-gray-200 p-4"
+        className="flex justify-between items-center cursor-pointer p-1"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <h3 className="text-lg font-semibold">{title}</h3>
+        <h3 className="text-sm font-semibold">{title}</h3>
         <svg
-          className={`w-6 h-6 ${isOpen ? "transform rotate-180" : ""}`}
+          className={`w-4 h-4 ${isOpen ? "transform rotate-180" : ""}`}
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -30,9 +30,8 @@ const Accordion = ({ title, children }: AccordionProps) => {
           />
         </svg>
       </div>
-      {isOpen && (
-        <div className="p-4 bg-gray-100">{children}</div>
-      )}
+      <hr />
+      {isOpen && <div className="p-4 bg-gray-100">{children ? children :'Nothing to display'}</div>}
     </div>
   );
 };
