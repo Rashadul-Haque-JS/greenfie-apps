@@ -6,6 +6,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   textColor?: "white" | "black";
   type?: "submit" | "reset" | "button";
   handleAct?: () => void;
+  disabled?: boolean;
 }
 
 const Button = ({
@@ -15,6 +16,7 @@ const Button = ({
   color = "#000",
   textColor = "white",
   type = "button",
+  disabled= false
 }: ButtonProps) => {
   let bgColorClass = "";
   switch (color) {
@@ -48,7 +50,7 @@ const Button = ({
   return (
     <button
       type={type}
-      className={`${bgColorClass} ${textColorClass} font-bold rounded ${sizeClass} ${className}`}
+      className={`${bgColorClass} ${textColorClass} font-bold rounded ${sizeClass} ${className}`} disabled={disabled}
     >
       {children}
     </button>

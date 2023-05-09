@@ -1,5 +1,5 @@
 import { NextPageContext } from "next";
-import Head from "next/head";
+import Link from "next/link";
 
 type ErrorProps = {
   statusCode: number;
@@ -8,15 +8,28 @@ type ErrorProps = {
 
 const Error = ({ statusCode, errorMessage }: ErrorProps) => {
   return (
-    <>
-      <Head>
-        <title>Error {statusCode}</title>
-      </Head>
-      <div className="container">
-        <h1>Error {statusCode}</h1>
-        <p>{errorMessage ? errorMessage : "Sorry, an error occurred on the server."}</p>
+    <div className="flex items-center justify-center h-screen mx-auto">
+      <title>Error {statusCode}</title>
+      <div className="flex items-center">
+        <div className="h-full md:border-l-2 lg:border-l-2 xl:border-l-2 border-gray-200 md:pl-8 md:ml-8 lg:pl-8 lg:ml-8 xl:pl-8 xl:ml-8">
+          <h1 className="text-4xl font-bold text-red-500 mb-4">
+            Error {statusCode}
+          </h1>
+          <p className="text-lg text-gray-600 mb-8">
+            {errorMessage
+              ? errorMessage
+              : "Sorry, an error occurred on the server."}
+          </p>
+          <Link
+            href="/"
+            className="bg-red-500 text-white rounded-lg py-2 px-4 hover:bg-red-600 transition-colors duration-300"
+          >
+            Back to Home
+          </Link>
+        </div>
+        <div className="flex-grow"></div>
       </div>
-    </>
+    </div>
   );
 };
 

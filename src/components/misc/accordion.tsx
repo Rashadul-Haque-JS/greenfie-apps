@@ -3,11 +3,12 @@ import { useState } from "react";
 interface AccordionProps {
   title: string;
   children: React.ReactNode;
+  isOpen: boolean;
+  setIsOpen(value: boolean): void;
 }
 
-const Accordion = ({ title, children }: AccordionProps) => {
-  const [isOpen, setIsOpen] = useState(false);
-
+const Accordion = ({isOpen,setIsOpen, title, children }: AccordionProps) => {
+ 
   return (
     <div className="border-none rounded-lg mb-4">
       <div

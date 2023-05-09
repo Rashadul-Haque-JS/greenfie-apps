@@ -6,11 +6,15 @@ import { GenericProps } from "@/utils/types";
 import Accordion from "@/components/misc/accordion";
 import divisions from "@/utils/data/divisions";
 import Button from "@/components/experiments/Button";
-
+import { toast } from "react-toastify";
 const ProfilePage = ({ user }: GenericProps) => {
   const [userData, setUserData] = useState(user);
   const [wards, setWards] = useState<any[]>([]);
   const [email, setEmail] = useState("");
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     if (userData?.city !== undefined) {
@@ -35,6 +39,27 @@ const ProfilePage = ({ user }: GenericProps) => {
       fetchUserData();
     }
   }, [userData]);
+
+  const handleUpdatePassword = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (newPassword !== confirmPassword) {
+      toast.error("Passwords do not match");
+      return;
+    }
+    try {
+      const resp = await axios.post("/api/auth/updatePassword", {
+        email: userData?.email,
+        oldPassword,
+        newPassword,
+      });
+      toast.success(resp.data.message);
+      setIsOpen(!isOpen);
+    } catch (error: any) {
+      const { response } = error.response && error;
+      const { message } = error;
+      toast.error(response.data.message || message);
+    }
+  };
 
   function handleChangeSelect(
     e: SingleValue<{
@@ -73,7 +98,11 @@ const ProfilePage = ({ user }: GenericProps) => {
               <p>Loading...</p>
             )}
           </div>
-          <Accordion title="Edit and Update">
+          <Accordion
+            title="Edit and Update"
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+          >
             <div className="flex flex-col md:flex-row lg:flex-row xl:flex-row w-full md:gap-24 lg:gap-24 xl:gap-24">
               <div className="mt-6 w-1/2 xs:w-full sm:w-full">
                 <form action="" className="flex flex-col w-full">
@@ -150,9 +179,9 @@ const ProfilePage = ({ user }: GenericProps) => {
                   </Button>
                 </form>
               </div>
-              <hr className="my-6 hidden sm:block xs:block"/>
+              <hr className="my-6 hidden sm:block xs:block" />
               <div className="mt-6 w-1/2 xs:w-full sm:w-full sm:mt-0 xs:mt-0">
-                <form className="flex flex-col">
+                <form className="flex flex-col" onSubmit={handleUpdatePassword}>
                   <label htmlFor="current-password" className="mb-1">
                     Current Password
                   </label>
@@ -161,6 +190,7 @@ const ProfilePage = ({ user }: GenericProps) => {
                     id="current-password"
                     name="current-password"
                     className="px-3 py-2 border rounded-lg outline-none focus:border-blue-500"
+                    onChange={(e) => setOldPassword(e.target.value)}
                   />
                   <label htmlFor="new-password" className="mt-4 mb-1">
                     New Password
@@ -170,6 +200,7 @@ const ProfilePage = ({ user }: GenericProps) => {
                     id="new-password"
                     name="new-password"
                     className="px-3 py-2 border rounded-lg outline-none focus:border-blue-500"
+                    onChange={(e) => setNewPassword(e.target.value)}
                   />
                   <label htmlFor="confirm-password" className="mt-4 mb-1">
                     Confirm New Password
@@ -179,6 +210,7 @@ const ProfilePage = ({ user }: GenericProps) => {
                     id="confirm-password"
                     name="confirm-password"
                     className="px-3 py-2 border rounded-lg outline-none focus:border-blue-500"
+                    onChange={(e) => setConfirmPassword(e.target.value)}
                   />
                   <Button type="submit" className="mt-4 text-[16px]">
                     Update Password
@@ -187,15 +219,27 @@ const ProfilePage = ({ user }: GenericProps) => {
               </div>
             </div>
           </Accordion>
-          <Accordion title="My Published Products List">
+          <Accordion
+            title="My Published Products List"
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+          >
             {/* content for the My Published Products List accordion */}
           </Accordion>
 
-          <Accordion title="My Sales History">
+          <Accordion
+            title="My Sales History"
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+          >
             {/* content for the My Sales History accordion */}
           </Accordion>
 
-          <Accordion title="My Purchase History">
+          <Accordion
+            title="My Purchase History"
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+          >
             {/* content for the My Purchase History accordion */}
           </Accordion>
         </div>

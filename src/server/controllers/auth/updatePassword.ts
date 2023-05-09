@@ -16,7 +16,7 @@ export default async function updatePassword(req: NextApiRequest, res: NextApiRe
     return;
   }
   // Get user by email from database
-  const user = await Users.findOne(email);
+  const user = await Users.findOne({email});
   // Check if user exists
   if (!user) {
     res.status(400).json({ error: 'Invalid Email or Password' });
@@ -34,5 +34,5 @@ export default async function updatePassword(req: NextApiRequest, res: NextApiRe
   const hashedPassword = await hash(newPassword, salt);
   // Update user's password in database
   await user.updateOne({ password: hashedPassword });
-  res.status(200).json({ message: 'Password update successful' });
+  res.status(200).json({ message: 'Password updated successfully ☺️' });
 }
