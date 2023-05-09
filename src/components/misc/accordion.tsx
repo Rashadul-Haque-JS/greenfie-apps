@@ -1,4 +1,3 @@
-import { useState } from "react";
 
 interface AccordionProps {
   title: string;
@@ -31,7 +30,7 @@ const Accordion = ({isOpen,setIsOpen, title, children }: AccordionProps) => {
           />
         </svg>
       </div>
-      <hr />
+      <hr className="border-gray-400" />
       {isOpen && <div className="p-4 bg-gray-100">{children ? children :'Nothing to display'}</div>}
     </div>
   );

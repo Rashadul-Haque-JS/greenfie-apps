@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
 import axios from "axios";
-import Select, { SingleValue } from "react-select";
+import Select from "react-select";
 import { GenericProps } from "@/utils/types";
 import Accordion from "@/components/misc/accordion";
 import divisions from "@/utils/data/divisions";
 import Button from "@/components/experiments/Button";
 import { toast } from "react-toastify";
+import ImageUpload from "@/components/auth/avatar";
 const ProfilePage = ({ user }: GenericProps) => {
   const [userData, setUserData] = useState(user);
   const [wards, setWards] = useState<any[]>([]);
@@ -15,6 +15,7 @@ const ProfilePage = ({ user }: GenericProps) => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+  const [image, setImage] = useState('')
 
   useEffect(() => {
     if (userData?.city !== undefined) {
@@ -61,16 +62,15 @@ const ProfilePage = ({ user }: GenericProps) => {
     }
   };
 
-  function handleChangeSelect(
-    e: SingleValue<{
-      label: string;
-      value: string;
-      wards: { label: string; value: string }[];
-    }>,
-    arg1: string
-  ): void {
-    throw new Error("Function not implemented.");
-  }
+  const handleChange = (e: any) => {
+    const { name, value } = e.target;
+    setUserData({ ...userData, [name]: value });
+  };
+
+  const handleChangeSelect = (event: any, name: string) => {
+    const { value } = event;
+    setUserData({ ...userData, [name]: value });
+  };
 
   return (
     <div className="bg-gray-100">
@@ -78,18 +78,13 @@ const ProfilePage = ({ user }: GenericProps) => {
         <div className="p-6">
           <div className="flex flex-col justify-center items-center gap-2 mb-6">
             <div className="relative rounded-full overflow-hidden w-48 h-64 md:w-64 md:h-80">
-              <Image
-                src="/images/hero_cab.jpg"
-                layout="fill"
-                objectFit="cover"
-                alt="User Profile Picture"
-              />
+            <ImageUpload image={image} onImageChange={setImage} />
             </div>
             {userData ? (
               <>
                 <h1 className="text-2xl font-bold">{userData.name} Haque</h1>
                 <p className="text-gray-600">
-                  123 {userData.area}, {userData.city} BD
+                  123 {userData.area}, {userData.city}, BD
                 </p>
                 <p className="text-gray-600">{userData.email}</p>
                 <p className="text-gray-600">{userData.phone}</p>
@@ -124,7 +119,7 @@ const ProfilePage = ({ user }: GenericProps) => {
                 <hr className="mt-6 mb-3" /> {/* Add a horizontal line here */}
                 <div className="font-semibold text-sm mb-2">Others</div>
                 <form className="flex flex-col">
-                  <label htmlFor="email" className="mb-1">
+                  <label htmlFor="city" className="mb-1">
                     City
                   </label>
                   <Select
@@ -143,7 +138,7 @@ const ProfilePage = ({ user }: GenericProps) => {
                     }}
                     required
                   />
-                  <label htmlFor="email" className="mt-4 mb-1">
+                  <label htmlFor="area" className="mt-4 mb-1">
                     Area
                   </label>
                   <Select
@@ -164,7 +159,7 @@ const ProfilePage = ({ user }: GenericProps) => {
                     required
                   />
 
-                  <label htmlFor="email" className="mt-4 mb-1">
+                  <label htmlFor="phone" className="mt-4 mb-1">
                     Phone
                   </label>
                   <input
@@ -173,6 +168,7 @@ const ProfilePage = ({ user }: GenericProps) => {
                     name="phone"
                     value={userData?.phone}
                     className="px-3 py-2 border rounded-lg outline-none focus:border-blue-500"
+                    onChange={handleChange}
                   />
                   <Button type="submit" className="mt-4 text-[16px]">
                     Update Info
