@@ -63,3 +63,9 @@ export interface IUserUpdate {
   $set?: Partial<IUser>;
   $unset?: { [key in keyof IUser]?: boolean } & { confirmationToken?: boolean };
 }
+
+export interface DecodedToken {
+  _id: string;
+  iat: number;
+  exp: number;
+} 

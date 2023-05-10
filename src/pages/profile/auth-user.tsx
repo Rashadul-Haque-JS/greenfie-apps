@@ -26,6 +26,8 @@ const ProfilePage = ({ user }: GenericProps) => {
       );
       setWards(selectedDivision?.wards);
     }
+    console.log(email);
+    
   }, [userData?.city]);
 
   useEffect(() => {
@@ -74,17 +76,35 @@ const ProfilePage = ({ user }: GenericProps) => {
     setUserData({ ...userData, [name]: value });
   };
 
-  const updateAvatar = async(event: any) => {
+  const updateInfo = async (event: any) => {
     event.preventDefault();
-    try{
-      const formData = new FormData();
-      formData.append('avatar', file);
-      formData.append('id',userData?._id)
-      const res = await axios.put('/api/users/uploadAvatar',formData)
+    try {
+      const data = {
+        area: userData?.area,
+        city: userData?.city,
+        phone: userData?.phone,
+      };
+      const res = await axios.put("/api/users/updateUser", data);
+      toast.success(res.data.message);
+      setIsOpen(!isOpen);
       console.log(res.data.message);
-    }catch (error:any) {
+    } catch (error: any) {
+      const { response } = error.response && error;
+      const { message } = error;
+      toast.error(response.data.message || message);
+    }
+  };
+
+  const updateAvatar = async (event: any) => {
+    event.preventDefault();
+    try {
+      const formData = new FormData();
+      formData.append("avatar", file);
+      formData.append("id", userData?._id);
+      const res = await axios.put("/api/users/uploadAvatar", formData);
+      console.log(res.data.message);
+    } catch (error: any) {
       console.log(error);
-      
     }
   };
 
@@ -93,7 +113,7 @@ const ProfilePage = ({ user }: GenericProps) => {
       <div className="bg-background mx-auto w-full">
         <div className="p-6">
           <div className="flex flex-col justify-center items-center gap-2 mb-6">
-            <div className="relative rounded-full overflow-hidden w-48 h-64 md:w-64 md:h-80" >
+            <div className="relative rounded-full overflow-hidden w-48 h-64 md:w-64 md:h-80">
               <ImageUpload
                 image={image}
                 onImageChange={setImage}
@@ -102,9 +122,13 @@ const ProfilePage = ({ user }: GenericProps) => {
               />
             </div>
             {save && (
-              <form onSubmit={updateAvatar} className="w-fit py-1" encType="multipart/form-data">
-              <Button type="submit">Save Image</Button>
-            </form>
+              <form
+                onSubmit={updateAvatar}
+                className="w-fit py-1"
+                encType="multipart/form-data"
+              >
+                <Button type="submit">Save Image</Button>
+              </form>
             )}
             {userData ? (
               <>
@@ -119,11 +143,7 @@ const ProfilePage = ({ user }: GenericProps) => {
               <p>Loading...</p>
             )}
           </div>
-          <Accordion
-            title="Edit and Update"
-            isOpen={isOpen}
-            setIsOpen={setIsOpen}
-          >
+          <Accordion title="Edit and Update">
             <div className="flex flex-col md:flex-row lg:flex-row xl:flex-row w-full md:gap-24 lg:gap-24 xl:gap-24">
               <div className="mt-6 w-1/2 xs:w-full sm:w-full">
                 <form action="" className="flex flex-col w-full">
@@ -144,7 +164,7 @@ const ProfilePage = ({ user }: GenericProps) => {
                 </form>
                 <hr className="mt-6 mb-3" /> {/* Add a horizontal line here */}
                 <div className="font-semibold text-sm mb-2">Others</div>
-                <form className="flex flex-col">
+                <form onSubmit={updateInfo} className="flex flex-col">
                   <label htmlFor="city" className="mb-1">
                     City
                   </label>
@@ -241,27 +261,15 @@ const ProfilePage = ({ user }: GenericProps) => {
               </div>
             </div>
           </Accordion>
-          <Accordion
-            title="My Published Products List"
-            isOpen={isOpen}
-            setIsOpen={setIsOpen}
-          >
+          <Accordion title="My Published Products List">
             {/* content for the My Published Products List accordion */}
           </Accordion>
 
-          <Accordion
-            title="My Sales History"
-            isOpen={isOpen}
-            setIsOpen={setIsOpen}
-          >
+          <Accordion title="My Sales History">
             {/* content for the My Sales History accordion */}
           </Accordion>
 
-          <Accordion
-            title="My Purchase History"
-            isOpen={isOpen}
-            setIsOpen={setIsOpen}
-          >
+          <Accordion title="My Purchase History">
             {/* content for the My Purchase History accordion */}
           </Accordion>
         </div>

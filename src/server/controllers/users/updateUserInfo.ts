@@ -1,29 +1,29 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { parseCookies } from 'nookies';
 import Users from "@/server/models/users";
+import jwt  from 'jsonwebtoken';
 import type { UpdateQuery } from 'mongoose';
 
-export default async function getUserById(req: NextApiRequest, res: NextApiResponse) {
-  const cookies = parseCookies({ req });
-  const token = cookies.token;
+import {DecodedToken} from '@/utils/types'
+
+export default async function updateUser(req: NextApiRequest, res: NextApiResponse) {
+  const token = req.headers.authorization?.split(' ')[1];
   if (!token) {
     return res.status(401).json({ message: 'Unauthorized' });
   }
-  const {query } = req;
-  const {id,body,method} = query
-
+  const method = req.method;
   if (method !== 'PUT') {
     res.setHeader('Allow', ['PUT']);
     return res.status(405).json({ message: 'Method not allowed' });
   }
 
+  const {body } = req;
+  
   try {
-    if (body?.hasOwnProperty('password') || body?.hasOwnProperty('confirmPassword')) {
-        return { message: 'Please use the update password section to update your password.' };
-      }
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET!)as DecodedToken;
+   const id = decodedToken._id
     const result = await Users.findByIdAndUpdate(id, body as UpdateQuery<any>, { new: true })
     if (result) {
-      res.status(200).json('User updated successfully');
+      res.status(200).json({message:'Updated successfully'});
     } else {
       res.status(404).json({ message: 'User not found' });
     }
