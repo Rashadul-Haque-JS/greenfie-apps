@@ -3,18 +3,21 @@ import { useState } from "react";
 interface AccordionProps {
   title: string;
   children: React.ReactNode;
+  setScreen: (props: any) => void;
 }
 
-const Accordion = ({ title, children }: AccordionProps) => {
+const Accordion = ({ title, children, setScreen}: AccordionProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [openTitle, setOpenTitle] = useState("");
   const handleAccordionClick = () => {
-    setIsOpen((prev) => {
+    setIsOpen(() => {
       if (title === openTitle) {
         setOpenTitle("");
+        setScreen((prev:any)=> !prev)
         return false;
       }
       setOpenTitle(title);
+      setScreen((prev:any)=> !prev)
       return true;
     });
   };
