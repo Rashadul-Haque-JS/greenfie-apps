@@ -4,9 +4,11 @@ import Image from "next/image";
 type TAvatar = {
   image: string;
   onImageChange: Function;
+  setSave:(props:boolean)=>void;
+  setFile:(props:any)=>void
 };
 
-const ImageUpload = ({ image, onImageChange }: TAvatar) => {
+const ImageUpload = ({ image, onImageChange,setSave ,setFile }: TAvatar) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -17,6 +19,8 @@ const ImageUpload = ({ image, onImageChange }: TAvatar) => {
         onImageChange(reader.result);
       };
       reader.readAsDataURL(file);
+      setSave(true)
+      setFile(file);
     }
   };
 
@@ -49,29 +53,32 @@ const ImageUpload = ({ image, onImageChange }: TAvatar) => {
         onMouseLeave={handleImageWrapperMouseLeave}
       >
         <Image
-          src={image || "/images/hero_cab.jpg"}
+          src={image || "/images/default-avatar-green.png"}
           layout="fill"
           objectFit="cover"
           alt="User Profile Picture"
         />
         {isHovered && (
           <div className="absolute inset-0 flex items-center justify-center z-10">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-10 w-10 text-white opacity-75 hover:opacity-100 transition-opacity cursor-pointer"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+            <div
+              className="flex justify-center items-center h-10 w-10 glass-screen rounded-lg cursor-pointer"
               onClick={handleSvgClick}
-              style={{ zIndex: 1 }}
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-              />
-            </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                className="h-6 w-6 text-white opacity-100 transition-opacity"
+                style={{ zIndex: 1 }}
+              >
+                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h3.59l1.71-3.42A1 1 0 0 1 9.13 2h5.74a1 1 0 0 1 .92.58l1.71 3.42H23a2 2 0 0 1 2 2v9z"></path>
+                <circle cx="12" cy="13" r="4"></circle>
+              </svg>
+            </div>
           </div>
         )}
       </div>

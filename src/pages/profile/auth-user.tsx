@@ -15,7 +15,9 @@ const ProfilePage = ({ user }: GenericProps) => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-  const [image, setImage] = useState('')
+  const [image, setImage] = useState("");
+  const [file, setFile] = useState<any>();
+  const [save, setSave] = useState(false);
 
   useEffect(() => {
     if (userData?.city !== undefined) {
@@ -72,14 +74,38 @@ const ProfilePage = ({ user }: GenericProps) => {
     setUserData({ ...userData, [name]: value });
   };
 
+  const updateAvatar = async(event: any) => {
+    event.preventDefault();
+    try{
+      const formData = new FormData();
+      formData.append('avatar', file);
+      formData.append('id',userData?._id)
+      const res = await axios.put('/api/users/uploadAvatar',formData)
+      console.log(res.data.message);
+    }catch (error:any) {
+      console.log(error);
+      
+    }
+  };
+
   return (
     <div className="bg-gray-100">
-      <div className="bg-background  mx-auto w-full">
+      <div className="bg-background mx-auto w-full">
         <div className="p-6">
           <div className="flex flex-col justify-center items-center gap-2 mb-6">
-            <div className="relative rounded-full overflow-hidden w-48 h-64 md:w-64 md:h-80">
-            <ImageUpload image={image} onImageChange={setImage} />
+            <div className="relative rounded-full overflow-hidden w-48 h-64 md:w-64 md:h-80" >
+              <ImageUpload
+                image={image}
+                onImageChange={setImage}
+                setSave={setSave}
+                setFile={setFile}
+              />
             </div>
+            {save && (
+              <form onSubmit={updateAvatar} className="w-fit py-1" encType="multipart/form-data">
+              <Button type="submit">Save Image</Button>
+            </form>
+            )}
             {userData ? (
               <>
                 <h1 className="text-2xl font-bold">{userData.name} Haque</h1>
