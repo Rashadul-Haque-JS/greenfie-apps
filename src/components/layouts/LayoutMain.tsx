@@ -18,12 +18,12 @@ const Layout = ({ children, signup }: any) => {
         {pathname === "/" ? <Navbar signup={signup} /> : <NavbarPrivate />}
       </header>
       <main
-        className={`container w-full lg:w-5/6 xl:w-5/6 mx-auto mt-20 ${
+        className={`container w-full lg:w-5/6 xl:w-5/6 mx-auto ${
           pathname !== "/"
             ? "md:float-right lg:float-right xl:float-right"
             : ""
         }`}
-        style={{ marginTop: pathname === "/" ? "3rem" : "5rem" }}
+        style={{ marginTop: pathname === "/" ? "2rem" : "5rem" }}
       >
         {children}
       </main>

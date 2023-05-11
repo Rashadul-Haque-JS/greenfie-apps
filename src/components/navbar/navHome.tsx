@@ -48,8 +48,8 @@ const Navbar = ({ signup }: any) => {
       setNewUserEmail(email);
     }
   }, []);
-
   const user = useSelector((state: RootState) => state.auth.auth);
+  const isSignup = useSelector((state: RootState) => state.auth.signup);
   useEffect(() => {
     if (user) {
       setUsr(user);
@@ -58,7 +58,7 @@ const Navbar = ({ signup }: any) => {
 
   return (
     <AuthContext.Provider value={{ newUserEmail }}>
-      <div className="bg-main xs:px-1.5 sm:px-1.5 px-5 py-0">
+      <div className="bg-main xs:px-1.5 sm:px-1.5 px-5 py-2">
         <nav className="mx-auto flex justify-between py-2 items-center">
         <Logo/>
           {!usr?.name && (
@@ -93,7 +93,7 @@ const Navbar = ({ signup }: any) => {
             setIsResetModalOpen={setIsResetModalOpen}
           />
         )}
-        {isSignModalOpen && (
+        {(isSignModalOpen || isSignup) && (
           <Register
             setIsSignupModalOpen={setIsSignupModalOpen}
             signup={signup}
@@ -114,3 +114,5 @@ const Navbar = ({ signup }: any) => {
 };
 
 export default Navbar;
+
+

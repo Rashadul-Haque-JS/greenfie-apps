@@ -3,6 +3,8 @@ import Select from "react-select";
 import divisions from "@/utils/data/divisions";
 import axios from "axios";
 import Button from "../experiments/Button";
+import { useDispatch } from "react-redux";
+import { setSignup } from "@/store/features/auth";
 
 const Register = ({ setIsSignupModalOpen, signup }: any) => {
   const [user, setUser] = useState({
@@ -23,6 +25,7 @@ const Register = ({ setIsSignupModalOpen, signup }: any) => {
   const [errorMessage, setErrorMessage] = useState('')
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const dispatch = useDispatch()
   
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -43,6 +46,7 @@ const Register = ({ setIsSignupModalOpen, signup }: any) => {
     try {
       const resp = await axios.post(signup, user);
       setMessage(resp.data.message)
+      dispatch(setSignup(false))
     } catch (error: any) {
       const { response } = error.response && error
       const { message } = error
@@ -58,6 +62,8 @@ const Register = ({ setIsSignupModalOpen, signup }: any) => {
       setWards(selectedDivision?.wards);
     }
   }, [user.city]);
+
+  
 
   return (
     <div className="fixed top-0 left-0 w-full h-full overlay bg-background flex flex-wrap-reverse justify-evenly items-center overflow-y-auto">
@@ -80,7 +86,7 @@ const Register = ({ setIsSignupModalOpen, signup }: any) => {
             <h1 className="text-lg font-bold text-black">Signup</h1>
             <button
               aria-label="Close"
-              onClick={() => setIsSignupModalOpen(false)}
+              onClick={() => {setIsSignupModalOpen(false);dispatch(setSignup(false))}}
               className="material-icons"
             >
               close
@@ -89,7 +95,7 @@ const Register = ({ setIsSignupModalOpen, signup }: any) => {
           <div className="h-full w-full">
             <form
               onSubmit={handleSignup}
-              className="px-4 py-2 max-h-fit w-full flex flex-col"
+              className="p-2 py-2 max-h-fit w-full flex flex-col"
             >
               <div className="mt-4">
                 <input

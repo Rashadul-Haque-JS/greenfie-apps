@@ -1,125 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React from "react";
+import { useDispatch } from "react-redux";
+import { setSignup } from "@/store/features/auth";
 
-const Greetings= () => {
-  const [swap, setSwap] = useState(false);
-
-  const styles : {[key:string]:any}= {
-    chatBox: {
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      width: '180%',
-      padding: '20px',
-      backgroundColor: '#000',
-      position: 'relative',
-      overflow: 'hidden',
-    },
-    lineRow: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      marginBottom: '8px',
-    },
-    whiteBg: {
-      backgroundColor: '#fff',
-      width: '180px',
-      height: '4px',
-      margin: '0px 8px 0px 8px',
-      animation: `${swap ? 'slideRight' : 'slideLeft'} 5s ease-in-out infinite`,
-    },
-    greenBg: {
-      backgroundColor: 'green',
-      width: '180px',
-      height: '4px',
-      margin: '0px 8px 0px 8px',
-      animation: `${swap ? 'slideLeft' : 'slideRight'} 5s ease-in-out infinite`,
-    },
-    text: {
-      position: 'absolute',
-      top: '50%',
-      left: '50%',
-      letterSpacing:'1px',
-      transform: 'translate(-50%, -50%)',
-      opacity: swap ? 0: 1,
-      transition: 'opacity 2s ease-in-out'
-    },
+const Greetings = () => {
+  const dispatch = useDispatch()
+  const handleOptReg = () => {
+   dispatch(setSignup(true))
   };
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setSwap(prevSwap => !prevSwap);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
-    <div style={styles.chatBox} className='rounded'>
-      <div style={styles.lineRow}>
-        <span style={styles.whiteBg}></span>
-        <span style={styles.whiteBg}></span>
-        <span style={styles.greenBg}></span>
-        <span style={styles.greenBg}></span>
+    <div className="bg-txt px-4 xs:p-4 sm:p-4 md:p-6 w-full">
+      <p className="text-lime-400 text-center text-xs md:text-base font-medium mb-4 md:mb-6">
+        WELCOME TO THE FIRST ROOF VEGETABLES WEBSITE IN BD
+      </p>
+      <div className="flex flex-col md:flex-row justify-center items-center gap-6">
+        <h1 className="text-background text-center text-2xl md:text-4xl font-bold mb-4 md:mb-0">
+          Eat Fresh and Buy Local
+        </h1>
+        <button onClick={handleOptReg}
+          className="relative bg-main text-background rounded-full py-3 px-8 font-bold hover:bg-opacity-70 transition duration-300 ease-in-out"
+        >
+          {" "}
+          Sign Up Now
+        </button>
       </div>
-      <div style={styles.lineRow}>
-        <span style={styles.whiteBg}></span>
-        <span style={styles.whiteBg}></span>
-        <span style={styles.greenBg}></span>
-        <span style={styles.greenBg}></span>
-      </div>
-      <div style={styles.lineRow}>
-        <span style={styles.whiteBg}></span>
-        <span style={styles.whiteBg}></span>
-        <span style={styles.greenBg}></span>
-        <span style={styles.greenBg}></span>
-      </div>
-      <div style={styles.lineRow}>
-        <span style={styles.whiteBg}></span>
-        <span style={styles.whiteBg}></span>
-        <span style={styles.greenBg}></span>
-        <span style={styles.greenBg}></span>
-      </div>
-      <div style={styles.lineRow}>
-        <span style={styles.whiteBg}></span>
-        <span style={styles.whiteBg}></span>
-        <span style={styles.greenBg}></span>
-        <span style={styles.greenBg}></span>
-      </div>
-      <div style={styles.lineRow}>
-        <span style={styles.whiteBg}></span>
-        <span style={styles.whiteBg}></span>
-        <span style={styles.greenBg}></span>
-        <span style={styles.greenBg}></span>
-      </div>
-      <div style={styles.text}>
-      <p className='text-lime-400 text-center text-xs my-2'>WELCOME TO<span className='block text-xl text-background'>GREENFIE</span></p>
-      </div>
-      <style>
-        {`
-          @keyframes slideRight {
-            0% {
-              transform: translateX(0);
-            }
-            50% {
-              transform: translateX(200%);
-            }
-            180% {
-              transform: translateX(0);
-            }
-          }
-
-          @keyframes slideLeft {
-            0% {
-              transform: translateX(0);
-            }
-            50% {
-              transform: translateX(-200%);
-            }
-            180% {
-              transform: translateX(0);
-            }
-          }
-        `}
-      </style>
     </div>
   );
 };

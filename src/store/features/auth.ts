@@ -6,6 +6,7 @@ type TAuth={
 }
 const initialState= {
   auth: {},
+  signup:false
   
 };
 
@@ -19,11 +20,14 @@ const authSlice = createSlice({
 
     logoutAuth(state){
       state.auth = {};
-    }
+    },
+    setSignup(state ,{payload}: PayloadAction<boolean>){
+      state.signup = payload;
+    },
   },
 });
 
-export const { setAuth, logoutAuth } = authSlice.actions;
+export const { setAuth, logoutAuth ,setSignup} = authSlice.actions;
 export default authSlice.reducer;
 
 
