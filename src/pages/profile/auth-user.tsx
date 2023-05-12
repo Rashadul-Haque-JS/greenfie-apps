@@ -107,9 +107,10 @@ const ProfilePage = ({ user }: GenericProps) => {
     event.preventDefault();
     try {
       const formData = new FormData();
-      formData.append("avatar", file);
-      formData.append("id", userData?._id);
-      const res = await axios.put("/api/users/uploadAvatar", formData);
+      formData.append("image", file);
+      console.log(file);
+      
+      const res = await axios.post("/api/users/uploadAvatar", formData);
       console.log(res.data.message);
     } catch (error: any) {
       console.log(error);
