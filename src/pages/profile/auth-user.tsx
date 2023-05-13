@@ -93,7 +93,9 @@ const ProfilePage = ({ user }: GenericProps) => {
   const handleUpdateEmail = async (event: any) => {
     event.preventDefault();
     try {
-      const res = await axios.put("/api/users/update-email", { email:userData?.email });
+      const res = await axios.put("/api/users/update-email", {
+        email: userData?.email,
+      });
       toast.success(res.data.message);
       console.log(res.data.message);
     } catch (error: any) {
@@ -108,12 +110,17 @@ const ProfilePage = ({ user }: GenericProps) => {
     try {
       const formData = new FormData();
       formData.append("image", file);
-      console.log(file);
-      
       const res = await axios.post("/api/users/uploadAvatar", formData);
-      console.log(res.data.message);
+      setUserData((user: GenericProps) => ({
+        ...user,
+        avatar: res.data.file,
+      }));
+      setSave(false)
+      toast.success(res.data.message);
     } catch (error: any) {
-      console.log(error);
+      const { response } = error.response && error;
+      const { message } = error;
+      toast.error(response.data.message || message);
     }
   };
 
@@ -126,7 +133,12 @@ const ProfilePage = ({ user }: GenericProps) => {
             <div className="flex flex-col justify-center items-center gap-2 mb-6">
               <div className="relative rounded-full overflow-hidden w-48 h-64 md:w-64 md:h-80">
                 <ImageUpload
-                  image={image}
+                  image={
+                    userData?.avatar
+                      ? `/uploads/${userData.avatar}`
+                      : image
+                  }
+                  setData={setUserData}
                   onImageChange={setImage}
                   setSave={setSave}
                   setFile={setFile}

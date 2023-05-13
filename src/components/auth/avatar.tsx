@@ -1,26 +1,34 @@
 import React, { useState } from "react";
 import Image from "next/image";
+import { GenericProps } from "@/utils/types";
 
 type TAvatar = {
   image: string;
   onImageChange: Function;
-  setSave:(props:boolean)=>void;
-  setFile:(props:any)=>void
+  setSave: (props: boolean) => void;
+  setFile: (props: any) => void;
+  setData?: (props: GenericProps) => void;
 };
 
-const ImageUpload = ({ image, onImageChange,setSave ,setFile }: TAvatar) => {
+const ImageUpload = ({
+  image,
+  onImageChange,
+  setSave,
+  setFile,
+  setData,
+}: TAvatar) => {
   const [isHovered, setIsHovered] = useState(false);
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
+  const handleImageChange = (e: any) => {
+    const file = e.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        onImageChange(reader.result);
-      };
-      reader.readAsDataURL(file);
-      setSave(true)
       setFile(file);
+      if (setData) {
+        setData((user: GenericProps) => ({ ...user, avatar: "" }));
+      }
+      // set the File object as the state instead of the base64-encoded string
+      onImageChange(URL.createObjectURL(file)); // set the object URL as the image source
+      setSave(true);
     }
   };
 

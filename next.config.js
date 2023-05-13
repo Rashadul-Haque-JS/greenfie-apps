@@ -1,19 +1,19 @@
-const path = require('path');
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: process.env.ANALYZE === 'true',
+const path = require("path");
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: process.env.ANALYZE === "true",
 });
 
 module.exports = withBundleAnalyzer({
   webpack(config) {
     config.resolve.alias = {
       ...config.resolve.alias,
-      '@styles': path.resolve(__dirname, 'src/styles'),
+      "@styles": path.resolve(__dirname, "src/styles"),
     };
 
     return config;
   },
-
   images: {
-    domains: ['picsum.photos'],
+    domains: ["picsum.photos", "127.0.0.1"],
+    path: '/_next/image'
   },
 });
