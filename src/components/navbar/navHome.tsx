@@ -58,7 +58,7 @@ const Navbar = ({ signup }: any) => {
 
   return (
     <AuthContext.Provider value={{ newUserEmail }}>
-      <div className="bg-main xs:px-1.5 sm:px-1.5 px-5">
+      <div className="bg-main xs:px-1.5 sm:px-1.5 px-5 py-1">
         <nav className="mx-auto flex justify-between py-2 items-center">
         <Logo/>
           {!usr?.name && (

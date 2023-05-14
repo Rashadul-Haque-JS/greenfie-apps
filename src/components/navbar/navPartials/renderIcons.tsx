@@ -51,7 +51,7 @@ const RenderNavIcon = ({ toLogin, isLogoutIcon }: TIcon) => {
         <>
           {!isProfile && pathname !== "/profile/auth-user" && (
             <div
-              className="flex justify-center items-center w-[28px] h-[28px] rounded-full text-background bg-green cursor-pointer"
+              className="flex justify-center items-center w-[28px] h-[28px] rounded-full text-background bg-green cursor-pointer font-bold"
               onClick={() => setIsProfile(!isProfile)}
             >
               {letterIcon()}
@@ -59,7 +59,7 @@ const RenderNavIcon = ({ toLogin, isLogoutIcon }: TIcon) => {
           )}
           {!isProfile && pathname === "/profile/auth-user" && (
             <div
-              className="flex justify-center items-center w-[28px] h-[28px] rounded-full text-background bg-green cursor-pointer"
+              className="flex justify-center items-center w-[28px] h-[28px] rounded-full text-background bg-green cursor-pointer font-bold"
             >
               {letterIcon()}
             </div>
