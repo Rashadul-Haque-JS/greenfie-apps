@@ -1,55 +1,139 @@
 import React from "react";
 import axios from "axios";
 import { GetServerSideProps } from "next";
-import Image from "next/image";
-import Link from "next/link";
-import Greetings from "@/components/misc/greetings";
-import { GenericProps, IApps } from "@/utils/types";
-import HeroText from "@/components/misc/heroTxt";
-
+import Greetings from "@/components/misc/landings.tsx/greetings";
+import { GenericProps } from "@/utils/types";
+import Hero from "@/components/misc/landings.tsx/hero";
+import AppLists from "@/components/misc/landings.tsx/appLists";
 const Home = ({ apps }: GenericProps) => {
   if (!apps.length) {
     return <div>Loading...</div>;
   }
 
   return (
-    <div className="flex flex-col items-center min-h-screen bg-background text-txt gap-10">
+    <div className="flex flex-col items-center min-h-screen bg-background text-txt gap-10 mt-24">
       <Greetings />
-      <div className="relative w-full h-[280px] sm:h-[360px] md:h-[480px] 2xl:h-[640px]">
-        <Image
-          src="/images/hero_tom.jpg"
-          alt="Hero image"
-          className="object-cover w-full h-full"
-          layout="fill"
-        />
-        <HeroText />
-      </div>
-      <div className="bg-gray-100 w-full py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-extrabold mb-8 text-center">
-            Green Tour
+      <Hero />
+      <AppLists apps={apps} />
+      <div className="bg-gray-400 py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+            What people are saying
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 ">
-            {apps.map((page: IApps) => (
-              <Link
-                key={page.name}
-                href={page.page}
-                className="block rounded-md shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-200"
-              >
-                <div className="relative h-40 sm:h-48 md:h-56 w-full">
-                  <Image
-                    src={page.image}
-                    alt={`${page.name} icon`}
-                    layout="fill"
-                    objectFit="cover"
-                  />
+          <div className="mt-8 grid grid-cols-2 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+            <div className="bg-white p-6 rounded-lg shadow-md">
+              <p className="mt-2 text-lg font-medium text-gray-900">
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                non risus. Suspendisse lectus tortor, dignissim sit amet,
+                adipiscing nec, ultricies sed, dolor. Cras elementum ultrices
+                diam. Maecenas ligula massa, varius a, semper congue, euismod
+                non, mi."
+              </p>
+              <div className="mt-4">
+                <div className="flex items-center">
+                  <div className="flex-shrink-0">
+                    <img
+                      className="h-10 w-10 rounded-full"
+                      src="/images/default-avatar-green.png"
+                      alt=""
+                    />
+                  </div>
+                  <div className="ml-3">
+                    <div className="text-sm font-medium text-gray-900">
+                      Jane Doe
+                    </div>
+                    <div className="text-sm text-gray-500">
+                      CEO, Example Company
+                    </div>
+                  </div>
                 </div>
-                <div className="px-4 py-2 md:px-6 md:py-4">
-                  <p className="text-base font-medium mb-1">{page.name}</p>
-                  <p className="text-sm text-gray-500">{page.name}</p>
+              </div>
+            </div>
+
+            <div className="bg-white p-6 rounded-lg shadow-md">
+              <p className="mt-2 text-lg font-medium text-gray-900">
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                non risus. Suspendisse lectus tortor, dignissim sit amet,
+                adipiscing nec, ultricies sed, dolor. Cras elementum ultrices
+                diam. Maecenas ligula massa, varius a, semper congue, euismod
+                non, mi."
+              </p>
+              <div className="mt-4">
+                <div className="flex items-center">
+                  <div className="flex-shrink-0">
+                    <img
+                      className="h-10 w-10 rounded-full"
+                      src="/images/default-avatar-green.png"
+                      alt=""
+                    />
+                  </div>
+                  <div className="ml-3">
+                    <div className="text-sm font-medium text-gray-900">
+                      John Doe
+                    </div>
+                    <div className="text-sm text-gray-500">
+                      CTO, Example Company
+                    </div>
+                  </div>
                 </div>
-              </Link>
-            ))}
+              </div>
+            </div>
+            <div className="bg-white p-6 rounded-lg shadow-md">
+              <p className="mt-2 text-lg font-medium text-gray-900">
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                non risus. Suspendisse lectus tortor, dignissim sit amet,
+                adipiscing nec, ultricies sed, dolor. Cras elementum ultrices
+                diam. Maecenas ligula massa, varius a, semper congue, euismod
+                non, mi."
+              </p>
+              <div className="mt-4">
+                <div className="flex items-center">
+                  <div className="flex-shrink-0">
+                    <img
+                      className="h-10 w-10 rounded-full"
+                      src="/images/default-avatar-green.png"
+                      alt=""
+                    />
+                  </div>
+                  <div className="ml-3">
+                    <div className="text-sm font-medium text-gray-900">
+                      John Doe
+                    </div>
+                    <div className="text-sm text-gray-500">
+                      CTO, Example Company
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="bg-white p-6 rounded-lg shadow-md">
+              <p className="mt-2 text-lg font-medium text-gray-900">
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                non risus. Suspendisse lectus tortor, dignissim sit amet,
+                adipiscing nec, ultricies sed, dolor. Cras elementum ultrices
+                diam. Maecenas ligula massa, varius a, semper congue, euismod
+                non, mi."
+              </p>
+              <div className="mt-4">
+                <div className="flex items-center">
+                  <div className="flex-shrink-0">
+                    <img
+                      className="h-10 w-10 rounded-full"
+                      src="/images/default-avatar-green.png"
+                      alt=""
+                    />
+                  </div>
+                  <div className="ml-3">
+                    <div className="text-sm font-medium text-gray-900">
+                      John Doe
+                    </div>
+                    <div className="text-sm text-gray-500">
+                      CTO, Example Company
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

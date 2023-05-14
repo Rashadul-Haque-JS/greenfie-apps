@@ -155,7 +155,7 @@ const ProfilePage = ({ user }: GenericProps) => {
               )}
               {userData ? (
                 <>
-                  <h1 className="text-2xl font-bold">{userData.name} Haque</h1>
+                  <h1 className="text-2xl font-bold capitalize">{userData.name} Haque</h1>
                   <p className="text-gray-600">
                     123 {userData.area}, {userData.city}, BD
                   </p>

@@ -36,7 +36,7 @@ module.exports = {
         txt: "#000000", //used
         lightBG: "#F5F5F5",//used in single product page
         light: "#E6F9E6",
-        lightGreen:"#34D399",
+        lightGreen:"#6DDA6B", //used in render navlinks
         offWhite:"#f7fafc"
       },
       fontFamily: {

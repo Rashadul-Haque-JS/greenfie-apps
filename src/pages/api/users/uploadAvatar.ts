@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { parseForm, FormidableError } from "@/libs/parse-form";
+import { parseForm, FormidableError } from "@/server/middlewares/imageUploader";
 import Users from "@/server/models/users";
 import jwt from "jsonwebtoken";
 import { DecodedToken } from "@/utils/types";
