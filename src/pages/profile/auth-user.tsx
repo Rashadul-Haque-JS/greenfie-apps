@@ -147,10 +147,10 @@ const ProfilePage = ({ user }: GenericProps) => {
               {save && (
                 <form
                   onSubmit={updateAvatar}
-                  className="w-fit py-1"
+                  className="w-fit my-3"
                   encType="multipart/form-data"
                 >
-                  <Button type="submit">Save Image</Button>
+                  <button type="submit" className=" px-3 py-2 rounded-lg bg-main text-background font-bold">Save Image</button>
                 </form>
               )}
               {userData ? (

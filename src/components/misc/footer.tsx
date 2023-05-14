@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 const Footer = () => {
   return (
-    <footer className='bg-black text-light h-72 md:hidden lg:hidden xl:hidden mx-6 mb-6 shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px] mt-12 rounded'>
+    <footer className='bg-black text-light h-72 md:hidden lg:hidden xl:hidden  mb-6 shadow-md  mt-12 rounded'>
       <div className='flex flex-col justify-evenly h-full px-4'>
         <div className='py-2'>
           <p className='text-2xl font-semibold'>Greenfie</p>

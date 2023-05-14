@@ -13,10 +13,10 @@ const Home = ({ apps }: GenericProps) => {
 
   return (
     <div className="w-full flex flex-col items-center gap-6 xs:gap-8 sm:gap-8">
-      <div className="flex justify-center w-full">
+      <div className="flex justify-center w-full xs:p-3 sm:p-3 ">
         <Greetings />
       </div>
-      <div className="w-full flex flex-wrap justify-center mx-6 items-start gap-10 md:gap-20 lg:gap-24 xl:gap-52 md:pb-8 md:pt-5 lg:pb-8 lg:pt-5 xl:pt-5 xl:pb-8 shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px]">
+      <div className="w-full flex flex-wrap justify-center mx-6 items-start gap-10 md:gap-20 lg:gap-24 xl:gap-52 md:pb-8 md:pt-5 lg:pb-8 lg:pt-5 xl:pt-5 xl:pb-8 shadow-md p-3">
         <div className="w-full md:w-2/4 md:h-[164px] lg:w-[440px] xl:w-2/5 bg-gray-900 rounded ">
           <Hero />
         </div>

@@ -27,7 +27,9 @@ const Layout = ({ children, signup }: any) => {
       >
         {children}
       </main>
+      <div className=" w-full p-3">
       <Footer />
+      </div>
     </div>
   );
 };
