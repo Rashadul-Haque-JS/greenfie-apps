@@ -1,10 +1,11 @@
 import React from "react";
 import axios from "axios";
 import { GetServerSideProps } from "next";
-import AppSymbol from "@/components/misc/appsSymbol";
-import Hero from "@/components/misc/hero";
-import { GenericProps, IApps } from "@/utils/types";
+import Image from "next/image";
+import Link from "next/link";
 import Greetings from "@/components/misc/greetings";
+import { GenericProps, IApps } from "@/utils/types";
+import HeroText from "@/components/misc/heroTxt";
 
 const Home = ({ apps }: GenericProps) => {
   if (!apps.length) {
@@ -12,29 +13,43 @@ const Home = ({ apps }: GenericProps) => {
   }
 
   return (
-    <div className="w-full flex flex-col items-center gap-6 xs:gap-8 sm:gap-8">
-      <div className="flex justify-center w-full xs:p-3 sm:p-3 ">
-        <Greetings />
+    <div className="flex flex-col items-center min-h-screen bg-background text-txt gap-10">
+      <Greetings />
+      <div className="relative w-full h-[280px] sm:h-[360px] md:h-[480px] 2xl:h-[640px]">
+        <Image
+          src="/images/hero_tom.jpg"
+          alt="Hero image"
+          className="object-cover w-full h-full"
+          layout="fill"
+        />
+        <HeroText />
       </div>
-      <div className="w-full flex flex-wrap justify-center mx-6 items-start gap-10 md:gap-20 lg:gap-24 xl:gap-52 md:pb-8 md:pt-5 lg:pb-8 lg:pt-5 xl:pt-5 xl:pb-8 shadow-md p-3">
-        <div className="w-full md:w-2/4 md:h-[164px] lg:w-[440px] xl:w-2/5 bg-gray-900 rounded ">
-          <Hero />
-        </div>
-        <div
-          className="w-full md:w-1/3 lg:w-1/3 xl:w-1/3 bg-screen"
-          style={{ borderRadius: "16px" }}
-        >
-          <div className="w-full grid grid-cols-3 gap-2 place-items-center justify-content-center px-4 glass-screen pt-3 md:pb-2">
-            {apps.map((page: IApps, index: number) => {
-              return (
-                <AppSymbol
-                  key={index}
-                  image={page.image}
-                  name={page.name}
-                  page={page.page}
-                />
-              );
-            })}
+      <div className="bg-gray-100 w-full py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl font-extrabold mb-8 text-center">
+            Green Tour
+          </h2>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 ">
+            {apps.map((page: IApps) => (
+              <Link
+                key={page.name}
+                href={page.page}
+                className="block rounded-md shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-200"
+              >
+                <div className="relative h-40 sm:h-48 md:h-56 w-full">
+                  <Image
+                    src={page.image}
+                    alt={`${page.name} icon`}
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </div>
+                <div className="px-4 py-2 md:px-6 md:py-4">
+                  <p className="text-base font-medium mb-1">{page.name}</p>
+                  <p className="text-sm text-gray-500">{page.name}</p>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </div>
