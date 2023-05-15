@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import Select from "react-select";
-import divisions from "@/utils/data/divisions";
+
 import axios from "axios";
 import Button from "../experiments/Button";
 import { useDispatch } from "react-redux";
@@ -11,16 +10,9 @@ const Register = ({ setIsSignupModalOpen, signup }: any) => {
     name: "",
     email: "",
     password: "",
-    area: "",
-    city: "",
-    country: "BD",
-    phone: "",
-    gender: "",
-    avatar: "",
   });
-
+  const [restCountry, setRestCountry] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [wards, setWards] = useState<any[]>([]);
   const [message, setMessage] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
   const [showPassword, setShowPassword] = useState(false);
@@ -32,11 +24,6 @@ const Register = ({ setIsSignupModalOpen, signup }: any) => {
     setUser({ ...user, [name]: value });
   };
 
-  const handleChangeSelect = (event: any, name: string) => {
-    const { value } = event;
-    setUser({ ...user, [name]: value });
-  };
-
   const handleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (user.password !== confirmPassword) {
@@ -44,7 +31,8 @@ const Register = ({ setIsSignupModalOpen, signup }: any) => {
       return;
     }
     try {
-      const resp = await axios.post(signup, user);
+      const signupData = { ...user, restCountry};
+      const resp = await axios.post(signup, signupData);
       setMessage(resp.data.message)
       dispatch(setSignup(false))
     } catch (error: any) {
@@ -55,15 +43,17 @@ const Register = ({ setIsSignupModalOpen, signup }: any) => {
   };
 
   useEffect(() => {
-    if (user.city !== undefined) {
-      const [selectedDivision] = divisions.filter(
-        (division) => division.label === user.city
-      );
-      setWards(selectedDivision?.wards);
-    }
-  }, [user.city]);
+    const fetchCountry = async () => {
+      try {
+        const response = await axios.get('https://ipapi.co/json/');
+        setRestCountry(response.data.country_name);
+      } catch (error) {
+        console.error('Error fetching country:', error);
+      }
+    };
 
-  
+    fetchCountry();
+  }, []);
 
   return (
     <div className="fixed top-0 left-0 w-full h-full overlay bg-background flex flex-wrap-reverse justify-evenly items-center overflow-y-auto">
@@ -98,6 +88,7 @@ const Register = ({ setIsSignupModalOpen, signup }: any) => {
               className="p-2 py-2 max-h-fit w-full flex flex-col"
             >
               <div className="mt-4">
+                <label htmlFor="name">Full Name</label>
                 <input
                   className="w-full px-3 py-2 border rounded-lg"
                   type="text"
@@ -105,12 +96,13 @@ const Register = ({ setIsSignupModalOpen, signup }: any) => {
                   name="name"
                   onChange={handleChange}
                   required
-                  placeholder="Name..."
+                  placeholder="Full Name..."
                   style={{ color: "#000" }}
                   autoFocus
                 />
               </div>
               <div className="mt-4">
+              <label htmlFor="email">E-mail</label>
                 <input
                   className="w-full px-3 py-2 border rounded-lg"
                   type="email"
@@ -121,6 +113,7 @@ const Register = ({ setIsSignupModalOpen, signup }: any) => {
                 />
               </div>
               <div className="mt-4">
+                <label htmlFor="password">Password</label>
                 <div className="relative">
                 <input
                   className="w-full px-3 py-2 border rounded-lg"
@@ -141,6 +134,7 @@ const Register = ({ setIsSignupModalOpen, signup }: any) => {
               </div>
               <div className="mt-4">
                 {errorMessage && errorMessage.includes('Password') && <p className="text-red-500 my-1 px-2 text-notification">{errorMessage}</p>}
+                <label htmlFor="confirm password">Confirm Password</label>
                 <div className="relative">
                 <input
                   className="w-full px-3 py-2 border rounded-lg"
@@ -160,65 +154,7 @@ const Register = ({ setIsSignupModalOpen, signup }: any) => {
                     {showConfirmPassword ?(<i className="material-icons text-[20px] mt-2">visibility_off</i>) : (<i className="material-icons text-[20px] mt-2">remove_red_eye</i>)}
                   </button>
                 </div>
-              </div>
-              <div className="mt-4">
-                <Select
-                  name="city"
-                  options={divisions}
-                  placeholder="Choose your city"
-                  onChange={(e) => handleChangeSelect(e, "city")}
-                  styles={{
-                    control: (provided) => ({
-                      ...provided,
-                      backgroundColor: "#fff",
-                    }),
-                  }}
-                  required
-                />
-              </div>
-              <div className="mt-4">
-                <Select
-                  name="area"
-                  options={wards}
-                  placeholder="Choose your Area"
-                  onChange={(e) => handleChangeSelect(e, "area")}
-                  styles={{
-                    control: (provided) => ({
-                      ...provided,
-                      backgroundColor: "#fff",
-                    }),
-                  }}
-                  noOptionsMessage={() => "Select city first"}
-                  required
-                />
-              </div>
-              <div className="mt-4">
-                <Select
-                  name="gender"
-                  options={[
-                    { label: "male", value: "male" },
-                    { label: "female", value: "female" },
-                  ]}
-                  placeholder="Select gender"
-                  onChange={(e) => handleChangeSelect(e, "gender")}
-                  styles={{
-                    control: (provided) => ({
-                      ...provided,
-                      backgroundColor: "#fff",
-                    }),
-                  }}
-                  required
-                />
-              </div>
-              <div className="mt-4">
-                <input
-                  className="w-full p-2  text-gray-700  rounded"
-                  type="tel"
-                  name="phone"
-                  onChange={handleChange}
-                  placeholder="Phone Number"
-                />
-              </div>
+              </div>  
               <hr className="my-5" />
               <p className="text-gray-600 text-sm mb-4">
                 By clicking Login, you agree to our{" "}

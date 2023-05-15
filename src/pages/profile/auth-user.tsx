@@ -55,7 +55,7 @@ const ProfilePage = ({ user }: GenericProps) => {
         newPassword,
       });
       toast.success(resp.data.message);
-      setScreen(false)
+      setScreen(false);
     } catch (error: any) {
       const { response } = error.response && error;
       const { message } = error;
@@ -116,7 +116,7 @@ const ProfilePage = ({ user }: GenericProps) => {
         ...user,
         avatar: res.data.file,
       }));
-      setSave(false)
+      setSave(false);
       toast.success(res.data.message);
     } catch (error: any) {
       const { response } = error.response && error;
@@ -135,9 +135,7 @@ const ProfilePage = ({ user }: GenericProps) => {
               <div className="relative rounded-full overflow-hidden w-48 h-64 md:w-64 md:h-80">
                 <ImageUpload
                   image={
-                    userData?.avatar
-                      ? `/uploads/${userData.avatar}`
-                      : image
+                    userData?.avatar ? `/uploads/${userData.avatar}` : image
                   }
                   setData={setUserData}
                   onImageChange={setImage}
@@ -151,12 +149,19 @@ const ProfilePage = ({ user }: GenericProps) => {
                   className="w-fit my-3"
                   encType="multipart/form-data"
                 >
-                  <button type="submit" className=" px-3 py-2 rounded-lg bg-main text-background font-bold">Save Image</button>
+                  <button
+                    type="submit"
+                    className=" px-3 py-2 rounded-lg bg-main text-background font-bold"
+                  >
+                    Save Image
+                  </button>
                 </form>
               )}
               {userData ? (
                 <>
-                  <h1 className="text-2xl font-bold capitalize">{userData.name} Haque</h1>
+                  <h1 className="text-2xl font-bold capitalize">
+                    {userData.name} Haque
+                  </h1>
                   <p className="text-gray-600">
                     123 {userData.area}, {userData.city}, BD
                   </p>
@@ -237,7 +242,6 @@ const ProfilePage = ({ user }: GenericProps) => {
                     noOptionsMessage={() => "Select city first"}
                     required
                   />
-
                   <label htmlFor="phone" className="mt-4 mb-1">
                     Phone
                   </label>
@@ -249,6 +253,33 @@ const ProfilePage = ({ user }: GenericProps) => {
                     className="px-3 py-2 border rounded-lg outline-none focus:border-blue-500"
                     onChange={handleChange}
                   />
+
+                  {!userData?.gender && (
+                    <>
+                      <label htmlFor="gender" className="mt-4 mb-1">
+                        Gender
+                      </label>
+                      <Select
+                        name="gender"
+                        options={[
+                          { label: "male", value: "male" },
+                          { label: "female", value: "female" },
+                        ]}
+                        placeholder="Select gender"
+                        onChange={(e) => handleChangeSelect(e, "gender")}
+                        styles={{
+                          control: (provided) => ({
+                            ...provided,
+                            backgroundColor: "#fff",
+                            padding: "0.25rem",
+                            border: "1px solid #000",
+                            outline: "none",
+                          }),
+                        }}
+                        required
+                      />
+                    </>
+                  )}
                   <Button type="submit" className="mt-4 text-[16px]">
                     Update Info
                   </Button>

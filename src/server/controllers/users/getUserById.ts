@@ -12,7 +12,7 @@ export default async function getUserById(req: NextApiRequest, res: NextApiRespo
   
   try {
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET!)as DecodedToken;
-    const user = await Users.findOne({ _id: decodedToken._id }).select('-password -confirmToken -confirmed -resetPasswordToken');
+    const user = await Users.findOne({ _id: decodedToken._id }).select('-password -confirmToken -confirmed -resetPasswordToken -restCountry');
     return res.status(200).json({ user });
   } catch (err) {
     return res.status(401).json({ message: 'Unauthorized' });
