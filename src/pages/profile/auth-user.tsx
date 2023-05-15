@@ -80,6 +80,7 @@ const ProfilePage = ({ user }: GenericProps) => {
         area: userData?.area,
         city: userData?.city,
         phone: userData?.phone,
+        gender: userData?.gender,
       };
       const res = await axios.put("/api/users/updateUser", data);
       toast.success(res.data.message);
@@ -194,7 +195,7 @@ const ProfilePage = ({ user }: GenericProps) => {
                     />
                     <Button
                       type="submit"
-                      className="py-1 xs:rounded-lg sm:rounded-lg rounded-l-none xs:w-full sm:w-full"
+                      className="py-1 xs:rounded-lg sm:rounded-lg rounded-l-none xs:w-full sm:w-full xs:mt-2 sm:mt-2"
                     >
                       Save
                     </Button>

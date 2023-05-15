@@ -23,7 +23,7 @@ const Testimonials = () => {
   return (
     <div className="bg-gray-400 py-8 w-full">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-2xl font-extrabold text-gray-900 sm:text-3xl">
+        <h2 className="text-2xl font-extrabold text-background sm:text-3xl">
           What people are saying
         </h2>
         <div className="mt-8 grid xs:grid-cols-1 sm:grid-cols-1 grid-cols-2 gap-y-10 gap-x-6 xl:gap-x-8">
