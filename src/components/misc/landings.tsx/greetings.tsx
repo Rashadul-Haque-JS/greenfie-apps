@@ -14,7 +14,7 @@ const Greetings = () => {
         <h1 className="text-background text-center text-2xl lg:text-3xl xl:text-3xl font-bold mb-4 md:mb-0">
         Fresh veggies. Connect & Share. Grow Together</h1>
         <button onClick={handleOptReg}
-          className="relative bg-txt text-background rounded-full py-3 px-8 font-bold hover:bg-opacity-70 transition duration-300 ease-in-out"
+          className="btn-main relative bg-txt text-background rounded-full py-3 px-8 font-bold hover:bg-opacity-70 transition duration-300 ease-in-out cursor-pointer"
         >
           Sign Up Now
         </button>
