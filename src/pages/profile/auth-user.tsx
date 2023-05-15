@@ -55,10 +55,11 @@ const ProfilePage = ({ user }: GenericProps) => {
         newPassword,
       });
       toast.success(resp.data.message);
+      setScreen(false)
     } catch (error: any) {
       const { response } = error.response && error;
       const { message } = error;
-      toast.error(response.data.message || message);
+      toast.error(response.data.error || message);
     }
   };
 

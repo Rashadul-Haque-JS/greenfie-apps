@@ -19,14 +19,14 @@ export default async function updatePassword(req: NextApiRequest, res: NextApiRe
   const user = await Users.findOne({email});
   // Check if user exists
   if (!user) {
-    res.status(400).json({ error: 'Invalid Email or Password' });
+    res.status(400).json({ error: 'User Not Registered' });
     return;
   }
   // Compare old password with hashed password in database
   const passwordMatch = await compare(oldPassword, user.password);
 
   if (!passwordMatch) {
-    res.status(400).json({ error: 'Invalid Email or Password' });
+    res.status(400).json({ error: 'Current Password Is Incorrect' });
     return;
   }
   // Hash new password
