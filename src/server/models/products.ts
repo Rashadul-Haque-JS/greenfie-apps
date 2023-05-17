@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-import { IProducts } from '@/utils/types';
+import mongoose from "mongoose";
+import { IProducts } from "@/utils/types";
 // Define Products schema
 const ProductsSchema = new mongoose.Schema({
   name: {
@@ -9,7 +9,6 @@ const ProductsSchema = new mongoose.Schema({
   description: {
     type: String,
     required: true,
-   
   },
   price: {
     type: Number,
@@ -17,15 +16,32 @@ const ProductsSchema = new mongoose.Schema({
   },
   image: {
     type: String,
-  }
+  },
+  unit: {
+    type: String,
+    required: [true, "Product's unit is not specified"],
+  },
+  inStock: {
+    type: Number,
+    required: [true, "In stock is not specified"],
+  },
+  isAvailable: {
+    type:Boolean,
+    required: [true, "Please select product's availability"],
+  },
+  ownerId: {
+    type: String,
+    required: [true, "Server error, pls try again"],
+  },
 });
 
 // Check if model is already defined before defining it
 // to avoid the "Cannot overwrite model once compiled" error
- const Products = mongoose.models.Products || mongoose.model('Products', ProductsSchema);
-   
+const Products =
+  mongoose.models.Products || mongoose.model("Products", ProductsSchema);
+
 // Define CRUD operations
-export async function createProduct(data:IProducts) {
+export async function createProduct(data: IProducts) {
   const product = new Products(data);
   await product.save();
   return product.toObject();
@@ -36,19 +52,19 @@ export async function getProducts() {
   return productss.map((products) => products.toObject());
 }
 
-export async function getProduct(id:string) {
+export async function getProduct(id: string) {
   const product = await Products.findById(id);
   return product ? product.toObject() : null;
 }
 
-export async function updateProduct(id:string, data:IProducts) {
+export async function updateProduct(id: string, data: IProducts) {
   const product = await Products.findByIdAndUpdate(id, data, { new: true });
   return product ? product.toObject() : null;
 }
 
-export async function deleteProduct(id:string) {
+export async function deleteProduct(id: string) {
   const product = await Products.findByIdAndDelete(id);
   return product ? product.toObject() : null;
 }
 
-export default Products
+export default Products;

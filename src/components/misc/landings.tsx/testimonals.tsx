@@ -21,7 +21,7 @@ const Testimonials = () => {
   };
 
   return (
-    <div className="bg-gray-400 py-8 w-full">
+    <div className="bg-gray-400 py-8 w-full mb-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-2xl font-extrabold text-background sm:text-3xl">
           What people are saying

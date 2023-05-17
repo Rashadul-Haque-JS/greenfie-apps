@@ -6,7 +6,8 @@ type TAuth={
 }
 const initialState= {
   auth: {},
-  signup:false
+  signup:false,
+  signupIcon:false
   
 };
 
@@ -24,10 +25,14 @@ const authSlice = createSlice({
     setSignup(state ,{payload}: PayloadAction<boolean>){
       state.signup = payload;
     },
+
+    setSignupIcon(state ,{payload}: PayloadAction<boolean>){
+      state.signupIcon = payload;
+    },
   },
 });
 
-export const { setAuth, logoutAuth ,setSignup} = authSlice.actions;
+export const { setAuth, logoutAuth ,setSignup,setSignupIcon} = authSlice.actions;
 export default authSlice.reducer;
 
 

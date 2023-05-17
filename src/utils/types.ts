@@ -16,6 +16,9 @@ export interface IProducts{
   price:number;
   image: string;
   unit?: string;
+  inStock:number;
+  isAvailable: boolean;
+  ownerId: string;
 }
 export interface IApps{
   _id?: string;

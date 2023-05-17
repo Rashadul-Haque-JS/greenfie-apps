@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { GetServerSideProps } from "next";
 import Greetings from "@/components/misc/landings.tsx/greetings";
@@ -6,7 +6,29 @@ import { GenericProps } from "@/utils/types";
 import Hero from "@/components/misc/landings.tsx/hero";
 import AppLists from "@/components/misc/landings.tsx/appLists";
 import Testiminials from "@/components/misc/landings.tsx/testimonals";
+import { useDispatch } from "react-redux";
+import { setSignupIcon} from "@/store/features/auth";
 const Home = ({ apps }: GenericProps) => {
+  const dispatch = useDispatch()
+
+  const handleScroll = () => {
+    const scrolledPixels = window.pageYOffset;
+
+    if (scrolledPixels >= 166) {
+      dispatch(setSignupIcon(true));
+    } else {
+      dispatch(setSignupIcon(false));
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    // Clean up the event listener when the component unmounts
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   if (!apps.length) {
     return <div>Loading...</div>;
   }
@@ -16,7 +38,7 @@ const Home = ({ apps }: GenericProps) => {
       <Greetings />
       <Hero />
       <AppLists apps={apps} />
-      <Testiminials/>
+      <Testiminials />
     </div>
   );
 };
