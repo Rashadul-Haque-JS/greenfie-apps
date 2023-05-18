@@ -1,14 +1,29 @@
 import { ChangeEvent, useState } from "react";
+import { GenericProps } from "@/utils/types";
 
 const ProductUpload = () => {
-  const [name, setName] = useState("");
+  const [product, setProduct] = useState<GenericProps>({
+    name: "",
+    price: null,
+    shortDesc: "",
+    available: false,
+    unit: "",
+  });
   const [image, setImage] = useState<File | null>();
-  const [price, setPrice] = useState("");
-  const [shortDesc, setShortDesc] = useState("");
-  const [available, setAvailable] = useState(false);
 
-  const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setName(event.target.value);
+  const handleProductChange = (
+    event: ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
+    const { name, value } = event.target;
+
+    if (event.target.type === "checkbox") {
+      const isChecked = (event.target as HTMLInputElement).checked;
+      setProduct({ ...product, [name]: isChecked });
+    } else {
+      setProduct({ ...product, [name]: value });
+    }
   };
 
   const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -16,35 +31,25 @@ const ProductUpload = () => {
     setImage(file);
   };
 
-  const handlePriceChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setPrice(event.target.value);
-  };
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
 
-  const handleShortDescChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setShortDesc(event.target.value);
-  };
-
-  const handleAvailableChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setAvailable(event.target.checked);
-  };
-
-  const handleSubmit = () => {
     // Perform product upload logic here
-    // You can use the form values: name, image, price, shortDesc, available
+    // You can use the form values: product, image
     console.log("Product submitted:", {
-      name,
+      product,
       image,
-      price,
-      shortDesc,
-      available,
     });
 
     // Reset form values
-    setName("");
+    setProduct({
+      name: "",
+      price: null,
+      shortDesc: "",
+      available: false,
+      unit: "",
+    });
     setImage(null);
-    setPrice("");
-    setShortDesc("");
-    setAvailable(false);
   };
 
   return (
@@ -57,8 +62,9 @@ const ProductUpload = () => {
           </label>
           <input
             type="text"
-            value={name}
-            onChange={handleNameChange}
+            name="name"
+            value={product.name}
+            onChange={handleProductChange}
             className="w-full border-gray-300 rounded-md px-3 py-2"
             required
           />
@@ -83,33 +89,63 @@ const ProductUpload = () => {
             type="number"
             min="0"
             step="0.01"
-            value={price}
-            onChange={handlePriceChange}
+            name="price"
+            value={product.price}
+            onChange={handleProductChange}
             className="w-full border-gray-300 rounded-md px-3 py-2"
             required
           />
         </div>
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Short Description
+          <label className="flex justify-between items-center mb-1">
+            <span className="text-sm font-medium text-gray-700">
+              Short Description
+            </span>
+            {product.shortDesc.length === 30 && (
+              <small className="text-red-400">Max 30 chars</small>
+            )}
+            {product.shortDesc.length < 30 && (
+              <small className="text-gray-700">
+                {product.shortDesc.length}/30
+              </small>
+            )}
           </label>
           <textarea
-            value={shortDesc}
-            onChange={handleShortDescChange}
+            name="shortDesc"
+            value={product.shortDesc}
+            onChange={handleProductChange}
             className="w-full border-gray-300 rounded-md px-3 py-2"
+            maxLength={30}
             required
           ></textarea>
         </div>
         <div className="mb-4">
-          <label className="flex items-center">
-            <input
-              type="checkbox"
-              checked={available}
-              onChange={handleAvailableChange}
-              className="mr-2"
-            />
-            <span className="text-sm font-weight text-gray-700">Available</span>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Unit
           </label>
+          <select
+            name="unit"
+            value={product.unit}
+            onChange={handleProductChange}
+            className="w-full border-gray-300 rounded-md px-3 py-2"
+            required
+          >
+            <option value="">Select Selling Unit</option>
+            <option value="kg">KG</option>
+            <option value="piece">Piece</option>
+          </select>
+        </div>
+
+        <div className="mb-4 w-fit flex items-center">
+          <input
+            type="checkbox"
+            name="available"
+            checked={product.available}
+            onChange={handleProductChange}
+            className="mr-2 rounded-sm"
+            required
+          />
+          <span className="text-sm font-weight text-gray-700">Available</span>
         </div>
         <button
           type="submit"
