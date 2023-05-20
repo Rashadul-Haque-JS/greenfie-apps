@@ -13,7 +13,7 @@ const Hero = () => {
       <div className="absolute bottom-0 w-full lg:h-1/3 xl:h-1/3 bg-gray-800 bg-opacity-25 px-4 xs:py-6 sm:py-6 py-6">
         <div className="flex flex-col md:flex-row justify-center items-center gap-4">
           <h2 className="text-white text-center text-lg xl:text-xl lg:p-16 xl:p-16 font-medium mb-4 md:mb-6 uppercase">
-            Discover fresh and local produce with Greenfie, BD's first rooftop
+            Discover fresh and local produce with Greenfie, BDs first rooftop
             vegetables hub
           </h2>
         </div>

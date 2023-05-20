@@ -1,15 +1,18 @@
 import { ChangeEvent, useState } from "react";
 import { GenericProps } from "@/utils/types";
+import axios from "axios";
 
 const ProductUpload = () => {
   const [product, setProduct] = useState<GenericProps>({
     name: "",
-    price: null,
+    price: 0,
     shortDesc: "",
+    description:"",
     available: false,
     unit: "",
+    inStock: 0,
   });
-  const [image, setImage] = useState<File | null>();
+  const [file, setFile] = useState<any>();
 
   const handleProductChange = (
     event: ChangeEvent<
@@ -26,36 +29,48 @@ const ProductUpload = () => {
     }
   };
 
-  const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    setImage(file);
+  const handleImageChange = (event: any) => {
+    const file = event.target.files[0];
+    setFile(file);
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event:any) => {
     event.preventDefault();
 
-    // Perform product upload logic here
-    // You can use the form values: product, image
-    console.log("Product submitted:", {
-      product,
-      image,
-    });
-
+    try {
+      const formData = new FormData();
+      formData.append("name", product.name);
+      formData.append("price", product.price);
+      formData.append("shortDesc", product.shortDesc);
+      formData.append("description", product.description);
+      formData.append("unit", product.unit);
+      formData.append("inStock", product.inStock);
+      formData.append("available", product.available);
+      formData.append("image", file);
+      console.log("good");
+      const res = await axios.post("/api/products/product-create", formData);
+      console.log("bra", res);
+    } catch (err: any) {
+      console.log(err.message);
+    }
+   
     // Reset form values
-    setProduct({
-      name: "",
-      price: null,
-      shortDesc: "",
-      available: false,
-      unit: "",
-    });
-    setImage(null);
+    // setProduct({
+    //   name: "",
+    //   price: 0,
+    //   shortDesc: "",
+    //   description:"",
+    //   available: false,
+    //   unit: "",
+    //   inStock: 0,
+    // });
+   
   };
 
   return (
     <div className="max-w-md mx-auto bg-white p-8 shadow rounded-lg">
       <h2 className="text-2xl font-semibold mb-4">Upload Product</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} encType="multipart/form-data">
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Product Name
@@ -70,11 +85,13 @@ const ProductUpload = () => {
           />
         </div>
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label   htmlFor="image-upload" className="block text-sm font-medium text-gray-700 mb-1">
             Product Image
           </label>
           <input
+            id="image-upload"
             type="file"
+            name="image"
             accept="image/*"
             onChange={handleImageChange}
             className="border-gray-300"
@@ -146,6 +163,29 @@ const ProductUpload = () => {
             required
           />
           <span className="text-sm font-weight text-gray-700">Available</span>
+        </div>
+        <div className="mb-4">
+          <label className="flex justify-between items-center mb-1">
+            <span className="text-sm font-medium text-gray-700">
+              Description
+            </span>
+            {product.description.length === 200 && (
+              <small className="text-red-400">Max 200 chars</small>
+            )}
+            {product.description.length < 200 && (
+              <small className="text-gray-700">
+                {product.description.length}/200
+              </small>
+            )}
+          </label>
+          <textarea
+            name="description"
+            value={product.description}
+            onChange={handleProductChange}
+            className="w-full border-gray-300 rounded-md px-3 py-2"
+            maxLength={200}
+            required
+          ></textarea>
         </div>
         <button
           type="submit"

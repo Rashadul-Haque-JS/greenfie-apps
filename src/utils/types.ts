@@ -16,6 +16,7 @@ export interface IProducts{
   price:number;
   image: string;
   unit?: string;
+  shortDesc:string,
   inStock:number;
   isAvailable: boolean;
   ownerId: string;

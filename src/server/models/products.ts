@@ -6,27 +6,33 @@ const ProductsSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  description: {
-    type: String,
-    required: true,
-  },
   price: {
     type: Number,
     required: true,
   },
-  image: {
-    type: String,
-  },
   unit: {
     type: String,
     required: [true, "Product's unit is not specified"],
+  },
+
+  shortDesc: {
+    type: String,
+    required: [true, "Product's shortDesc is required"],
+  },
+
+  description: {
+    type: String,
+    required: false,
+  },
+  image: {
+    type: String,
   },
   inStock: {
     type: Number,
     required: [true, "In stock is not specified"],
   },
   isAvailable: {
-    type:Boolean,
+    type: Boolean,
     required: [true, "Please select product's availability"],
   },
   ownerId: {
@@ -39,13 +45,6 @@ const ProductsSchema = new mongoose.Schema({
 // to avoid the "Cannot overwrite model once compiled" error
 const Products =
   mongoose.models.Products || mongoose.model("Products", ProductsSchema);
-
-// Define CRUD operations
-export async function createProduct(data: IProducts) {
-  const product = new Products(data);
-  await product.save();
-  return product.toObject();
-}
 
 export async function getProducts() {
   const productss = await Products.find();

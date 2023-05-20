@@ -34,6 +34,8 @@ const RenderNavIcon = ({ toLogin, isLogoutIcon }: TIcon) => {
       dispatch(logoutAuth());
       if (window.location.pathname !== "/") {
         window.location.href = "/";
+      }else{
+        window.location.reload()
       }
     } catch (err: any) {
       console.log(err.message);
