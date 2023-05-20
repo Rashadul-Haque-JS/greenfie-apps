@@ -26,7 +26,7 @@ const SingleProduct = ({ product }: GenericProps) => {
         <div className='px-4'>
             <div className='flex flex-wrap justify-between items-center gap-5'>
                 <div className='relative w-full md:w-1/2 lg:w-1/2 xl:w-1/2 h-full'>
-                    <Image src={product?.image} alt={product?.name} className='w-full object-cover rounded h-full shadow-lg' width={500} height={500} />
+                    <Image src={`/uploads/${product.image}`} alt={product?.name} className='w-full object-cover rounded h-full shadow-lg' width={500} height={500} />
                 </div>
                 <div className='flex flex-col justify-end w-[336px] md:w-[304px] xs:w-full sm:w-full p-5 bg-background text-txt rounded-lg shadow-md gap-5 h-full'>
                     <h2 className='text-2xl font-bold mb-4 w-fit'>{product?.name}</h2>
