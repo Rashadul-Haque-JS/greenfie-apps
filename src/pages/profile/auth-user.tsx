@@ -13,10 +13,10 @@ const ProfilePage = ({ user }: GenericProps) => {
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [screen, setScreen] = useState(false);
+  const [screen, setScreen] = useState<boolean>(false);
   const [image, setImage] = useState("");
   const [file, setFile] = useState<any>();
-  const [save, setSave] = useState(false);
+  const [save, setSave] = useState<boolean>(false);
 
   useEffect(() => {
     if (userData?.city !== undefined) {
@@ -208,6 +208,7 @@ const ProfilePage = ({ user }: GenericProps) => {
                     City
                   </label>
                   <Select
+                    id="city"
                     name="city"
                     options={divisions}
                     placeholder="Choose your city"
@@ -221,12 +222,14 @@ const ProfilePage = ({ user }: GenericProps) => {
                         outline: "none",
                       }),
                     }}
+                    aria-labelledby="city"
                     required
                   />
                   <label htmlFor="area" className="mt-4 mb-1">
                     Area
                   </label>
                   <Select
+                    id="area"
                     name="area"
                     options={wards}
                     placeholder="Choose your Area"
@@ -241,6 +244,7 @@ const ProfilePage = ({ user }: GenericProps) => {
                       }),
                     }}
                     noOptionsMessage={() => "Select city first"}
+                    aria-labelledby="area"
                     required
                   />
                   <label htmlFor="phone" className="mt-4 mb-1">
@@ -261,6 +265,7 @@ const ProfilePage = ({ user }: GenericProps) => {
                         Gender
                       </label>
                       <Select
+                        id="gender"
                         name="gender"
                         options={[
                           { label: "male", value: "male" },
@@ -277,6 +282,7 @@ const ProfilePage = ({ user }: GenericProps) => {
                             outline: "none",
                           }),
                         }}
+                        aria-labelledby="gender"
                         required
                       />
                     </>

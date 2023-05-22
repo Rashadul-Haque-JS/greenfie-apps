@@ -19,7 +19,10 @@ const Login = ({
 
   useEffect(() => {
     if (newUserEmail) {
-      setCredentials({ ...credentials, email: newUserEmail });
+      setCredentials((prevCredentials) => ({
+        ...prevCredentials,
+        email: newUserEmail,
+      }));
     }
   }, [newUserEmail]);
 

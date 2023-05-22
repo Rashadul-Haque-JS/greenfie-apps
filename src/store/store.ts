@@ -11,10 +11,10 @@ const makeStore = () =>
       }),
   });
 
-export const wrapper = createWrapper(makeStore);
+export const wrapper = createWrapper(makeStore, { debug: false });
+
 export type AppDispatch = ReturnType<typeof makeStore>['dispatch'];
 export type RootState = ReturnType<typeof rootReducer>;
-
 
 // Define a custom GetServerSideProps that will inject the store into the props
 export const getServerSideProps =

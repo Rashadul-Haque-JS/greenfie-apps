@@ -42,8 +42,8 @@ const Navbar = ({ signup }: any) => {
       setIsLoginModalOpen(true);
       setNewUserEmail(email);
     }
-  }, []);
-
+  }, [router.query]);
+  
   useEffect(() => {
     const { resetPasswordToken, email } = router.query;
     if (resetPasswordToken && email) {
