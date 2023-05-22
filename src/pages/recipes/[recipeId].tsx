@@ -2,6 +2,8 @@ import axios from 'axios';
 import { GetServerSideProps } from 'next';
 import { GenericProps } from '@/utils/types';
 import VideoPlayer from '@/components/video/videoPlayer';
+
+
 const Recipe = ({ recipe }: GenericProps) => {
 
   if (!recipe) {
@@ -50,7 +52,7 @@ resolvedUrl: The actual URL of the request after resolution of any redirects.
 export const getServerSideProps: GetServerSideProps = async (context) => {
   try {
     const { recipeId } = context.query;
-    const res = await axios.get(`http://127.0.0.1:9000/api/recipes/recipes?id=${recipeId}`);
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_CLIENT_URL}/api/recipes/recipes?id=${recipeId}`);
     const recipe = res.data;
     return { props: { recipe } };
   } catch (error: any) {

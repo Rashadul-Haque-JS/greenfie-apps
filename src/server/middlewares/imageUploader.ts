@@ -28,10 +28,10 @@ export const parseForm = async (
       maxFileSize: 1024 * 1024, // 1mb
       uploadDir,
       filename: (_name, _ext, part) => {
-        const uniqueSuffix = `${uuidv4()}`;
-        const filename = `${part.name || "unknown"}-${uniqueSuffix}${extname(
-          part.name || ""
-        )}`;
+        const uniqueSuffix = uuidv4();
+        const originalName = part.name || "";
+        const extension = extname(originalName) || ".png"; // Use .jpg as the default extension if none is found
+        const filename = `${originalName}-${uniqueSuffix}${extension}`;
         return filename;
       },
       filter: (part) => {

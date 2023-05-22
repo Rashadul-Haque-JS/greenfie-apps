@@ -6,6 +6,7 @@ import axios from "axios";
 import Image from "next/image";
 import Buttons from "@/stories/buttons/Button";
 
+
 const SingleProduct = ({ product }: GenericProps) => {
   const [quantity, setQuantity] = useState(1);
   const decreaseQuantity = () => {
@@ -93,7 +94,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   try {
     const { productId } = context.query;
     const res = await axios.get(
-      `http://127.0.0.1:9000/api/products/products?id=${productId}`
+      `${process.env.NEXT_PUBLIC_CLIENT_URL}/api/products/products?id=${productId}`
     );
     const product = res.data;
     return { props: { product } };

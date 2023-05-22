@@ -47,7 +47,7 @@ const Home = ({ apps }: GenericProps) => {
 
 export const getServerSideProps: GetServerSideProps = async () => {
   try {
-    const res = await axios.get("http://127.0.0.1:9000/api/fav-apps");
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_CLIENT_URL}/api/fav-apps`);
     const apps = res.data;
     return { props: { apps } };
   } catch (error: any) {

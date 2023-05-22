@@ -5,6 +5,7 @@ import {IRecipe, GenericProps } from '../../utils/types';
 import { GetServerSideProps } from 'next';
 import axios from 'axios'
 
+
 const Recipes = ({recipes}:GenericProps) => {
   return (
     <ListsPage>
@@ -16,7 +17,7 @@ const Recipes = ({recipes}:GenericProps) => {
 
 export const getServerSideProps : GetServerSideProps= async ()=>{
   try {
-    const res = await axios.get('http://127.0.0.1:9000/api/recipes/recipes');
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_CLIENT_URL}/api/recipes/recipes`);
     const recipes = res.data;
     return { props: { recipes } };
   } catch (error:any) {
@@ -26,4 +27,5 @@ export const getServerSideProps : GetServerSideProps= async ()=>{
 }
 
 export default Recipes
+
 
