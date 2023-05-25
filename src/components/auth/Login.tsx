@@ -52,18 +52,19 @@ const Login = ({
     setIsLoginModalOpen(false);
   };
   return (
-    <div className="fixed top-0 left-0 w-full h-full overlay bg-background flex flex-wrap-reverse justify-evenly items-center overflow-y-auto">
-      <div
-        className="text-3xl text-white text-center md:flex-grow lg:flex-grow xl:flex-grow  h-full sm:h-[320px] xs:h-[320px] font-semibold "
+  <div className="w-full h-full overlay bg-background flex justify-evenly items-center overflow-y-auto">
+    <div
+        className="text-3xl text-white text-center md:flex-grow lg:flex-grow xl:flex-grow h-full sm:h-[320px] xs:h-[320px] font-semibold hidden-xs hidden-sm"
         style={{
           backgroundImage: "url(/images/smiles.png)",
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
         }}
       ></div>
+
       <div className="bg-background p-8 w-[546px] sm:mt-8 xs:mt-8">
         <div className="w-3/4 sm:w-full xs:w-full flex flex-col mx-auto">
-          <span className="sm:block xs:block hidden bg-main text-background px-4 py-2 transform translate-y-[-30px] rounded-lg text-center">
+          <span className="sm:block xs:block hidden bg-main text-background px-4 py-2 rounded-lg text-center mb-8">
             Greenfie
           </span>
           <div className="flex justify-between items-center mb-4 px-2">
@@ -87,15 +88,15 @@ const Login = ({
                     {errorMessage}
                   </p>
                 )}
+                <label className="px-1" htmlFor="password">Email</label>
                 <input
-                  className="w-full px-3 py-2 border border-gray-400 rounded-lg my-2"
+                  className="w-full px-3 py-2 border border-gray-400 rounded-lg mt-1"
                   type="email"
                   id="email"
                   name="email"
                   value={credentials.email}
                   onChange={handleChange}
                   required
-                  placeholder="Email..."
                   autoFocus
                 />
               </div>
@@ -105,15 +106,16 @@ const Login = ({
                     {errorMessage}
                   </p>
                 )}
-                <div className="relative">
+                <label className="px-1" htmlFor="password">Password</label>
+                <div className="relative mt-1">
                   <input
-                    className="w-full px-3 py-2 border border-gray-400 rounded-lg my-2"
+                    className="w-full px-3 py-2 border border-gray-400 rounded-lg "
                     type={showPassword ? "text" : "password"}
                     id="password"
                     name="password"
                     onChange={handleChange}
                     required
-                    placeholder="Password..."
+                   
                   />
                   <button
                     type="button"
@@ -150,7 +152,7 @@ const Login = ({
           </div>
           <div className="px-2 text-center">
             <p className="text-gray-600 text-sm mb-2">
-             Don&apos;t have an account? 
+              Don&apos;t have an account?
               <span
                 className="text-blue-500 cursor-pointer"
                 onClick={handleOptReg}
