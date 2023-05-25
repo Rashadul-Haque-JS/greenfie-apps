@@ -1,18 +1,32 @@
+import { useState } from "react";
 
 interface AccordionProps {
   title: string;
   children: React.ReactNode;
-  isOpen: boolean;
-  setIsOpen(value: boolean): void;
+  setScreen: (props: any) => void;
 }
 
-const Accordion = ({isOpen,setIsOpen, title, children }: AccordionProps) => {
- 
+const Accordion = ({ title, children, setScreen}: AccordionProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [openTitle, setOpenTitle] = useState("");
+  const handleAccordionClick = () => {
+    setIsOpen(() => {
+      if (title === openTitle) {
+        setOpenTitle("");
+        setScreen((prev:any)=> !prev)
+        return false;
+      }
+      setOpenTitle(title);
+      setScreen((prev:any)=> !prev)
+      return true;
+    });
+  };
+
   return (
     <div className="border-none rounded-lg mb-4">
       <div
         className="flex justify-between items-center cursor-pointer p-1"
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={handleAccordionClick}
       >
         <h3 className="text-sm font-semibold">{title}</h3>
         <svg
@@ -31,7 +45,11 @@ const Accordion = ({isOpen,setIsOpen, title, children }: AccordionProps) => {
         </svg>
       </div>
       <hr className="border-gray-400" />
-      {isOpen && <div className="p-4 bg-gray-100">{children ? children :'Nothing to display'}</div>}
+      {isOpen && (
+        <div className="p-4 bg-gray-100">
+          {children ? children : "Nothing to display"}
+        </div>
+      )}
     </div>
   );
 };

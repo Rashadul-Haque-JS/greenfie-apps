@@ -43,18 +43,18 @@ const PasswordForm = ({ setIsPassFormOpen, setIsLoginModalOpen }: any) => {
   }, [newUserEmail]);
 
   return (
-    <div className="fixed top-0 left-0 w-full h-full overlay bg-background flex flex-wrap-reverse justify-evenly items-center overflow-y-auto">
-      <div
-        className="text-3xl text-white text-center md:flex-grow lg:flex-grow xl:flex-grow  h-full sm:h-[320px] xs:h-[320px] font-semibold "
+    <div className="w-full h-full overlay bg-background flex justify-evenly items-center overflow-y-auto">
+    <div
+        className="text-3xl text-white text-center md:flex-grow lg:flex-grow xl:flex-grow h-full sm:h-[320px] xs:h-[320px] font-semibold hidden-xs hidden-sm"
         style={{
           backgroundImage: "url(/images/smiles.png)",
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
         }}
       ></div>
-      <div className="bg-background p-8 w-[546px] sm:mt-10 xs:mt-10 transform translate-y-[-100px] sm:translate-y-[100px] xs:translate-y-[100px]">
+      <div className="bg-background p-8 w-[546px] sm:mt-10 xs:mt-10">
         <div className="w-3/4 sm:w-full xs:w-full flex flex-col mx-auto">
-          <span className="sm:block xs:block hidden bg-main text-background text-center px-4 py-2  transform translate-y-[-30px] rounded-lg">
+          <span className="sm:block xs:block hidden bg-main text-background text-center px-4 py-2 rounded-lg mb-8">
             Greenfie
           </span>
           {errorMessage && !errorMessage.includes("match") && (
@@ -76,14 +76,14 @@ const PasswordForm = ({ setIsPassFormOpen, setIsLoginModalOpen }: any) => {
           <div className="h-full w-full ">
             <form onSubmit={handlePasswordSubmit} className="p-2 flex flex-col">
               <div className="mt-4">
+              <label className="px-1" htmlFor="email">New Password</label>
                 <div className="relative">
                   <input
-                    className="w-full px-3 py-2 border rounded-lg"
+                    className="w-full px-3 py-2 border rounded-lg mt-1"
                     type={showPassword ? "text" : "password"}
                     name="password"
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                    placeholder=" New password..."
                   />
                   <button
                     type="button"
@@ -111,16 +111,17 @@ const PasswordForm = ({ setIsPassFormOpen, setIsLoginModalOpen }: any) => {
                     <hr />
                   </span>
                 )}
+                <label className="px-1" htmlFor="email">Confirm Password</label>
                 <div className="relative">
                   <input
-                    className="w-full px-3 py-2 border rounded-lg"
+                    className="w-full px-3 py-2 border rounded-lg mt-1"
                     type={showConfirmPassword ? "text" : "password"}
                     id="confirmPassword"
                     name="confirmPassword"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     required
-                    placeholder="Confirm new password..."
+                   
                   />
                   <button
                     type="button"

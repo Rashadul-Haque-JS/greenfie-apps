@@ -18,6 +18,10 @@ const Navbar = ({ signup }: any) => {
   const [newUserEmail, setNewUserEmail] = useState<any>();
   const [usr, setUsr] = useState<any>();
   const router = useRouter();
+  const user = useSelector((state: RootState) => state.auth.auth);
+  const isSignup = useSelector((state: RootState) => state.auth.signup);
+  const isSignupIcon = useSelector((state: RootState) => state.auth.signupIcon);
+
   const openModal = (modalType: string) => {
     const modalStates = {
       login: [true, false, false],
@@ -38,8 +42,8 @@ const Navbar = ({ signup }: any) => {
       setIsLoginModalOpen(true);
       setNewUserEmail(email);
     }
-  }, []);
-
+  }, [router.query]);
+  
   useEffect(() => {
     const { resetPasswordToken, email } = router.query;
     if (resetPasswordToken && email) {
@@ -49,7 +53,6 @@ const Navbar = ({ signup }: any) => {
     }
   }, []);
 
-  const user = useSelector((state: RootState) => state.auth.auth);
   useEffect(() => {
     if (user) {
       setUsr(user);
@@ -58,9 +61,12 @@ const Navbar = ({ signup }: any) => {
 
   return (
     <AuthContext.Provider value={{ newUserEmail }}>
-      <div className="bg-main xs:px-1.5 sm:px-1.5 px-5 py-0">
+      <div
+        className="bg-main xs:px-1.5 sm:px-1.5 px-5 py-1"
+        style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 999 }}
+      >
         <nav className="mx-auto flex justify-between py-2 items-center">
-        <Logo/>
+          <Logo />
           {!usr?.name && (
             <div className="flex w-48  items-center justify-end  gap-4">
               <div
@@ -69,12 +75,14 @@ const Navbar = ({ signup }: any) => {
               >
                 <i className="material-icons cursor-pointer">person</i>
               </div>
-              <div
-                className="flex justify-center items-center  w-[28px] h-[28px] rounded-full text-background bg-green"
-                onClick={() => openModal("signup")}
-              >
-                <i className="material-icons cursor-pointer">person_add</i>
-              </div>
+              {isSignupIcon && (
+                <div
+                  className="flex justify-center items-center  w-[28px] h-[28px] rounded-full text-background bg-green"
+                  onClick={() => openModal("signup")}
+                >
+                  <i className="material-icons cursor-pointer">person_add</i>
+                </div>
+              )}
               <div
                 className="flex justify-center items-center  w-[28px] h-[28px] rounded-full text-background bg-green"
                 onClick={() => openModal("reset")}
@@ -83,7 +91,7 @@ const Navbar = ({ signup }: any) => {
               </div>
             </div>
           )}
-        {usr?.name && <RenderNavIcon isLogoutIcon={true}/>}
+          {usr?.name && <RenderNavIcon isLogoutIcon={true} />}
         </nav>
 
         {isLoginModalOpen && (
@@ -93,7 +101,7 @@ const Navbar = ({ signup }: any) => {
             setIsResetModalOpen={setIsResetModalOpen}
           />
         )}
-        {isSignModalOpen && (
+        {(isSignModalOpen || isSignup) && (
           <Register
             setIsSignupModalOpen={setIsSignupModalOpen}
             signup={signup}

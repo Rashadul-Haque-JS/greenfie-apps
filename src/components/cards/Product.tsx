@@ -19,10 +19,11 @@ const ProductCard = ({ product }: GenericProps) => {
   return (
     <div className='max-w-sm rounded overflow-hidden shadow-lg m-10'>
       <Link href={`/products/${product._id}`}>
-        <Image className='w-full brightness-105 contrast-115' src={product.image} alt={product.name} width={500} height={500} />
+        <Image className='w-full h-2/3 brightness-105 contrast-115 object-cover' src={`/uploads/${product.image}`} alt={product.name} width={500} height={500}
+         />
       </Link>
       <div className='px-6 py-4'>
-        <div className='font-bold text-xl mb-2'>{product.name}</div>
+        <div className='font-bold text-xl mb-2 capitalize'>{product.name}</div>
         <p className='text-gray-700 text-base'>
           {product.description}
         </p>

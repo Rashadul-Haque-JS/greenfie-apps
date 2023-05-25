@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import user from '@/server/controllers/users/updateUser';
+import updateUser from '@/server/controllers/users/updateUserInfo';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  await user (req, res);
+  await updateUser (req, res);
 }

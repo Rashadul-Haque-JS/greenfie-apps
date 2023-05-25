@@ -59,10 +59,9 @@ const App = ({ Component, pageProps }: AppProps) => {
 
 export default wrapper.withRedux(App);
 
-
 const fetchUser = async (dispatch:AppDispatch) => {
   try {
-    const res = await axios.get(`http://127.0.0.1:9000/api/users/authUser`);
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_CLIENT_URL}/api/users/authUser`);
     const { user } = res.data;
     const newData = {_id:user?._id, name:user?.name}
     dispatch(setAuth(newData))

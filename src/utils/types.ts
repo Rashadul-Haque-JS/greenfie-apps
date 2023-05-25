@@ -16,6 +16,10 @@ export interface IProducts{
   price:number;
   image: string;
   unit?: string;
+  shortDesc:string,
+  inStock:number;
+  isAvailable: boolean;
+  ownerId: string;
 }
 export interface IApps{
   _id?: string;
@@ -63,3 +67,9 @@ export interface IUserUpdate {
   $set?: Partial<IUser>;
   $unset?: { [key in keyof IUser]?: boolean } & { confirmationToken?: boolean };
 }
+
+export interface DecodedToken {
+  _id: string;
+  iat: number;
+  exp: number;
+} 
