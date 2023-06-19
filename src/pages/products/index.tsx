@@ -3,7 +3,7 @@ import ListsPage from '@/components/layouts/LayoutInner';
 import {IProducts, GenericProps } from '@/utils/types';
 import { GetServerSideProps } from 'next';
 import axios from 'axios';
-
+import { getClientURL } from '@/utils/clientUrl';
 
 const Products = ({ products }:GenericProps) => {
   
@@ -18,13 +18,14 @@ const Products = ({ products }:GenericProps) => {
 
 
 export const getServerSideProps: GetServerSideProps = async () => {
+  const URL = getClientURL();
   try {
-    const res = await axios.get(`${process.env.NEXT_PUBLIC_CLIENT_URL}/api/products/products`);
+    const res = await axios.get(`${URL}/api/products/products`);
     const products = res.data;
     return { props: { products } };
-  } catch (error:any) {
+  } catch (error: any) {
     console.error(error.message);
-    return { props: { products: []} };
+    return { props: { products: [] } };
   }
 };
 

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { getClientURL } from '@/utils/clientUrl';
 import '@/styles/global.scss';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -23,6 +24,7 @@ const App = ({ Component, pageProps }: AppProps) => {
   const isUnprotectedRoute = unprotectedRoutes.includes(currentPath);
   const isAuthenticated = !isUnprotectedRoute && bearerToken;
   const dispatch = useDispatch() as AppDispatch
+  const clientUrl = getClientURL();
 
   useEffect(() => {
     const randomString = [...Array(10)].map(() => Math.random().toString(36)[2]).join('');
@@ -30,7 +32,7 @@ const App = ({ Component, pageProps }: AppProps) => {
     if (token) {
       setBearerToken(token);
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-      fetchUser(dispatch)
+      fetchUser(dispatch,clientUrl)
     } else if (!isAuthenticated && !isUnprotectedRoute) {
       router.push(`/?login=${randomString}`);
     }else{
@@ -50,7 +52,7 @@ const App = ({ Component, pageProps }: AppProps) => {
       )}
       {isUnprotectedRoute && (
         <Layout signup={signup}>
-          <Component {...pageProps} />
+          <Component {...pageProps}/>
         </Layout>
       )}
     </>
@@ -59,9 +61,9 @@ const App = ({ Component, pageProps }: AppProps) => {
 
 export default wrapper.withRedux(App);
 
-const fetchUser = async (dispatch:AppDispatch) => {
+const fetchUser = async (dispatch:AppDispatch,clientURL:any) => {
   try {
-    const res = await axios.get(`${process.env.NEXT_PUBLIC_CLIENT_URL}/api/users/authUser`);
+    const res = await axios.get(`${clientURL}/api/users/authUser`);
     const { user } = res.data;
     const newData = {_id:user?._id, name:user?.name}
     dispatch(setAuth(newData))

@@ -3,6 +3,7 @@ import Users from "@/server/models/users";
 import dotenv from "dotenv";
 import bcrypt from "bcryptjs";
 import crypto from "crypto";
+import connectToDatabase from "@/server/connection";
 //import nodemailer from "nodemailer";
 
 dotenv.config();
@@ -21,6 +22,7 @@ export default async function register(
   res: NextApiResponse
 ) {
   try {
+    connectToDatabase();
     const { password, email } = req.body;
     const userCheck = await Users.findOne({ email });
     if (userCheck) {

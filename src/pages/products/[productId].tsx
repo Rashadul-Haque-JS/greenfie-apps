@@ -5,7 +5,7 @@ import Links from "@/stories/links/Link";
 import axios from "axios";
 import Image from "next/image";
 import Buttons from "@/stories/buttons/Button";
-
+import { getClientURL } from '@/utils/clientUrl';
 
 const SingleProduct = ({ product }: GenericProps) => {
   const [quantity, setQuantity] = useState(1);
@@ -91,10 +91,11 @@ const SingleProduct = ({ product }: GenericProps) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  const URL = getClientURL();
   try {
     const { productId } = context.query;
     const res = await axios.get(
-      `${process.env.NEXT_PUBLIC_CLIENT_URL}/api/products/products?id=${productId}`
+      `${URL}/api/products/products?id=${productId}`
     );
     const product = res.data;
     return { props: { product } };
