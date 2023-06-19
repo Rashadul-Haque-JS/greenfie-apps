@@ -82,7 +82,7 @@ const SingleProduct = ({ product }: GenericProps) => {
         </div>
       </div>
       <hr className="mt-16 mb-8" />
-      <div className="mt-2">
+      <div className="mt-2 px-40 md:px-28 sm:px-8 xs:px-6">
         <h2 className="font-bold py-2">Details</h2>
         <p className="text-gray-600">{product?.description}</p>
       </div>
