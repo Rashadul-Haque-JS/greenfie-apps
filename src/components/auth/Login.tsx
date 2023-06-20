@@ -10,7 +10,7 @@ const Login = ({
   setIsSignupModalOpen,
   setIsResetModalOpen,
 }: any) => {
-  const [credentials, setCredentials] = useState({ email: "", password: "" });
+  const [credentials, setCredentials] = useState({ email: "greenfie@greenfie-test.com", password: "greenfie" });
   const [errorMessage, setErrorMessage] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
