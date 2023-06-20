@@ -113,6 +113,7 @@ const Login = ({
                     type={showPassword ? "text" : "password"}
                     id="password"
                     name="password"
+                    value={credentials.password}
                     onChange={handleChange}
                     required
                    
