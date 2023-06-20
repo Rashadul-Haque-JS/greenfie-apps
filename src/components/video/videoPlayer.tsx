@@ -27,7 +27,9 @@ function VideoPlayer({ src }: TProps) {
       onMouseLeave={() => setShowPauseButton(false)}
       onTouchMove={() => setShowPauseButton(true)}
       onTouchEnd={() => setShowPauseButton(false)}
+
     >
+      <div style={{border:'10px #000 solid'}}>
       <video
         controls
         autoPlay
@@ -39,6 +41,7 @@ function VideoPlayer({ src }: TProps) {
       >
         <source src={src} type='video/mp4' className='w-full h-full' />
       </video>
+      </div>
       {playing && showPauseButton && (
         <button
           onClick={togglePlayPause}

@@ -2,7 +2,7 @@ import axios from 'axios';
 import { GetServerSideProps } from 'next';
 import { GenericProps } from '@/utils/types';
 import VideoPlayer from '@/components/video/videoPlayer';
-
+import { getClientURL } from '@/utils/clientUrl';
 
 const Recipe = ({ recipe }: GenericProps) => {
 
@@ -12,7 +12,7 @@ const Recipe = ({ recipe }: GenericProps) => {
 
   return (
     <div className='transform translate-y-[-28px]'>
-      <div className='w-full transform translate-y-[-26px]'>
+      <div className='w-full transform translate-y-[-2px]'>
        <VideoPlayer src={recipe.video}/>
       </div>
       <div className='max-h-96 overflow-scroll mx-4'>
@@ -40,7 +40,7 @@ const Recipe = ({ recipe }: GenericProps) => {
 
 
 /* 
-The context argument in SSR function is an object that has the following properties:
+The context argument in SSR function is an object which has the following properties:
 params: An object containing the dynamic route parameters.
 req: The incoming HTTP request object.
 res: The incoming HTTP response object.
@@ -50,9 +50,10 @@ resolvedUrl: The actual URL of the request after resolution of any redirects.
 */
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  const URL = getClientURL();
   try {
     const { recipeId } = context.query;
-    const res = await axios.get(`${process.env.NEXT_PUBLIC_CLIENT_URL}/api/recipes/recipes?id=${recipeId}`);
+    const res = await axios.get(`${URL}/api/recipes/recipes?id=${recipeId}`);
     const recipe = res.data;
     return { props: { recipe } };
   } catch (error: any) {

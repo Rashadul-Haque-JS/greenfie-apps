@@ -1,8 +1,5 @@
 import React, { useEffect} from "react";
-import axios from "axios";
-import { GetServerSideProps } from "next";
 import Greetings from "@/components/misc/landings.tsx/greetings";
-import { GenericProps } from "@/utils/types";
 import Hero from "@/components/misc/landings.tsx/hero";
 import AppLists from "@/components/misc/landings.tsx/appLists";
 import Testiminials from "@/components/misc/landings.tsx/testimonals";
@@ -10,8 +7,9 @@ import { useDispatch } from "react-redux";
 import { setSignupIcon } from "@/store/features/auth";
 import AskToAct from "@/components/misc/landings.tsx/askToAct";
 import { getCookies } from "@/utils/cookies";
+import favapps from "@/utils/data/fav-app";
 
-const Home = ({ apps }: GenericProps) => {
+const Home = () => {
   const dispatch = useDispatch();
   const handleScroll = () => {
     const scrolledPixels = window.pageYOffset;
@@ -31,7 +29,7 @@ const Home = ({ apps }: GenericProps) => {
     };
   }, []);
 
-  if (!apps.length) {
+  if (!favapps.length) {
     return <div>Loading...</div>;
   }
 
@@ -39,21 +37,12 @@ const Home = ({ apps }: GenericProps) => {
     <div className="flex flex-col items-center min-h-screen bg-background text-txt gap-10 mt-24">
       {!getCookies('token') ? <Greetings />:<AskToAct />}
       <Hero />
-      <AppLists apps={apps} />
+      <AppLists apps={favapps} />
       <Testiminials />
     </div>
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  try {
-    const res = await axios.get(`${process.env.NEXT_PUBLIC_CLIENT_URL}/api/fav-apps`);
-    const apps = res.data;
-    return { props: { apps } };
-  } catch (error: any) {
-    console.error(error.message);
-    return { props: { apps: [] } };
-  }
-};
+
 
 export default Home;
