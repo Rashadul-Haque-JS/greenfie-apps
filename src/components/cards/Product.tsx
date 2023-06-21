@@ -31,21 +31,24 @@ const ProductCard = ({ product }: GenericProps) => {
       <div className="px-6 py-4">
         <div className="font-bold text-xl mb-2 capitalize">{product.name}</div>
         <div className="flex items-center gap-3">
-          <div className="sm:w-1/3 xs:w-1/3 md:w-1/3 w-1/2" style={{ borderTop: "8px solid #000" }}></div>
+          <div
+            className="sm:w-1/3 xs:w-1/3 md:w-1/3 w-1/2"
+            style={{ borderTop: "8px solid #28B335" }}
+          ></div>
           <p className="text-gray-700 text-base">{product.shortDesc}</p>
         </div>
+      </div>
+      <div className="p-4 flex justify-center items-center">
+        <Button onClick={addToCart} className="px-2 mx-1 bg-main text-white font-semibold hover:bg-white">
+          {isInCart ? "In Cart 🛒" : "Add to Cart"}
+        </Button>
       </div>
       <div className="px-6 py-4 flex justify-center items-center">
         <span className="inline-block bg-gray-200 rounded px-2 py-1 text-sm font-semibold text-gray-700 mr-2 flex-shrink-0">
           ${product.price}
         </span>
-      </div>
-      <div className="px-6 py-4 flex justify-center items-center">
         <Button onClick={toggleLove} className="px-2 mx-1 hover:bg-slate-300">
           {isLoved ? "Loved ❤️" : "Love It"}
-        </Button>
-        <Button onClick={addToCart} className="px-2 mx-1 hover:bg-slate-300">
-          {isInCart ? "In Cart 🛒" : "Add to Cart"}
         </Button>
       </div>
     </div>
