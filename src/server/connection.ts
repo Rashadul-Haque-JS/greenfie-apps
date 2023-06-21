@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 
 mongoose.set('strictQuery', false);
 dotenv.config();
-const uri = process.env.MONGODB_CONNECTION_STRING;;
+const uri = process.env.MONGODB_URI;
 const options: ConnectOptions = {
   maxPoolSize: 100,
   minPoolSize: 0,
