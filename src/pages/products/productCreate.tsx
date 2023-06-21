@@ -1,6 +1,7 @@
 import { ChangeEvent, useState } from "react";
 import { GenericProps } from "@/utils/types";
 import axios from "axios";
+import { toast } from 'react-toastify';
 
 const ProductUpload = () => {
   const [product, setProduct] = useState<GenericProps>({
@@ -48,22 +49,21 @@ const ProductUpload = () => {
       formData.append("available", product.available);
       formData.append("image", file);
       console.log("good");
-      const res = await axios.post("/api/products/product-create", formData);
-      console.log("bra", res);
+      await axios.post("/api/products/product-create", formData);
+      toast.success('Product created successfully')
     } catch (err: any) {
       console.log(err.message);
     }
    
-    // Reset form values
-    // setProduct({
-    //   name: "",
-    //   price: 0,
-    //   shortDesc: "",
-    //   description:"",
-    //   available: false,
-    //   unit: "",
-    //   inStock: 0,
-    // });
+    setProduct({
+      name: "",
+      price: 0,
+      shortDesc: "",
+      description:"",
+      available: false,
+      unit: "",
+      inStock: 0,
+    });
    
   };
 
