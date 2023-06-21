@@ -35,10 +35,11 @@ const Register = ({ setIsSignupModalOpen, signup }: any) => {
       const resp = await axios.post(signup, signupData);
       setMessage(resp.data.message);
       dispatch(setSignup(false));
+      setErrorMessage('');
     } catch (error: any) {
       const { response } = error.response && error;
       const { message } = error;
-      setErrorMessage(response.data.message || message);
+      setErrorMessage(response.data.error || message);
     }
   };
 
