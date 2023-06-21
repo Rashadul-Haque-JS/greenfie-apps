@@ -13,7 +13,7 @@ module.exports = withBundleAnalyzer({
     return config;
   },
   images: {
-    domains: ["picsum.photos", "127.0.0.1","randomuser.me"], //THIS IS TEMPORARY FOR TESTING
+    domains: ["picsum.photos", "127.0.0.1","randomuser.me", "vercel.app"], //THIS IS TEMPORARY FOR TESTING
     path: '/_next/image'
   },
 });
