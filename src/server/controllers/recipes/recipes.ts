@@ -1,11 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import connectToDB from '@/server/connection';
 import { createRecipe, getRecipes, getRecipe, updateRecipe, deleteRecipe } from '@/server/models/recipes';
 
 const recipeHandler=async(req: NextApiRequest, res: NextApiResponse) =>{
   const { method, body, query } = req;
-
-  await connectToDB();
 
   switch (method) {
     case 'POST':

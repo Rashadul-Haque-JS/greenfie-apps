@@ -1,7 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import Users from "@/server/models/users";
-import dotenv from "dotenv";
-dotenv.config();
 
 export default async function confirmEmail(
   req: NextApiRequest,

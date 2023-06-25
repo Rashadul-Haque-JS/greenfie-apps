@@ -3,9 +3,7 @@ import Users from "@/server/models/users";
 import dotenv from "dotenv";
 import bcrypt from "bcryptjs";
 import crypto from "crypto";
-import connectToDatabase from "@/server/connection";
 //import nodemailer from "nodemailer";
-
 dotenv.config();
 // const transporter = nodemailer.createTransport({
 //   host: process.env.SMTP_HOST,
@@ -22,7 +20,6 @@ export default async function register(
   res: NextApiResponse
 ) {
   try {
-    connectToDatabase();
     const { password, email } = req.body;
     const userCheck = await Users.findOne({ email });
     if (userCheck) {

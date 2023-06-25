@@ -1,6 +1,4 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import connectToDB from "@/server/connection";
-
 import {
   getProducts,
   getProduct,
@@ -10,8 +8,6 @@ import {
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { method, body, query } = req;
-
-  await connectToDB();
 
   switch (method) {
     case "GET":
