@@ -2,7 +2,6 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import Users from "@/server/models/users";
 import jwt  from 'jsonwebtoken';
 import type { UpdateQuery } from 'mongoose';
-
 import {DecodedToken} from '@/utils/types'
 
 export default async function updateUser(req: NextApiRequest, res: NextApiResponse) {

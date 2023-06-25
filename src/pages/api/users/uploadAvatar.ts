@@ -5,11 +5,13 @@ import jwt from "jsonwebtoken";
 import { DecodedToken } from "@/utils/types";
 import fs from 'fs';
 import path from 'path';
+import connectToDatabase from "@/server/connection";
 
 const handler = async (
   req: NextApiRequest,
   res: NextApiResponse
 ) => {
+  await connectToDatabase();
   if (req.method !== "POST") {
     res.setHeader("Allow", "POST");
     res.status(405).json({
