@@ -13,13 +13,13 @@ const favapps = [
       },
       {
         name: "Interiors",
-        image: "/images/products.png",
+        image: "/images/interiors.png",
          page:'/interiors'
   
       },
       {
         name: "blogs",
-        image: "/images/products.png",
+        image: "/images/blogs.png",
          page:'/blogs'
   
       },
@@ -43,17 +43,11 @@ const favapps = [
       },
       {
         name: "contact",
-        image: "/images/products.png",
+        image: "/images/contact.png",
          page:'/contact'
   
-      },
-      {
-        name: "products",
-        image: "/images/products.png",
-         page:'/products'
+      }
   
-      },
-    
   ];
   
   export default favapps;

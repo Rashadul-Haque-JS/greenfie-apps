@@ -161,10 +161,10 @@ const ProfilePage = ({ user }: GenericProps) => {
               {userData ? (
                 <>
                   <h1 className="text-2xl font-bold capitalize">
-                    {userData.name} Haque
+                    {userData.name}
                   </h1>
                   <p className="text-gray-600">
-                    123 {userData.area}, {userData.city}, BD
+                    123 {userData.area}, {userData.city || 'city'}, Global
                   </p>
                   <p className="text-gray-600">{userData.email}</p>
                   <p className="text-gray-600">{userData.phone}</p>
