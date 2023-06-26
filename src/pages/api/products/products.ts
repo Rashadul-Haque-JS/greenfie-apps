@@ -3,6 +3,6 @@ import products from '@/server/controllers/products/products';
 import connectToDatabase from "@/server/connection";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  await connectToDatabase();
+  connectToDatabase();
   await products (req, res);
 }

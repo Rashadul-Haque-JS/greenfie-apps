@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import Button from "../experiments/Button";
 import { AuthContext } from "../navbar/navHome";
 import { setCookies } from "@/utils/cookies";
+import { set } from "mongoose";
 
 const Login = ({
   setIsLoginModalOpen,
@@ -13,6 +14,7 @@ const Login = ({
   const [credentials, setCredentials] = useState({ email: "greenfie@greenfie-test.com", password: "greenfie" });
   const [errorMessage, setErrorMessage] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [preLoader, setPreLoader] = useState(false);
 
   const router = useRouter();
   const { newUserEmail } = useContext(AuthContext);
@@ -32,6 +34,7 @@ const Login = ({
   };
   const handleLoginSubmit = async (event: any) => {
     event.preventDefault();
+    setPreLoader(true);
     try {
       const response = await axios.post("/api/auth/login", credentials);
       const { token } = response.data;
@@ -42,6 +45,7 @@ const Login = ({
       const { message } = error;
       setErrorMessage(response.data.message || message);
     }
+    setPreLoader(false);
   };
   const handleOptReg = () => {
     setIsSignupModalOpen(true);
@@ -68,7 +72,7 @@ const Login = ({
             Greenfie
           </span>
           <div className="flex justify-between items-center mb-4 px-2">
-            <h1 className="text-lg font-bold text-black">Signin</h1>
+            <h1 className="text-lg font-bold text-black">Signin {preLoader && <span className="mx-2 text-xs text-main">Loading...</span>}</h1>
             <button
               aria-label="Close"
               onClick={() => setIsLoginModalOpen(false)}

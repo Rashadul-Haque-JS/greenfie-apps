@@ -1,4 +1,3 @@
-// database.ts
 import mongoose, { ConnectOptions } from 'mongoose';
 
 class Database {
@@ -21,13 +20,17 @@ class Database {
       return;
     }
     try {
-      await mongoose.connect(uri, options);
+      await this.connect(uri, options);
       this.isConnected = true;
       console.log('MongoDB connected');
     } catch (err: any) {
       console.error(err.message);
       throw err;
     }
+  }
+
+  private async connect(uri: string, options: ConnectOptions): Promise<void> {
+    await mongoose.connect(uri, options);
   }
 
   public isConnectedToDB(): boolean {
