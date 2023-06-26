@@ -11,7 +11,7 @@ const handler = async (
   req: NextApiRequest,
   res: NextApiResponse
 ) => {
-  await connectToDatabase();
+  connectToDatabase();
   if (req.method !== "POST") {
     res.setHeader("Allow", "POST");
     res.status(405).json({

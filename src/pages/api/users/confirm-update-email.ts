@@ -6,6 +6,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  await connectToDatabase();
+  connectToDatabase();
   await confirmUpdateEmail(req, res);
 }

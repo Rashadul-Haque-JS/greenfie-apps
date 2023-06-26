@@ -9,6 +9,6 @@ export const config = {    // This code block is very important in nextjs multif
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  await connectToDatabase();
+  connectToDatabase();
   await productCreate (req, res);
 }
