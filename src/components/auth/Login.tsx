@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import Button from "../experiments/Button";
 import { AuthContext } from "../navbar/navHome";
 import { setCookies } from "@/utils/cookies";
-import { set } from "mongoose";
 
 const Login = ({
   setIsLoginModalOpen,
