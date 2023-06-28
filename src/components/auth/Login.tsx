@@ -38,13 +38,14 @@ const Login = ({
       const response = await axios.post("/api/auth/login", credentials);
       const { token } = response.data;
       setCookies("token", token);
+      setPreLoader(false);
       router.replace("/products");
     } catch (error: any) {
       const { response } = error.response && error;
       const { message } = error;
       setErrorMessage(response.data.message || message);
     }
-    setPreLoader(false);
+    
   };
   const handleOptReg = () => {
     setIsSignupModalOpen(true);
