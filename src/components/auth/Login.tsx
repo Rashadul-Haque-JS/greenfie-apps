@@ -10,7 +10,10 @@ const Login = ({
   setIsSignupModalOpen,
   setIsResetModalOpen,
 }: any) => {
-  const [credentials, setCredentials] = useState({ email: "greenfie@greenfie-test.com", password: "greenfie" });
+  const [credentials, setCredentials] = useState({
+    email: "greenfie@greenfie-test.com",
+    password: "greenfie",
+  });
   const [errorMessage, setErrorMessage] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [preLoader, setPreLoader] = useState(false);
@@ -45,7 +48,6 @@ const Login = ({
       const { message } = error;
       setErrorMessage(response.data.message || message);
     }
-    
   };
   const handleOptReg = () => {
     setIsSignupModalOpen(true);
@@ -56,8 +58,8 @@ const Login = ({
     setIsLoginModalOpen(false);
   };
   return (
-  <div className="w-full h-full overlay bg-background flex justify-evenly items-center overflow-y-auto">
-    <div
+    <div className="w-full h-full overlay bg-background flex justify-evenly items-center overflow-y-auto">
+      <div
         className="text-3xl text-white text-center md:flex-grow lg:flex-grow xl:flex-grow h-full sm:h-[320px] xs:h-[320px] font-semibold hidden-xs hidden-sm"
         style={{
           backgroundImage: "url(/images/smiles.png)",
@@ -72,7 +74,12 @@ const Login = ({
             Greenfie
           </span>
           <div className="flex justify-between items-center mb-4 px-2">
-            <h1 className="text-lg font-bold text-black">Signin {preLoader && <span className="mx-2 text-xs text-main">Loading...</span>}</h1>
+            <h1 className="text-lg font-bold text-black">
+              Signin{" "}
+              {preLoader && (
+                <span className="mx-2 text-xs text-main">Loading...</span>
+              )}
+            </h1>
             <button
               aria-label="Close"
               onClick={() => setIsLoginModalOpen(false)}
@@ -92,7 +99,9 @@ const Login = ({
                     {errorMessage}
                   </p>
                 )}
-                <label className="px-1" htmlFor="password">Email</label>
+                <label className="px-1" htmlFor="password">
+                  Email
+                </label>
                 <input
                   className="w-full px-3 py-2 border border-gray-400 rounded-lg mt-1"
                   type="email"
@@ -110,7 +119,9 @@ const Login = ({
                     {errorMessage}
                   </p>
                 )}
-                <label className="px-1" htmlFor="password">Password</label>
+                <label className="px-1" htmlFor="password">
+                  Password
+                </label>
                 <div className="relative mt-1">
                   <input
                     className="w-full px-3 py-2 border border-gray-400 rounded-lg "
@@ -120,7 +131,6 @@ const Login = ({
                     value={credentials.password}
                     onChange={handleChange}
                     required
-                   
                   />
                   <button
                     type="button"
