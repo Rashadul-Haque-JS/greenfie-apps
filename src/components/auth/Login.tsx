@@ -132,6 +132,7 @@ const Login = ({
                     onChange={handleChange}
                     required
                   />
+                  
                   <button
                     type="button"
                     className="absolute top-1/2 right-3 transform -translate-y-1/2 focus:outline-none"
@@ -148,6 +149,9 @@ const Login = ({
                     )}
                   </button>
                 </div>
+                {!preLoader && (
+                <span className="my-3 mx-1 text-xs text-gray-600">Temp Testing Password</span>
+              )}
               </div>
               <hr className="my-5" />
 
