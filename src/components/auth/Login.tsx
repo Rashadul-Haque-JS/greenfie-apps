@@ -41,8 +41,8 @@ const Login = ({
       const response = await axios.post("/api/auth/login", credentials);
       const { token } = response.data;
       setCookies("token", token);
-      setPreLoader(false);
       router.replace("/products");
+      setPreLoader(false);
     } catch (error: any) {
       const { response } = error.response && error;
       const { message } = error;
